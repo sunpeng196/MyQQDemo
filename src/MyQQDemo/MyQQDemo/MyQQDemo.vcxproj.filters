@@ -50,6 +50,15 @@
     <ClCompile Include="GeneratedFiles\qrc_myqqdemo.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="titlebar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_titlebar.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_titlebar.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="myqqdemo.h">
@@ -60,6 +69,9 @@
     </CustomBuild>
     <CustomBuild Include="myqqdemo.qrc">
       <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="titlebar.h">
+      <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
