@@ -59,13 +59,19 @@
     <ClCompile Include="GeneratedFiles\Release\moc_titlebar.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="columnwidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_columnwidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_columnwidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="myqqdemo.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="myqqdemo.ui">
-      <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="myqqdemo.qrc">
       <Filter>Resource Files</Filter>
@@ -73,10 +79,11 @@
     <CustomBuild Include="titlebar.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="columnwidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GeneratedFiles\ui_myqqdemo.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
+    <None Include="QQStyle.css" />
   </ItemGroup>
 </Project>

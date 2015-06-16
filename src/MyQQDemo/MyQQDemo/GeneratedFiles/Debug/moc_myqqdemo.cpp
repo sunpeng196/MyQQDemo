@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'myqqdemo.h'
 **
-** Created: Mon Jun 15 18:04:04 2015
+** Created: Tue Jun 16 16:23:21 2015
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -50,7 +50,7 @@ const QMetaObjectExtraData MyQQDemo::staticMetaObjectExtraData = {
 };
 
 const QMetaObject MyQQDemo::staticMetaObject = {
-    { &QMainWindow::staticMetaObject, qt_meta_stringdata_MyQQDemo,
+    { &QFrame::staticMetaObject, qt_meta_stringdata_MyQQDemo,
       qt_meta_data_MyQQDemo, &staticMetaObjectExtraData }
 };
 
@@ -68,12 +68,12 @@ void *MyQQDemo::qt_metacast(const char *_clname)
     if (!_clname) return 0;
     if (!strcmp(_clname, qt_meta_stringdata_MyQQDemo))
         return static_cast<void*>(const_cast< MyQQDemo*>(this));
-    return QMainWindow::qt_metacast(_clname);
+    return QFrame::qt_metacast(_clname);
 }
 
 int MyQQDemo::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QMainWindow::qt_metacall(_c, _id, _a);
+    _id = QFrame::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     return _id;

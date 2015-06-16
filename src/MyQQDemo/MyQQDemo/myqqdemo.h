@@ -1,10 +1,11 @@
 #ifndef MYQQDEMO_H
 #define MYQQDEMO_H
 
-#include <QtGui/QMainWindow>
-#include "ui_myqqdemo.h"
+#include <QtGui/QFrame>
+class TitleBar;
+class ColumnWidget;
 
-class MyQQDemo : public QMainWindow
+class MyQQDemo : public QFrame
 {
 	Q_OBJECT
 
@@ -13,7 +14,10 @@ public:
 	~MyQQDemo();
 
 private:
-	Ui::MyQQDemoClass ui;
+	TitleBar *m_pTitleBar;
+
+	ColumnWidget *m_pColumnWidget;
+
 };
 
 #endif // MYQQDEMO_H

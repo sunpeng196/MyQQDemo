@@ -1,4 +1,48 @@
 <RCC>
-    <qresource prefix="MyQQDemo">
+    <qresource prefix="/MyQQDemo">
+        <file>Resources/main.jpg</file>
+        <file>Resources/close_down.png</file>
+        <file>Resources/close_hover.png</file>
+        <file>Resources/close_normal.png</file>
+    </qresource>
+    <qresource prefix="/qss">
+        <file>QQStyle.css</file>
+    </qresource>
+    <qresource prefix="/logo">
+        <file>Resources/qqlogo-16.png</file>
+    </qresource>
+    <qresource prefix="/SysMenu">
+        <file>Resources/sysbtn_close_down.png</file>
+        <file>Resources/sysbtn_close_hover.png</file>
+        <file>Resources/sysbtn_close_normal.png</file>
+        <file>Resources/sysbtn_max_down.png</file>
+        <file>Resources/sysbtn_max_hover.png</file>
+        <file>Resources/sysbtn_max_normal.png</file>
+        <file>Resources/sysbtn_min_down.png</file>
+        <file>Resources/sysbtn_min_hover.png</file>
+        <file>Resources/sysbtn_min_normal.png</file>
+        <file>Resources/sysbtn_restore_down.png</file>
+        <file>Resources/sysbtn_restore_hover.png</file>
+        <file>Resources/sysbtn_restore_normal.png</file>
+    </qresource>
+    <qresource prefix="/ColumnIcon">
+        <file>Resources/icon_contacts_hover.png</file>
+        <file>Resources/icon_contacts_normal.png</file>
+        <file>Resources/icon_contacts_selected.png</file>
+        <file>Resources/icon_contacts_selected_Blue.png</file>
+        <file>Resources/icon_group_hover.png</file>
+        <file>Resources/icon_group_normal.png</file>
+        <file>Resources/icon_group_selected.png</file>
+        <file>Resources/icon_group_selected_Blue.png</file>
+        <file>Resources/icon_last_hover.png</file>
+        <file>Resources/icon_last_normal.png</file>
+        <file>Resources/icon_last_normal_msg.png</file>
+    </qresource>
+    <qresource prefix="/MainTab">
+        <file>Resources/HorizonLine_background.png</file>
+        <file>Resources/main_contacticonlist_background.png</file>
+        <file>Resources/main_tab_check.png</file>
+        <file>Resources/main_tab_highlight.png</file>
+        <file>Resources/main_tabctrl_background.png</file>
     </qresource>
 </RCC>

@@ -1,0 +1,129 @@
+QToolButton#toolButtonClose
+{
+	width: 39px;
+	height: 20px;
+	border-image:url(:/SysMenu/Resources/sysbtn_close_normal.png) 0 0 0 0 stretch stretch;
+}
+
+QToolButton#toolButtonClose:hover 
+{
+	border-image:url(:/SysMenu/Resources/sysbtn_close_hover.png) 0 0 0 0 stretch stretch;
+}
+
+QToolButton#toolButtonClose:pressed 
+{
+	border-image:url(:/SysMenu/Resources/sysbtn_close_down.png) 0 0 0 0 stretch stretch;
+}
+
+QToolButton#toolButtonMin
+{
+	width: 39px;
+	height: 20px;
+	border-image:url(:/SysMenu/Resources/sysbtn_min_normal.png) 0 0 0 0 stretch stretch;
+}
+
+QToolButton#toolButtonMin:hover 
+{
+	border-image:url(:/SysMenu/Resources/sysbtn_min_hover.png) 0 0 0 0 stretch stretch;
+}
+
+QToolButton#toolButtonMin:pressed 
+{
+	border-image:url(:/SysMenu/Resources/sysbtn_min_down.png) 0 0 0 0 stretch stretch;
+}
+
+
+
+
+
+QPushButton#pushBtnContract
+{
+    background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+    background-repeat:no-repeat;
+    border:none;
+    background-position: center left;
+}
+
+QPushButton#pushBtnContract:hover 
+{
+	background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	 background-repeat:no-repeat;
+}
+
+QPushButton#pushBtnContract:pressed 
+{
+	background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	background-repeat:no-repeat;
+}
+
+QPushButton#pushBtnContract:checked 
+{
+	background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	background-repeat:no-repeat;
+}
+
+
+
+
+
+
+
+
+QPushButton#groupBtn
+{
+    background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+    background-repeat:no-repeat;
+    border:none;
+    background-position: center left;
+}
+
+QPushButton#groupBtn:hover 
+{
+	background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	background-repeat:no-repeat;
+}
+
+QPushButton#groupBtn:pressed 
+{
+	background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	background-repeat:no-repeat;
+}
+
+QPushButton#groupBtn:checked 
+{
+	background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	background-repeat:no-repeat;
+}
+
+
+QPushButton#lastBtn
+{
+    background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+    background-repeat:no-repeat;
+    border:none;
+    background-position: center left;
+}
+
+QPushButton#lastBtn:hover 
+{
+	background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	 background-repeat:no-repeat;
+}
+
+QPushButton#lastBtn:pressed 
+{
+	background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	background-repeat:no-repeat;
+}
+
+QPushButton#lastBtn:checked 
+{
+	background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	background-repeat:no-repeat;
+}
+
+QWidget#columnWidget
+{
+    background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch; 0 0 0 0 stretch stretch;
+
+}
