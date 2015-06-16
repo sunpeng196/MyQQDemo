@@ -68,6 +68,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_columnwidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="toolwidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_toolwidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_toolwidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="myqqdemo.h">
@@ -80,6 +89,9 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="columnwidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="toolwidget.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

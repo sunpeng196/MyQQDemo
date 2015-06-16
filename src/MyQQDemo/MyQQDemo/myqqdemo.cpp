@@ -1,6 +1,10 @@
 #include "myqqdemo.h"
 #include "titlebar.h"
 #include "columnwidget.h"
+#include "toolwidget.h"
+#include <QSystemTrayIcon>
+#include <QAction>
+#include <QMenu>
 
 MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	: QFrame(parent, flags)
@@ -24,6 +28,18 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 
 	//setCursor();
 
+	m_pToolWidget = new ToolWidget(this);
+
+	m_pToolWidget->setGeometry(0,100,270,30);
+
+	m_pSytemTrayIcon = new QSystemTrayIcon(this);
+	m_pSytemTrayIcon->setIcon(QIcon(""));
+	m_pSytemTrayIcon->show();
+
+	QMenu *pMenu = m_pSytemTrayIcon->contextMenu();
+	//pMenu->addAction(new QAction(tr("显示主界面")));
+
+	m_pSytemTrayIcon->setContextMenu(pMenu);
 
 	
 }

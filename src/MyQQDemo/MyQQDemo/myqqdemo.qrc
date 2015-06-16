@@ -45,4 +45,8 @@
         <file>Resources/main_tab_highlight.png</file>
         <file>Resources/main_tabctrl_background.png</file>
     </qresource>
+    <qresource prefix="/ToolWidget">
+        <file>Resources/menu_btn_highlight.png</file>
+        <file>Resources/menu_btn_normal.png</file>
+    </qresource>
 </RCC>

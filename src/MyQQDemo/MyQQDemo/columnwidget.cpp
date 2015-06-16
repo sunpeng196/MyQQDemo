@@ -61,13 +61,9 @@ ColumnWidget::ColumnWidget(QWidget *parent)
 	m_pLastBtn->setCheckable(true);
 
 
-
-	
-
-
-	m_pContractBtn->setFlat(true);
-	m_pGroupBtn->setFlat(true);
-	m_pLastBtn->setFlat(true);
+// 	m_pContractBtn->setFlat(true);
+// 	m_pGroupBtn->setFlat(true);
+// 	m_pLastBtn->setFlat(true);
 
 	m_pHBoxLayout->addWidget(m_pContractBtn);
 	m_pHBoxLayout->addWidget(m_pGroupBtn);

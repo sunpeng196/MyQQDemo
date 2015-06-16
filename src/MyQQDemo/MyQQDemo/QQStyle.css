@@ -127,3 +127,13 @@ QWidget#columnWidget
     background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch; 0 0 0 0 stretch stretch;
 
 }
+
+QToolButton#toolBtnMainMenu
+{
+border-image:url(:/ToolWidget/Resources/menu_btn_normal.png) 0 0 0 0 stretch stretch;
+}
+
+QToolButton#toolBtnMainMenu:hover
+{
+border-image:url(:/ToolWidget/Resources/menu_btn_highlight.png) 0 0 0 0 stretch stretch;
+}

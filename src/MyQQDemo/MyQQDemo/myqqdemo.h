@@ -4,6 +4,8 @@
 #include <QtGui/QFrame>
 class TitleBar;
 class ColumnWidget;
+class ToolWidget;
+class QSystemTrayIcon;
 
 class MyQQDemo : public QFrame
 {
@@ -17,6 +19,10 @@ private:
 	TitleBar *m_pTitleBar;
 
 	ColumnWidget *m_pColumnWidget;
+
+	ToolWidget *m_pToolWidget;
+
+	QSystemTrayIcon *m_pSytemTrayIcon;
 
 };
 
