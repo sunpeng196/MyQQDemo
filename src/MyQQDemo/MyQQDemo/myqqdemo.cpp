@@ -5,6 +5,7 @@
 #include <QSystemTrayIcon>
 #include <QAction>
 #include <QMenu>
+#include "searchlineedit.h"
 
 MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	: QFrame(parent, flags)
@@ -24,13 +25,13 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 
 	m_pColumnWidget = new ColumnWidget(this);
 
-	m_pColumnWidget->setGeometry(0,50,270,30);
+	m_pColumnWidget->setGeometry(0,250,270,500);
 
 	//setCursor();
 
-	m_pToolWidget = new ToolWidget(this);
-
-	m_pToolWidget->setGeometry(0,100,270,30);
+// 	m_pToolWidget = new ToolWidget(this);
+// 
+// 	m_pToolWidget->setGeometry(0,100,270,30);
 
 	m_pSytemTrayIcon = new QSystemTrayIcon(this);
 	m_pSytemTrayIcon->setIcon(QIcon(""));
@@ -41,10 +42,33 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 
 	m_pSytemTrayIcon->setContextMenu(pMenu);
 
+	m_pSearchLineEdit = new SearchLineEdit(this);
+
+	m_pSearchLineEdit->setGeometry(0,100,260,30);
+
+	
+
+	
+
 	
 }
 
 MyQQDemo::~MyQQDemo()
+{
+
+}
+
+void MyQQDemo::mousePressEvent( QMouseEvent * e )
+{
+
+}
+
+void MyQQDemo::mouseMoveEvent( QMouseEvent * e )
+{
+
+}
+
+void MyQQDemo::mouseReleaseEvent( QMouseEvent * e )
 {
 
 }

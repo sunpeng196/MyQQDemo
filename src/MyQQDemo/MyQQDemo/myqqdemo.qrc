@@ -49,4 +49,8 @@
         <file>Resources/menu_btn_highlight.png</file>
         <file>Resources/menu_btn_normal.png</file>
     </qresource>
+    <qresource prefix="/SearchLineEdit">
+        <file>Resources/find.png</file>
+        <file>Resources/finger_normal.png</file>
+    </qresource>
 </RCC>

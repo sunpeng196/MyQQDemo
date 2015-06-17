@@ -63,7 +63,7 @@ void TitleBar::mousePressEvent( QMouseEvent * event )
 		m_bLeftPressDown = true;
 
 		m_ptPrev = event->globalPos();
-		//event->ignore();
+		event->ignore();
 		return;
 	}
 

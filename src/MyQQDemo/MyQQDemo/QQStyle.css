@@ -38,7 +38,7 @@ QToolButton#toolButtonMin:pressed
 
 QPushButton#pushBtnContract
 {
-    background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+    border-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
     background-repeat:no-repeat;
     border:none;
     background-position: center left;
@@ -46,19 +46,19 @@ QPushButton#pushBtnContract
 
 QPushButton#pushBtnContract:hover 
 {
-	background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	border-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
 	 background-repeat:no-repeat;
 }
 
 QPushButton#pushBtnContract:pressed 
 {
-	background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	border-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
 	background-repeat:no-repeat;
 }
 
 QPushButton#pushBtnContract:checked 
 {
-	background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	border-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
 	background-repeat:no-repeat;
 }
 
