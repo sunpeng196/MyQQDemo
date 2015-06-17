@@ -2,7 +2,7 @@
 #include <QtGui/QApplication>
 #include <QFile>
 #include <QTextCodec>
-
+main_tabctrl_arrow.png
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
