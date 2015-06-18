@@ -7,6 +7,7 @@ class ColumnWidget;
 class ToolWidget;
 class QSystemTrayIcon;
 class SearchLineEdit;
+class BuddyListWidget;
 
 class MyQQDemo : public QFrame
 {
@@ -20,6 +21,7 @@ public:
 	void mouseMoveEvent(QMouseEvent * e);
 	void mouseReleaseEvent(QMouseEvent * e);
 
+
 private:
 	TitleBar *m_pTitleBar;
 
@@ -30,6 +32,10 @@ private:
 	QSystemTrayIcon *m_pSytemTrayIcon;
 
 	SearchLineEdit *m_pSearchLineEdit;
+
+	BuddyListWidget *m_pBuddyList;
+
+
 
 	
 

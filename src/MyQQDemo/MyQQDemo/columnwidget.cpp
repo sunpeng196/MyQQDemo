@@ -23,7 +23,7 @@ ColumnWidget::ColumnWidget(QWidget *parent)
 
 	//setStyleSheet("QPushButton{border:0px;background-image: url(:/MainTab/Resources/main_tab_check.png)}");
 
-	m_pHBoxLayout = new QHBoxLayout;
+	m_pHBoxLayout = new QHBoxLayout(this);
 	m_pHBoxLayout->setSpacing(0);
 	m_pHBoxLayout->setContentsMargins(0,0,0,0);
 
@@ -74,25 +74,27 @@ ColumnWidget::ColumnWidget(QWidget *parent)
 	m_pHBoxLayout->addWidget(m_pGroupBtn);
 	m_pHBoxLayout->addWidget(m_pLastBtn);
 
- 	m_StackedWidget = new QStackedWidget;
+	setLayout(m_pHBoxLayout);
 
-	m_MainLayout = new QVBoxLayout(this);
-
-	m_MainLayout->addLayout(m_pHBoxLayout);
-	m_MainLayout->addWidget(m_StackedWidget);
-
-	m_MainLayout->addStretch(1);
-
-	m_StackedWidget->addWidget(new QLabel("聊天窗口"));
-	m_StackedWidget->addWidget(new QLabel("回话窗口"));
-	m_StackedWidget->addWidget(new QLabel("群组窗口"));
-
-	m_StackedWidget->setCurrentIndex(0);
-
-	QObject::connect(m_pContractBtn,SIGNAL(pressed()),m_StackedWidget,SLOT(setCurrentIndex(0)));
-
-	QObject::connect(m_pContractBtn,SIGNAL(pressed()),m_StackedWidget,SLOT(setCurrentIndex(1)));
-	QObject::connect(m_pContractBtn,SIGNAL(pressed()),m_StackedWidget,SLOT(setCurrentIndex(2)));
+//  	m_StackedWidget = new QStackedWidget;
+// 
+// 	m_MainLayout = new QVBoxLayout(this);
+// 
+// 	m_MainLayout->addLayout(m_pHBoxLayout);
+// 	m_MainLayout->addWidget(m_StackedWidget);
+// 
+// 	m_MainLayout->addStretch(1);
+// 
+// 	m_StackedWidget->addWidget(new QLabel("聊天窗口"));
+// 	m_StackedWidget->addWidget(new QLabel("回话窗口"));
+// 	m_StackedWidget->addWidget(new QLabel("群组窗口"));
+// 
+// 	m_StackedWidget->setCurrentIndex(0);
+// 
+// 	QObject::connect(m_pContractBtn,SIGNAL(pressed()),m_StackedWidget,SLOT(setCurrentIndex(0)));
+// 
+// 	QObject::connect(m_pContractBtn,SIGNAL(pressed()),m_StackedWidget,SLOT(setCurrentIndex(1)));
+// 	QObject::connect(m_pContractBtn,SIGNAL(pressed()),m_StackedWidget,SLOT(setCurrentIndex(2)));
 
 }
 

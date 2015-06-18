@@ -2,7 +2,8 @@
 #include <QtGui/QApplication>
 #include <QFile>
 #include <QTextCodec>
-main_tabctrl_arrow.png
+#include "buddylistwidget.h"
+
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
@@ -22,6 +23,7 @@ int main(int argc, char *argv[])
 		qApp->setStyleSheet(file.readAll());
 	}
 	file.close();
+
 
 	MyQQDemo w;
 	w.show();

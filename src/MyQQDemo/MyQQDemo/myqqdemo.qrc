@@ -4,6 +4,7 @@
         <file>Resources/close_down.png</file>
         <file>Resources/close_hover.png</file>
         <file>Resources/close_normal.png</file>
+        <file>Resources/Bg.png</file>
     </qresource>
     <qresource prefix="/qss">
         <file>QQStyle.css</file>
@@ -52,5 +53,17 @@
     <qresource prefix="/SearchLineEdit">
         <file>Resources/find.png</file>
         <file>Resources/finger_normal.png</file>
+    </qresource>
+    <qresource prefix="/headers">
+        <file>Resources/93.png</file>
+        <file>Resources/94.png</file>
+    </qresource>
+    <qresource prefix="/MainPanel">
+        <file>Resources/mainpanel_foldernode_collapsetexture.png</file>
+        <file>Resources/mainpanel_foldernode_collapsetexturehighlight.png</file>
+        <file>Resources/mainpanel_foldernode_expandtexture.png</file>
+        <file>Resources/MainPanel_FolderNode_expandTextureHighlight.png</file>
+        <file>Resources/mainpanelcontainer_background.png.png</file>
+        <file>Resources/mainpanel/main_group_highlight.png</file>
     </qresource>
 </RCC>
