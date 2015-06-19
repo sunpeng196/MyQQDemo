@@ -1,6 +1,8 @@
 #pragma once
 #include <QString>
 #include <QList>
+#include "BuddyItem.h"
+#include <QPixmap>
 
 class BuddyItem;
 
@@ -14,6 +16,18 @@ public:
 		m_iCurrentNumber = iCurrentNumber;
 
 		m_bExpand = false;
+
+		for (int i = 0;i<9;++i)
+		{
+			BuddyItem *pNewItem = new BuddyItem();
+			m_BuddyItemList.push_back(pNewItem);
+
+			pNewItem->m_lpHeadImg = new QPixmap(":/headers/Resources/94.png");
+			pNewItem->m_strMarkName = "大朗";
+			pNewItem->m_strNickName = "邵晓";
+			pNewItem->m_strSign = "和我一起学MFC";
+
+		}
 	}
 	~BuddyTeam(void);
 
@@ -28,6 +42,11 @@ public:
 	QString m_GroupName;
 	int m_iAllNumber;
 	int m_iCurrentNumber;
+
+	int Size()
+	{
+		return m_BuddyItemList.size();
+	}
 
 	void setExpand(bool Expand);
 

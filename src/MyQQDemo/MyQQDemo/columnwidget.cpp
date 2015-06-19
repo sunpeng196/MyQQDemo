@@ -13,10 +13,10 @@ ColumnWidget::ColumnWidget(QWidget *parent)
 
 	setAutoFillBackground(true);
 
-	//QPalette palette;
-	//palette.setColor(QPalette::Background, QColor(231,239,248));
+	QPalette palette;
+	palette.setColor(QPalette::Background, QColor(231,239,248));
 	//palette.setBrush(QPalette::Background, QBrush(QPixmap(":/MainTab/Resources/main_tabctrl_background.png")));
-	//this->setPalette(palette);
+	this->setPalette(palette);
 
 
 	setObjectName("columnWidget");
@@ -75,26 +75,6 @@ ColumnWidget::ColumnWidget(QWidget *parent)
 	m_pHBoxLayout->addWidget(m_pLastBtn);
 
 	setLayout(m_pHBoxLayout);
-
-//  	m_StackedWidget = new QStackedWidget;
-// 
-// 	m_MainLayout = new QVBoxLayout(this);
-// 
-// 	m_MainLayout->addLayout(m_pHBoxLayout);
-// 	m_MainLayout->addWidget(m_StackedWidget);
-// 
-// 	m_MainLayout->addStretch(1);
-// 
-// 	m_StackedWidget->addWidget(new QLabel("聊天窗口"));
-// 	m_StackedWidget->addWidget(new QLabel("回话窗口"));
-// 	m_StackedWidget->addWidget(new QLabel("群组窗口"));
-// 
-// 	m_StackedWidget->setCurrentIndex(0);
-// 
-// 	QObject::connect(m_pContractBtn,SIGNAL(pressed()),m_StackedWidget,SLOT(setCurrentIndex(0)));
-// 
-// 	QObject::connect(m_pContractBtn,SIGNAL(pressed()),m_StackedWidget,SLOT(setCurrentIndex(1)));
-// 	QObject::connect(m_pContractBtn,SIGNAL(pressed()),m_StackedWidget,SLOT(setCurrentIndex(2)));
 
 }
 

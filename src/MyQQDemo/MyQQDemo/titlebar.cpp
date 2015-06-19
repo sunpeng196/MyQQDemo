@@ -19,18 +19,17 @@ TitleBar::TitleBar(QWidget *parent)
 	m_pQQLableTitle = new QLabel("QQ");
 
 
-
-	
-
 	m_pMinButton = new QToolButton();
 	m_pMinButton->setIconSize(QSize(30,27));
 	m_pMinButton->setObjectName("toolButtonMin");
 	m_pMinButton->setAutoRaise(true);
+	m_pMinButton->setToolTip("最小化");
 
 	m_pCloseButton = new QToolButton();
 	m_pCloseButton->setObjectName("toolButtonClose");
 	m_pCloseButton->setIconSize(QSize(30,27));
 	m_pCloseButton->setAutoRaise(true);
+	m_pCloseButton->setToolTip("关闭");
 
 	m_hBoxLayout->addWidget(m_pQQLabelIcon);
 	m_hBoxLayout->addWidget(m_pQQLableTitle);

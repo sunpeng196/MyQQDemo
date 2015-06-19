@@ -26,9 +26,9 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	m_pTitleBar->setGeometry(0,0,270,30);
 
 
-// 	m_pColumnWidget = new ColumnWidget(this);
-// 
-// 	m_pColumnWidget->setGeometry(0,250,270,500);
+ 	m_pColumnWidget = new ColumnWidget(this);
+
+ 	m_pColumnWidget->setGeometry(0,170,281,35);
 
 	//setCursor();
 

@@ -66,4 +66,33 @@
         <file>Resources/mainpanelcontainer_background.png.png</file>
         <file>Resources/mainpanel/main_group_highlight.png</file>
     </qresource>
+    <qresource prefix="/SCrollBar">
+        <file>ScrollBar/scrollbar_arrowdown_down.png</file>
+        <file>ScrollBar/scrollbar_arrowdown_highlight.png</file>
+        <file>ScrollBar/scrollbar_arrowdown_normal.png</file>
+        <file>ScrollBar/scrollbar_arrowup_down.png</file>
+        <file>ScrollBar/scrollbar_arrowup_highlight.png</file>
+        <file>ScrollBar/scrollbar_arrowup_normal.png</file>
+        <file>ScrollBar/scrollbar_bar_down.png</file>
+        <file>ScrollBar/scrollbar_bar_highlight.png</file>
+        <file>ScrollBar/scrollbar_bar_normal.png</file>
+        <file>ScrollBar/scrollbar_bkg.png</file>
+    </qresource>
+    <qresource prefix="/BuddyList">
+        <file>BuddyList/Bg.png</file>
+        <file>BuddyList/BuddyItemHotBg.png</file>
+        <file>BuddyList/BuddyItemSelBg.png</file>
+        <file>BuddyList/BuddyTeamHotBg.png</file>
+        <file>BuddyList/DefGroupHeadPic.jpg</file>
+        <file>BuddyList/main_group_highlight.png</file>
+        <file>BuddyList/main_yellowbar_bkg.png</file>
+        <file>BuddyList/MainPanel_FolderNode_collapseTexture.png</file>
+        <file>BuddyList/MainPanel_FolderNode_collapseTextureHighlight.png</file>
+        <file>BuddyList/MainPanel_FolderNode_expandTexture.png</file>
+        <file>BuddyList/MainPanel_FolderNode_expandTextureHighlight.png</file>
+        <file>BuddyList/Padding4Select.png</file>
+        <file>BuddyList/SmallIconHotBg.png</file>
+        <file>BuddyList/trad_boy.png</file>
+        <file>BuddyList/trad_girl.png</file>
+    </qresource>
 </RCC>
