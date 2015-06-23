@@ -2,6 +2,7 @@
 #define MYQQDEMO_H
 
 #include <QtGui/QFrame>
+#include "appwidget.h"
 class TitleBar;
 class ColumnWidget;
 class ToolWidget;
@@ -34,6 +35,9 @@ private:
 	SearchLineEdit *m_pSearchLineEdit;
 
 	BuddyListWidget *m_pBuddyList;
+
+
+	AppWidget *m_pAppWidget;
 
 
 

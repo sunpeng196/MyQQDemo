@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'buddylistwidget.h'
 **
-** Created: Fri Jun 19 17:39:25 2015
+** Created: Tue Jun 23 16:01:44 2015
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
 **
 ** WARNING! All changes made in this file will be lost!

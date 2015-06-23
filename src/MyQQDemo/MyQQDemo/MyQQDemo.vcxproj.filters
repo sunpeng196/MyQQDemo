@@ -110,6 +110,15 @@
     <ClCompile Include="BuddyItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="appwidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_appwidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_appwidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="myqqdemo.h">
@@ -134,6 +143,9 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="buddylistwidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="appwidget.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

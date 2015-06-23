@@ -30,6 +30,10 @@ BuddyListWidget::BuddyListWidget(QWidget *parent)
 
 	m_nSelIndex = -1;
 
+	m_VecScroll = 0;
+
+	m_nLeft = m_nTop = 0;
+
 }
 
 BuddyListWidget::~BuddyListWidget()
@@ -41,7 +45,11 @@ void BuddyListWidget::paintEvent( QPaintEvent *e )
 {
 	QPainter painter(this);
 
+	//scroll(0,m_VecScroll);
+
 	painter.drawPixmap(268,0,8,433,QPixmap(":/SCrollBar/ScrollBar/scrollbar_bkg.png"));
+
+
 	BuddyTeam * lpTeamItem;
 	for (int i = 0; i < (int)m_BuddyList.size(); i++)
 	{
@@ -55,7 +63,10 @@ void BuddyListWidget::paintEvent( QPaintEvent *e )
 				DrawBuddyItemInBigIcon(i, j);
 			}
 		}
+
+		break;
 	}
+
 
 
 }
@@ -70,6 +81,13 @@ void BuddyListWidget::DrawBuddyItemInBigIcon(int nTeamIndex, int nIndex)
 
 	QRect rcItem;
 	GetItemRectByIndex(nTeamIndex, nIndex, rcItem);
+
+
+	int w = rcItem.width();
+	int h = rcItem.height();
+
+// 	painter.drawPixmap(rcItem.left(),rcItem.top(),rcItem.width(),rcItem.height(),
+// 		QPixmap(":/BuddyList/BuddyList/main_yellowbar_bkg.png"));
 
 	int nHeadWidth = 40, nHeadHeight = 40;
 
@@ -98,14 +116,6 @@ void BuddyListWidget::DrawBuddyItemInBigIcon(int nTeamIndex, int nIndex)
 
 	}
 
-// 	if (lpItem->m_bHeadFlashAnim)	// 头像闪动动画
-// 	{
-// 		POINT pt[] = {{-1,1},{0,0},{1,1},{0,0}};
-// 		if (lpItem->m_nHeadFlashAnimState >= 0 && lpItem->m_nHeadFlashAnimState < 4)
-// 			rcHead.OffsetRect(pt[lpItem->m_nHeadFlashAnimState]);
-// 	}
-
-
 	painter.drawPixmap(rcHead,QPixmap(":/headers/Resources/94.png"));
 
 	if (m_nSelTeamIndex == nTeamIndex && m_nSelIndex == nIndex)
@@ -125,11 +135,8 @@ void BuddyListWidget::DrawBuddyItemInBigIcon(int nTeamIndex, int nIndex)
 	}
 
 
-	QRect rcName1, rcName2, rcSign;
-
-	painter.drawText(rcName1,"sunpeng;");
-	painter.drawText(rcName2," nihao");
-	painter.drawText(rcSign,"HelloWorld");
+	painter.drawText(nHeadRight+6,rcItem.top()+10,rcItem.width()- nHeadRight - 6,20,0,"sunpeng;");
+ 	painter.drawText(nHeadRight+6,rcItem.top()+30,rcItem.width()- nHeadRight - 6,20,0,"和我一起学习QT，制作QT制作的QQ界面");
 }
 
 BuddyItem * BuddyListWidget::GetBuddyItemByIndex(int nTeamIndex, int nIndex)
@@ -166,8 +173,18 @@ void BuddyListWidget::mousePressEvent( QMouseEvent *e )
 {
 	if (e->buttons() == Qt::LeftButton)
 	{
+		QRect tempRect = rect();
+		int w = tempRect.width();
+		int h = tempRect.height();
+
 		
 		QPoint t = e->pos();
+		if (t.x() >= 268 && t.x()<= w && t.y()>=0 && t.y()<=h)
+		{
+			m_nTop -= 10;
+			update();
+			return;
+		}
 
 		int iIndex = GetIndexFromPoint(t);
 
@@ -236,18 +253,19 @@ bool BuddyListWidget::GetItemRectByIndex( int nTeamIndex,int nIndex,QRect &rectA
 {
 	BuddyTeam * lpTeamItem;
 	BuddyItem * lpItem;
-	
+
 	int nBuddyTeamWidth, nBuddyItemWidth, nBuddyItemHeight;
 
 	QRect rcClient = rect();
 
+	int abc = rcClient.width();
 	nBuddyTeamWidth = rcClient.width() - 2 - 2 - 0;
 	nBuddyItemWidth = nBuddyTeamWidth;
 
 
 	nBuddyItemHeight = 54;
 	int nLeft = 2;
-	int nTop = 0;
+	int nTop = m_nTop;
 
 
 	for (int i = 0; i < (int)m_BuddyList.size(); i++)
@@ -278,7 +296,7 @@ bool BuddyListWidget::GetItemRectByIndex( int nTeamIndex,int nIndex,QRect &rectA
 
 						if (i == nTeamIndex && j == nIndex)
 						{
-							rectArea = QRect(nLeft, nTop, nLeft+nBuddyItemWidth, nTop+nBuddyItemHeight);
+							rectArea = QRect(nLeft, nTop, nLeft+nBuddyItemWidth,nBuddyItemHeight);
 							return TRUE;
 						}
 						nTop += nBuddyItemHeight;
@@ -378,17 +396,23 @@ void BuddyListWidget::DrawBuddyTeam(int nIndex)
 		return;
 
 	QRect rcItem;
-	GetItemRectByIndex(nIndex, -1, rcItem);
+	GetItemRectByIndex(nIndex, -1, rcItem);//rcItem为矩形区域所在的位置。
+
+// 	painter.drawPixmap(rcItem.left(),rcItem.top(),rcItem.width(),rcItem.height(),
+// 		QPixmap(":/BuddyList/BuddyList/main_yellowbar_bkg.png"));
 
 	int nArrowWidth = 12, nArrowHeight = 12;
 
 	QRect rcArrow;
 	CalcCenterRect(rcItem, nArrowWidth, nArrowHeight, rcArrow);
+
+
 	rcArrow.setLeft(rcItem.left() + 2);
 	rcArrow.setRight(rcArrow.left() + nArrowWidth);
 
 	QRect rcText(rcItem);
 	rcText.setLeft(rcArrow.right() + 6);
+	rcText.setTop(rcArrow.top() + 1);
 
 	if (m_nSelTeamIndex == nIndex && m_nSelIndex == -1)//组选中
 	{
@@ -423,12 +447,12 @@ void BuddyListWidget::DrawBuddyTeam(int nIndex)
 		}
 		else
 		{
-			painter.drawPixmap(rcArrow.left(),rcArrow.top(),rcArrow.width(),rcArrow.height(),QPixmap(":/MainPanel/Resources/mainpanel_foldernode_collapsetexturehighlight.png"));
+			painter.drawPixmap(rcArrow.left(),rcArrow.top(),rcArrow.width(),rcArrow.height(),QPixmap(":/MainPanel/Resources/mainpanel_foldernode_expandtexture.png"));
 		}
 	}
 	BuddyTeam *pTeam = m_BuddyList.at(nIndex);
 
-	painter.drawText(rcText,pTeam->GetDesc());
+	painter.drawText(rcText,0,pTeam->GetDesc());
 
 }
 
@@ -442,4 +466,24 @@ void BuddyListWidget::CalcCenterRect(QRect& rcDest, int cx, int cy, QRect& rcCen
 	rcCenter.setTop(rcDest.top()+y);
 	rcCenter.setRight(rcCenter.left()+cx);
 	rcCenter.setBottom(rcCenter.top()+cy);
+}
+
+void BuddyListWidget::wheelEvent( QWheelEvent * event )
+{
+	if (event->delta() >0)
+	{	
+		m_nTop += 10;
+
+		if (m_nTop > 0)
+		{
+			m_nTop = 0;
+		}
+	}
+	else
+	{
+		m_nTop -= 10;
+	}
+
+
+	update();
 }

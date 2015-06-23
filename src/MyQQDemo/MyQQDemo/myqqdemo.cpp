@@ -53,6 +53,11 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 
 	m_pBuddyList->setGeometry(1,207,278,443);
 
+
+	m_pAppWidget = new AppWidget(this);
+
+	m_pAppWidget->setGeometry(0,657,278,30);
+
 	
 
 	

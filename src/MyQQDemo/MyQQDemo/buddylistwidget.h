@@ -6,6 +6,7 @@
 #include "BuddyTeam.h"
 #include <QRect>
 
+
 class BuddyListWidget : public QWidget
 {
 	Q_OBJECT
@@ -19,6 +20,8 @@ public:
 	void mouseMoveEvent(QMouseEvent *e);
 	void mousePressEvent(QMouseEvent *e);
 	void mouseReleaseEvent(QMouseEvent *e);
+
+	void wheelEvent ( QWheelEvent * event );
 
 	void mouseLeaveEvent(QMouseEvent *e);
 
@@ -50,6 +53,10 @@ private:
 	int m_nSelTeamIndex;
 
 	int m_nSelIndex;
+
+	int m_VecScroll;
+
+	int m_nLeft, m_nTop;
 
 	
 };

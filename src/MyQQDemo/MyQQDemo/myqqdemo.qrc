@@ -95,4 +95,11 @@
         <file>BuddyList/trad_boy.png</file>
         <file>BuddyList/trad_girl.png</file>
     </qresource>
+    <qresource prefix="/AppMenu">
+        <file>Resources/mainmenubutton/menu_btn_highlight.png</file>
+        <file>Resources/mainmenubutton/menu_btn_normal.png</file>
+        <file>Resources/mainmenubutton/menu_btn2_down.png</file>
+        <file>Resources/mainmenubutton/menu_btn2_highlight.png</file>
+        <file>Resources/mainmenubutton/menu_btn2_normal.png</file>
+    </qresource>
 </RCC>
