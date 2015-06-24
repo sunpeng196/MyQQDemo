@@ -6,6 +6,7 @@
 #include "BuddyItem.h"
 #include <QImage>
 #include <QBitmap>
+#include <QScrollBar>
 
 BuddyListWidget::BuddyListWidget(QWidget *parent)
 	: QWidget(parent)
@@ -34,6 +35,70 @@ BuddyListWidget::BuddyListWidget(QWidget *parent)
 
 	m_nLeft = m_nTop = 0;
 
+
+	m_pScrollBar = new QScrollBar(this);
+
+	m_pScrollBar->setGeometry(260,0,8,433);
+	m_pScrollBar->setObjectName("ScrollBar");
+
+
+	m_pScrollBar->installEventFilter(this);
+
+
+	m_pScrollBar->setStyleSheet("QScrollBar:vertical"
+		"{"
+		"width:8px;"
+		"background:rgba(0,0,0,0%);"
+		"margin:0px,0px,0px,0px;"
+		"padding-top:9px;"
+		"padding-bottom:9px;"
+		"}"
+		"QScrollBar::handle:vertical"
+		"{"
+		"width:8px;"
+		"background:rgba(0,0,0,25%);"
+		" border-radius:4px;"
+		"min-height:20;"
+		"}"
+		"QScrollBar::handle:vertical:hover"
+		"{"
+		"width:8px;"
+		"background:rgba(0,0,0,50%);"
+		" border-radius:4px;"
+		"min-height:20;"
+		"}"
+		"QScrollBar::add-line:vertical"
+		"{"
+		"height:9px;width:8px;"
+		"border-image:url(:/ScrollBar/Resources/ScrollBar/scrollbar_arrowup_down.png);"
+		"subcontrol-position:bottom;"
+		"}"
+		"QScrollBar::sub-line:vertical"
+		"{"
+		"height:9px;width:8px;"
+		"border-image:url(:/ScrollBar/Resources/ScrollBar/scrollbar_arrowup_highlight.png);"
+		"subcontrol-position:top;"
+		"}"
+		"QScrollBar::add-line:vertical:hover"
+		"{"
+		"height:9px;width:8px;"
+		"border-image:url(:/ScrollBar/Resources/ScrollBar/scrollbar_arrowdown_normal.png);"
+		"subcontrol-position:bottom;"
+		"}"
+		"QScrollBar::sub-line:vertical:hover"
+		"{"
+		"height:9px;width:8px;"
+		"border-image:url(:/ScrollBar/Resources/ScrollBar/scrollbar_arrowdown_highlight.png);"
+		"subcontrol-position:top;"
+		"}"
+		"QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical"
+		"{"
+		"background:rgba(0,0,0,10%);"
+		"border-radius:4px;"
+		"}"
+		);
+
+	m_bScrollButtonDown = false;
 }
 
 BuddyListWidget::~BuddyListWidget()
@@ -41,13 +106,15 @@ BuddyListWidget::~BuddyListWidget()
 
 }
 
+
+
 void BuddyListWidget::paintEvent( QPaintEvent *e )
 {
 	QPainter painter(this);
 
 	//scroll(0,m_VecScroll);
 
-	painter.drawPixmap(268,0,8,433,QPixmap(":/SCrollBar/ScrollBar/scrollbar_bkg.png"));
+	//painter.drawPixmap(268,0,8,433,QPixmap(":/SCrollBar/ScrollBar/scrollbar_bkg.png"));
 
 
 	BuddyTeam * lpTeamItem;
@@ -470,20 +537,75 @@ void BuddyListWidget::CalcCenterRect(QRect& rcDest, int cx, int cy, QRect& rcCen
 
 void BuddyListWidget::wheelEvent( QWheelEvent * event )
 {
+	int nLineSize = 100;
+
 	if (event->delta() >0)
 	{	
-		m_nTop += 10;
-
-		if (m_nTop > 0)
-		{
-			m_nTop = 0;
-		}
+		Scroll(0, -nLineSize);
 	}
 	else
 	{
-		m_nTop -= 10;
+		Scroll(0, nLineSize);
 	}
 
 
 	update();
+}
+
+void BuddyListWidget::Scroll(int cx, int cy)
+{
+	//if (m_VScrollBar.IsVisible() && m_VScrollBar.IsEnabled())
+	{
+		int nPos = m_pScrollBar->sliderPosition();
+		m_pScrollBar->setSliderPosition(nPos + cy);
+		m_pScrollBar->setSliderPosition(nPos + cy);
+		nPos = m_pScrollBar->sliderPosition();
+		m_nTop = 0 - nPos;
+	}
+}
+
+bool BuddyListWidget::eventFilter( QObject *obj, QEvent *event )
+{
+	if (m_pScrollBar && obj == m_pScrollBar ) {
+		if (event->type() == QEvent::MouseButtonPress) 
+		{
+			QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
+			if (mouseEvent->buttons() & Qt::LeftButton)
+			{
+				m_LastPt = mouseEvent->pos();
+				m_bScrollButtonDown = true;
+			}
+		}
+		else if (event->type() == QEvent::MouseButtonRelease)
+		{
+			QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
+			if (mouseEvent->buttons() & Qt::LeftButton)
+			{
+				m_bScrollButtonDown = false;
+			}
+
+		}
+		else if (event->type() == QEvent::MouseMove)
+		{
+			QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
+			if (mouseEvent->buttons() & Qt::LeftButton)
+			{
+				if (m_bScrollButtonDown)
+				{
+					QPoint pt = mouseEvent->pos();
+					int deltay = pt.y() - m_LastPt.y();
+
+					m_nTop -= deltay;
+
+					m_LastPt = pt;
+
+					update();
+
+				}
+
+			}
+		}
+	}
+
+	return QWidget::eventFilter(obj,event);
 }

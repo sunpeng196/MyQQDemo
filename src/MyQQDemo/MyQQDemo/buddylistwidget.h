@@ -5,6 +5,8 @@
 #include <QList>
 #include "BuddyTeam.h"
 #include <QRect>
+#include <QScrollArea>
+class QScrollBar;
 
 
 class BuddyListWidget : public QWidget
@@ -40,7 +42,11 @@ public:
 	void CalcCenterRect(QRect& rcDest, int cx, int cy, QRect& rcCenter );
 	void DrawBuddyItemInBigIcon(int nTeamIndex, int nIndex);
 	BuddyItem * GetBuddyItemByIndex(int nTeamIndex, int nIndex);
+	void Scroll(int cx, int cy);
 private:
+
+	 bool eventFilter(QObject *, QEvent *);
+
 	QList<BuddyTeam*> m_BuddyList;
 
 	int m_iCurrentSelectd;
@@ -57,6 +63,11 @@ private:
 	int m_VecScroll;
 
 	int m_nLeft, m_nTop;
+
+	QScrollBar *m_pScrollBar;
+
+	bool m_bScrollButtonDown;
+	QPoint m_LastPt;
 
 	
 };
