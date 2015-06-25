@@ -7,6 +7,7 @@
 #include <QImage>
 #include <QBitmap>
 #include <QScrollBar>
+#include <QPoint>
 
 BuddyListWidget::BuddyListWidget(QWidget *parent)
 	: QWidget(parent)
@@ -34,6 +35,8 @@ BuddyListWidget::BuddyListWidget(QWidget *parent)
 	m_VecScroll = 0;
 
 	m_nLeft = m_nTop = 0;
+
+	m_dwHeadFlashAnimTimerId = 0;
 
 
 	m_pScrollBar = new QScrollBar(this);
@@ -100,9 +103,6 @@ BuddyListWidget::BuddyListWidget(QWidget *parent)
 		"}"
 		);
 
-	m_bScrollButtonDown = false;
-
-
 }
 
 BuddyListWidget::~BuddyListWidget()
@@ -115,10 +115,6 @@ BuddyListWidget::~BuddyListWidget()
 void BuddyListWidget::paintEvent( QPaintEvent *e )
 {
 	QPainter painter(this);
-
-	//scroll(0,m_VecScroll);
-
-	//painter.drawPixmap(268,0,8,433,QPixmap(":/SCrollBar/ScrollBar/scrollbar_bkg.png"));
 
 	int h = GetContentHeight();
 	if (h > height())
@@ -165,13 +161,6 @@ void BuddyListWidget::DrawBuddyItemInBigIcon(int nTeamIndex, int nIndex)
 	QRect rcItem;
 	GetItemRectByIndex(nTeamIndex, nIndex, rcItem);
 
-
-	int w = rcItem.width();
-	int h = rcItem.height();
-
-// 	painter.drawPixmap(rcItem.left(),rcItem.top(),rcItem.width(),rcItem.height(),
-// 		QPixmap(":/BuddyList/BuddyList/main_yellowbar_bkg.png"));
-
 	int nHeadWidth = 40, nHeadHeight = 40;
 
 	QRect rcHead;
@@ -181,18 +170,14 @@ void BuddyListWidget::DrawBuddyItemInBigIcon(int nTeamIndex, int nIndex)
 
 	int nHeadRight = rcHead.right();
 
-	QString strName1 = "11111111111111111", strName2 = "2222222222222222";
-
 	if (m_nSelTeamIndex == nTeamIndex && m_nSelIndex == nIndex)				// 选中状态
 	{
-		QPainter painter;
 		painter.drawPixmap(rcItem.left(),rcItem.top(),rcItem.width(),rcItem.height(),
 			QPixmap(":/BuddyList/BuddyList/main_yellowbar_bkg.png"));
 
 	}
 	else if (m_nHoverTeamIndex == nTeamIndex && m_nHoverIndex == nIndex)	// 高亮状态
 	{
-		QPainter painter;
 		painter.drawPixmap(rcItem.left(),rcItem.top(),rcItem.width(),rcItem.height(),
 			QPixmap(":/BuddyList/BuddyList/main_yellowbar_bkg.png"));
 	}
@@ -201,7 +186,7 @@ void BuddyListWidget::DrawBuddyItemInBigIcon(int nTeamIndex, int nIndex)
 
 	}
 
-	painter.drawPixmap(rcHead,QPixmap(":/headers/Resources/94.png"));
+
 
 	if (m_nSelTeamIndex == nTeamIndex && m_nSelIndex == nIndex)
 	{
@@ -219,8 +204,18 @@ void BuddyListWidget::DrawBuddyItemInBigIcon(int nTeamIndex, int nIndex)
 
 	}
 
+	if (lpItem->m_bHeadFlashAnim)	// 头像闪动动画
+	{
+		QPoint pts[] = { QPoint(-1,1),QPoint(0,0),QPoint(1,1),QPoint(0,0)};
 
-	painter.drawText(nHeadRight+6,rcItem.top()+10,rcItem.width()- nHeadRight - 6,20,0,"sunpeng;");
+		if (lpItem->m_nHeadFlashAnimState >= 0 && lpItem->m_nHeadFlashAnimState < 4)
+			rcHead.translate(pts[lpItem->m_nHeadFlashAnimState]);
+	}
+
+	painter.drawPixmap(rcHead,QPixmap(":/headers/Resources/94.png"));
+
+
+	painter.drawText(nHeadRight+6,rcItem.top()+10,rcItem.width()- nHeadRight - 6,20,0,"sunpeng");
  	painter.drawText(nHeadRight+6,rcItem.top()+30,rcItem.width()- nHeadRight - 6,20,0,"和我一起学习QT，制作QT制作的QQ界面");
 }
 
@@ -254,6 +249,102 @@ void BuddyListWidget::InitList()
 
 }
 
+
+void BuddyListWidget::SetBuddyItemHeadFlashAnim(int nTeamIndex, int nIndex, bool bHeadFlashAnim)
+{
+	BuddyItem * lpBuddyItem = GetBuddyItemByIndex(nTeamIndex, nIndex);
+	if (NULL == lpBuddyItem || bHeadFlashAnim == lpBuddyItem->m_bHeadFlashAnim)
+		return;
+
+	lpBuddyItem->m_bHeadFlashAnim = bHeadFlashAnim;
+	lpBuddyItem->m_nHeadFlashAnimState = 0;
+	if (bHeadFlashAnim)
+	{
+		BuddyTeam * lpBuddyTeam = m_BuddyList.at(nTeamIndex);
+		if (lpBuddyTeam != NULL)
+		{
+			lpBuddyTeam->m_nHeadFlashAnim++;
+		}
+
+		if (NULL == m_dwHeadFlashAnimTimerId)	// 启动头像闪动动画计时器
+			m_dwHeadFlashAnimTimerId = startTimer(250);
+	}
+	else
+	{
+		BuddyTeam * lpBuddyTeam = m_BuddyList.at(nTeamIndex);
+		if (lpBuddyTeam != NULL)
+		{
+			lpBuddyTeam->m_nHeadFlashAnim--;
+			if (lpBuddyTeam->m_nHeadFlashAnim <= 0)
+				lpBuddyTeam->m_nHeadFlashAnimState = 0;
+		}
+
+		bool bHasAnim = FALSE;
+
+		int nTeamCnt = m_BuddyList.size();
+		for (int i = 0; i < nTeamCnt; i++)
+		{
+			lpBuddyTeam = m_BuddyList.at(i);
+			if (lpBuddyTeam != NULL && lpBuddyTeam->m_nHeadFlashAnim > 0)
+			{
+				bHasAnim = TRUE;
+				break;
+			}
+		}
+
+		if (!bHasAnim)
+		{
+			killTimer(m_dwHeadFlashAnimTimerId);
+			m_dwHeadFlashAnimTimerId = NULL;
+
+			if (isVisible())
+			{
+				update();
+			}
+		}
+	}
+}
+
+
+void BuddyListWidget::OnTimer_HeadFlashAnim(int nIDEvent)
+{
+	if (nIDEvent != m_dwHeadFlashAnimTimerId)
+		return;
+
+	int nTeamCnt = m_BuddyList.size();
+	for (int i = 0; i < nTeamCnt; i++)
+	{
+		BuddyTeam * lpBuddyTeam = m_BuddyList.at(i);
+		if (lpBuddyTeam != NULL)
+		{
+			if (lpBuddyTeam->m_nHeadFlashAnim > 0)
+			{
+				if (!lpBuddyTeam->m_bExpand)
+				{
+					lpBuddyTeam->m_nHeadFlashAnimState++;
+					if (lpBuddyTeam->m_nHeadFlashAnimState >= 2)
+						lpBuddyTeam->m_nHeadFlashAnimState = 0;
+				}
+				else
+				{
+					int nItemCnt = m_BuddyList.size();
+					for (int j = 0; j < nItemCnt; j++)
+					{
+						BuddyItem * lpBuddyItem = GetBuddyItemByIndex(i, j);
+						if (lpBuddyItem != NULL && lpBuddyItem->m_bHeadFlashAnim)
+						{
+							lpBuddyItem->m_nHeadFlashAnimState++;
+							if (lpBuddyItem->m_nHeadFlashAnimState >= 4)
+								lpBuddyItem->m_nHeadFlashAnimState = 0;
+						}
+					}
+				}
+			}
+		}
+	}
+	update();
+}
+
 void BuddyListWidget::mousePressEvent( QMouseEvent *e )
 {
 	if (e->buttons() == Qt::LeftButton)
@@ -264,14 +355,6 @@ void BuddyListWidget::mousePressEvent( QMouseEvent *e )
 
 		
 		QPoint t = e->pos();
-// 		if (t.x() >= 268 && t.x()<= w && t.y()>=0 && t.y()<=h)
-// 		{
-// 			m_nTop -= 10;
-// 			update();
-// 			return;
-// 		}
-
-/*		int iIndex = GetIndexFromPoint(t);*/
 		int nTeamIndex = -1;
 		int nIndex = -1;
 		HitTest(t,nTeamIndex,nIndex);
@@ -313,13 +396,12 @@ void BuddyListWidget::mouseMoveEvent( QMouseEvent *e )
 	QPoint t = e->pos();
 	if (m_nPressTeamIndex != -1)
 		return;
-
 	QPoint point = e->pos();
-// 	if (!m_bMouseTracking)
-// 	{
-// 		TrackMouseLeave(GetSafeHwnd());
-// 		m_bMouseTracking = TRUE;
-// 	}
+	if (!rect().contains(point))
+	{
+		m_nHoverIndex = -1;
+		m_nHoverTeamIndex = -1;
+	}
 
 	int nTeamIndex = -1, nIndex = -1;
 	HitTest(point, nTeamIndex, nIndex);
@@ -329,12 +411,11 @@ void BuddyListWidget::mouseMoveEvent( QMouseEvent *e )
 		m_nHoverTeamIndex = nTeamIndex;
 		m_nHoverIndex = nIndex;
 		update();
-		//Invalidate(FALSE);
 	}
+	else
+	{
 
-	//m_VScrollBar.OnMouseMove(nFlags, point);
-
-	//CWnd::OnMouseMove(nFlags, point);
+	}
 
 	return QWidget::mouseMoveEvent(e);
 
@@ -426,7 +507,7 @@ void BuddyListWidget::HitTest(QPoint pt, int& nTeamIndex, int& nIndex)
 {
 	BuddyTeam * lpTeamItem;
 	BuddyItem * lpItem;
-	int nLeft =2, nTop = 0;
+	int nLeft =2, nTop = m_nTop;
 	int nBuddyTeamWidth, nBuddyItemWidth, nBuddyItemHeight;
 	QRect rcItem;
 
@@ -524,6 +605,8 @@ void BuddyListWidget::DrawBuddyTeam(int nIndex)
 
 	if (m_nSelTeamIndex == nIndex && m_nSelIndex == -1)//组选中
 	{
+// 		painter.drawPixmap(rcItem.left(),rcItem.top(),rcItem.width(),rcItem.height(),
+// 			QPixmap(":/BuddyList/BuddyList/main_yellowbar_bkg.png"));
 		if (!lpItem->m_bExpand)
 		{
 			painter.drawPixmap(rcArrow.left(),rcArrow.top(),rcArrow.width(),rcArrow.height(),QPixmap(":/MainPanel/Resources/mainpanel_foldernode_collapsetexture.png"));
@@ -535,8 +618,8 @@ void BuddyListWidget::DrawBuddyTeam(int nIndex)
 	}
 	else if (m_nHoverTeamIndex == nIndex && m_nHoverIndex == -1)
 	{
-// 		painter.drawPixmap(rcItem.left(),rcItem.top(),rcItem.width(),rcItem.height(),
-// 			QPixmap(":/BuddyList/BuddyList/main_yellowbar_bkg.png"));
+		painter.drawPixmap(rcItem.left(),rcItem.top(),rcItem.width(),rcItem.height(),
+			QPixmap(":/BuddyList/BuddyList/main_yellowbar_bkg.png"));
 
 		if (!lpItem->m_bExpand)
 		{
@@ -560,7 +643,17 @@ void BuddyListWidget::DrawBuddyTeam(int nIndex)
 	}
 	BuddyTeam *pTeam = m_BuddyList.at(nIndex);
 
-	painter.drawText(rcText,0,pTeam->GetDesc());
+	bool bShowText = true;
+	if (!lpItem->m_bExpand && lpItem->m_nHeadFlashAnim > 0)
+	{
+		if (1 == lpItem->m_nHeadFlashAnimState)
+			bShowText = false;
+	}
+
+	if (bShowText)
+	{
+		painter.drawText(rcText,0,pTeam->GetDesc());
+	}
 
 }
 
@@ -704,6 +797,16 @@ void BuddyListWidget::ScrollBarValueChanged( int value )
 	else
 	{
 		Scroll();
+	}
+
+}
+
+void BuddyListWidget::timerEvent( QTimerEvent * e )
+{
+	int m = e->timerId();
+	if (e->timerId() == m_dwHeadFlashAnimTimerId)
+	{
+		OnTimer_HeadFlashAnim(m_dwHeadFlashAnimTimerId);
 	}
 
 }

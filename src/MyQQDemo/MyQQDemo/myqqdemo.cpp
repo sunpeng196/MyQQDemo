@@ -23,7 +23,7 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	setStyleSheet("QFrame {background-image:url(:/MyQQDemo/Resources/main.jpg);border:0px solid black;}");
 
 	m_pTitleBar = new TitleBar(this);
-	m_pTitleBar->setGeometry(0,0,270,30);
+	m_pTitleBar->setGeometry(0,0,281,30);
 
 
  	m_pColumnWidget = new ColumnWidget(this);
@@ -50,6 +50,8 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	m_pSearchLineEdit->setGeometry(0,100,260,30);
 
 	m_pBuddyList = new BuddyListWidget(this);
+
+	m_pBuddyList->SetBuddyItemHeadFlashAnim(0,1,true);
 
 	m_pBuddyList->setGeometry(1,207,278,443);
 	m_pAppWidget = new AppWidget(this);

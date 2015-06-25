@@ -22,6 +22,8 @@ public:
 	void mouseMoveEvent(QMouseEvent * e);
 	void mouseReleaseEvent(QMouseEvent * e);
 
+	
+
 
 private:
 	TitleBar *m_pTitleBar;

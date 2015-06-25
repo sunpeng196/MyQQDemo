@@ -45,6 +45,10 @@ public:
 	void DrawBuddyItemInBigIcon(int nTeamIndex, int nIndex);
 	BuddyItem * GetBuddyItemByIndex(int nTeamIndex, int nIndex);
 	void Scroll();
+	void SetBuddyItemHeadFlashAnim(int nTeamIndex, int nIndex, bool bHeadFlashAnim);
+
+	void timerEvent(QTimerEvent * e);
+
 private:
 
 /*	 bool eventFilter(QObject *, QEvent *);*/
@@ -64,20 +68,22 @@ private:
 
 	int m_VecScroll;
 
+	int m_dwHeadFlashAnimTimerId;
+
 	int m_nLeft, m_nTop;
 
 	QScrollBar *m_pScrollBar;
 
-	bool m_bScrollButtonDown;
-	QPoint m_LastPt;
+
+
 
 	int GetContentHeight();
 
+	void OnTimer_HeadFlashAnim(int nIDEvent);
 
 	public slots:
 		void ScrollBarValueChanged(int value);
 
-	
 };
 
 #endif // BUDDYLISTWIDGET_H

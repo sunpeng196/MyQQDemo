@@ -15,7 +15,11 @@ public:
 		m_iAllNumber = iAllNumber;
 		m_iCurrentNumber = iCurrentNumber;
 
+		m_nHeadFlashAnimState = 0;
+
 		m_bExpand = false;
+
+		m_nHeadFlashAnim = 0;
 
 		for (int i = 0;i<9;++i)
 		{
@@ -55,5 +59,9 @@ public:
 	bool m_bExpand;
 
 	QList<BuddyItem*> m_BuddyItemList;
+
+	int m_nHeadFlashAnim;
+
+	int m_nHeadFlashAnimState;
 };
 
