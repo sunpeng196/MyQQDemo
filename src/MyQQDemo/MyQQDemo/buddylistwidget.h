@@ -19,6 +19,8 @@ public:
 
 	void paintEvent(QPaintEvent *e);
 
+	void showEvent(QShowEvent * e);
+
 	void mouseMoveEvent(QMouseEvent *e);
 	void mousePressEvent(QMouseEvent *e);
 	void mouseReleaseEvent(QMouseEvent *e);
@@ -32,20 +34,20 @@ public:
 
 	QRect GetRectByIndex(int iIndex,int iSubIndex);
 
-	int GetIndexFromPoint(const QPoint& pt);
+/*	int GetIndexFromPoint(const QPoint& pt);*/
 
 	void AddBuddyItem(int iGroupIndex);
 
 	bool GetItemRectByIndex( int nTeamIndex,int nIndex,QRect &rect);
 	void HitTest(QPoint pt, int& nTeamIndex, int& nIndex);
 	void DrawBuddyTeam(int nIndex);
-	void CalcCenterRect(QRect& rcDest, int cx, int cy, QRect& rcCenter );
+	void CalcCenterRect(const QRect& rcDest, int cx, int cy, QRect& rcCenter );
 	void DrawBuddyItemInBigIcon(int nTeamIndex, int nIndex);
 	BuddyItem * GetBuddyItemByIndex(int nTeamIndex, int nIndex);
-	void Scroll(int cx, int cy);
+	void Scroll();
 private:
 
-	 bool eventFilter(QObject *, QEvent *);
+/*	 bool eventFilter(QObject *, QEvent *);*/
 
 	QList<BuddyTeam*> m_BuddyList;
 
@@ -68,6 +70,12 @@ private:
 
 	bool m_bScrollButtonDown;
 	QPoint m_LastPt;
+
+	int GetContentHeight();
+
+
+	public slots:
+		void ScrollBarValueChanged(int value);
 
 	
 };

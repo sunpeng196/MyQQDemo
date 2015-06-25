@@ -38,6 +38,8 @@ BuddyListWidget::BuddyListWidget(QWidget *parent)
 
 	m_pScrollBar = new QScrollBar(this);
 
+	QObject::connect(m_pScrollBar,SIGNAL(valueChanged(int)),this,SLOT(ScrollBarValueChanged(int)));
+
 	m_pScrollBar->setGeometry(260,0,8,433);
 	m_pScrollBar->setObjectName("ScrollBar");
 
@@ -99,6 +101,8 @@ BuddyListWidget::BuddyListWidget(QWidget *parent)
 		);
 
 	m_bScrollButtonDown = false;
+
+
 }
 
 BuddyListWidget::~BuddyListWidget()
@@ -116,6 +120,20 @@ void BuddyListWidget::paintEvent( QPaintEvent *e )
 
 	//painter.drawPixmap(268,0,8,433,QPixmap(":/SCrollBar/ScrollBar/scrollbar_bkg.png"));
 
+	int h = GetContentHeight();
+	if (h > height())
+	{
+		m_pScrollBar->setHidden(false);
+		m_pScrollBar->setEnabled(true);
+
+		m_pScrollBar->setMinimum(0);
+		m_pScrollBar->setMaximum(h - height());
+	}
+	else
+	{
+		m_pScrollBar->setHidden(true);
+	}
+
 
 	BuddyTeam * lpTeamItem;
 	for (int i = 0; i < (int)m_BuddyList.size(); i++)
@@ -130,8 +148,6 @@ void BuddyListWidget::paintEvent( QPaintEvent *e )
 				DrawBuddyItemInBigIcon(i, j);
 			}
 		}
-
-		break;
 	}
 
 
@@ -170,13 +186,15 @@ void BuddyListWidget::DrawBuddyItemInBigIcon(int nTeamIndex, int nIndex)
 	if (m_nSelTeamIndex == nTeamIndex && m_nSelIndex == nIndex)				// 选中状态
 	{
 		QPainter painter;
-		painter.drawPixmap(rcItem.left(),rcItem.top(),QPixmap(":/BuddyList/BuddyList/BuddyItemSelBg.png"));
+		painter.drawPixmap(rcItem.left(),rcItem.top(),rcItem.width(),rcItem.height(),
+			QPixmap(":/BuddyList/BuddyList/main_yellowbar_bkg.png"));
 
 	}
 	else if (m_nHoverTeamIndex == nTeamIndex && m_nHoverIndex == nIndex)	// 高亮状态
 	{
 		QPainter painter;
-		painter.drawPixmap(rcItem.left(),rcItem.top(),QPixmap(":/BuddyList/BuddyList/BuddyItemHotBg.png"));
+		painter.drawPixmap(rcItem.left(),rcItem.top(),rcItem.width(),rcItem.height(),
+			QPixmap(":/BuddyList/BuddyList/main_yellowbar_bkg.png"));
 	}
 	else
 	{
@@ -246,18 +264,38 @@ void BuddyListWidget::mousePressEvent( QMouseEvent *e )
 
 		
 		QPoint t = e->pos();
-		if (t.x() >= 268 && t.x()<= w && t.y()>=0 && t.y()<=h)
+// 		if (t.x() >= 268 && t.x()<= w && t.y()>=0 && t.y()<=h)
+// 		{
+// 			m_nTop -= 10;
+// 			update();
+// 			return;
+// 		}
+
+/*		int iIndex = GetIndexFromPoint(t);*/
+		int nTeamIndex = -1;
+		int nIndex = -1;
+		HitTest(t,nTeamIndex,nIndex);
+		if (nTeamIndex == -1 && nIndex == -1)
 		{
-			m_nTop -= 10;
-			update();
 			return;
 		}
 
-		int iIndex = GetIndexFromPoint(t);
+		if (nTeamIndex != -1 && nIndex == -1)//表明选中的是一个组选项
+		{
+			m_nSelTeamIndex = nTeamIndex;
+			m_nSelIndex = -1;
 
-		BuddyTeam *const pItem = m_BuddyList.at(iIndex);
-		pItem->setExpand(!pItem->Expand());
-		update();
+			BuddyTeam *const pItem = m_BuddyList.at(m_nSelTeamIndex);
+			pItem->setExpand(!pItem->Expand());
+			update();
+		}
+		else//表明选中的是一个单个项目
+		{
+			m_nSelTeamIndex = nTeamIndex;
+			m_nSelIndex = nIndex;
+		}
+
+
 
 		
 	}
@@ -303,13 +341,13 @@ void BuddyListWidget::mouseMoveEvent( QMouseEvent *e )
 }
 
 
-int BuddyListWidget::GetIndexFromPoint( const QPoint& pt )
-{
-	int y = pt.y();
-
-	return y/24;
-
-}
+// int BuddyListWidget::GetIndexFromPoint( const QPoint& pt )
+// {
+// 	int y = pt.y();
+// 
+// 	return y/24;
+// 
+// }
 
 void BuddyListWidget::AddBuddyItem( int iGroupIndex )
 {
@@ -343,7 +381,7 @@ bool BuddyListWidget::GetItemRectByIndex( int nTeamIndex,int nIndex,QRect &rectA
 		{
 			if (-1 == nIndex && i == nTeamIndex)
 			{
-				rectArea = QRect(nLeft, nTop, nLeft+nBuddyTeamWidth, nTop+24);
+				rectArea = QRect(nLeft, nTop, nBuddyTeamWidth,24);
 				return TRUE;
 			}
 
@@ -363,7 +401,7 @@ bool BuddyListWidget::GetItemRectByIndex( int nTeamIndex,int nIndex,QRect &rectA
 
 						if (i == nTeamIndex && j == nIndex)
 						{
-							rectArea = QRect(nLeft, nTop, nLeft+nBuddyItemWidth,nBuddyItemHeight);
+							rectArea = QRect(nLeft, nTop,nBuddyItemWidth,nBuddyItemHeight);
 							return TRUE;
 						}
 						nTop += nBuddyItemHeight;
@@ -380,6 +418,9 @@ bool BuddyListWidget::GetItemRectByIndex( int nTeamIndex,int nIndex,QRect &rectA
 
 	return FALSE;
 }
+
+//从头到尾遍历，计算每一个索引所对应的鼠标的范围。如果范围当中包含鼠标的点击范围，则当前索引就是
+//需要的索引范围。
 
 void BuddyListWidget::HitTest(QPoint pt, int& nTeamIndex, int& nIndex)
 {
@@ -412,7 +453,7 @@ void BuddyListWidget::HitTest(QPoint pt, int& nTeamIndex, int& nIndex)
 		lpTeamItem = m_BuddyList.at(i);
 		if (lpTeamItem != NULL)
 		{
-			rcItem = QRect(nLeft, nTop, nLeft+nBuddyTeamWidth, nTop+24);
+			rcItem = QRect(nLeft, nTop, nBuddyTeamWidth,24);
 			if (rcItem.contains(pt))
 			{
 				nTeamIndex = i;
@@ -434,7 +475,7 @@ void BuddyListWidget::HitTest(QPoint pt, int& nTeamIndex, int& nIndex)
 // 							&& (m_nSelTeamIndex == i && m_nSelIndex == j))
 // 							nBuddyItemHeight = m_nBuddyItemHeightInBig;
 
-						rcItem = QRect(nLeft, nTop, nLeft+nBuddyItemWidth, nTop+nBuddyItemHeight);
+						rcItem = QRect(nLeft, nTop, nBuddyItemWidth,nBuddyItemHeight);
 						if (rcItem.contains(pt))
 						{
 							nTeamIndex = i;
@@ -465,8 +506,8 @@ void BuddyListWidget::DrawBuddyTeam(int nIndex)
 	QRect rcItem;
 	GetItemRectByIndex(nIndex, -1, rcItem);//rcItem为矩形区域所在的位置。
 
-// 	painter.drawPixmap(rcItem.left(),rcItem.top(),rcItem.width(),rcItem.height(),
-// 		QPixmap(":/BuddyList/BuddyList/main_yellowbar_bkg.png"));
+
+	int h = rcItem.height();
 
 	int nArrowWidth = 12, nArrowHeight = 12;
 
@@ -489,13 +530,13 @@ void BuddyListWidget::DrawBuddyTeam(int nIndex)
 		}
 		else
 		{
-			painter.drawPixmap(rcArrow.left(),rcArrow.top(),rcArrow.width(),rcArrow.height(),QPixmap(":/MainPanel/Resources/mainpanel_foldernode_collapsetexturehighlight.png"));
+			painter.drawPixmap(rcArrow.left(),rcArrow.top(),rcArrow.width(),rcArrow.height(),QPixmap(":/MainPanel/Resources/mainpanel_foldernode_expandtexture.png"));
 		}
 	}
 	else if (m_nHoverTeamIndex == nIndex && m_nHoverIndex == -1)
 	{
-		painter.drawPixmap(rcArrow.left(),rcArrow.top(),rcArrow.width(),rcArrow.height(),QPixmap(""));
-
+// 		painter.drawPixmap(rcItem.left(),rcItem.top(),rcItem.width(),rcItem.height(),
+// 			QPixmap(":/BuddyList/BuddyList/main_yellowbar_bkg.png"));
 
 		if (!lpItem->m_bExpand)
 		{
@@ -503,14 +544,14 @@ void BuddyListWidget::DrawBuddyTeam(int nIndex)
 		}
 		else
 		{
-			painter.drawPixmap(rcArrow.left(),rcArrow.top(),rcArrow.width(),rcArrow.height(),QPixmap(":/MainPanel/Resources/mainpanel_foldernode_collapsetexturehighlight.png"));
+			painter.drawPixmap(rcArrow.left(),rcArrow.top(),rcArrow.width(),rcArrow.height(),QPixmap(":/MainPanel/Resources/MainPanel_FolderNode_expandTextureHighlight.png"));
 		}
 	}
 	else
 	{
 		if (!lpItem->m_bExpand)
 		{
-			painter.drawPixmap(rcArrow.left(),rcArrow.top(),rcArrow.width(),rcArrow.height(),QPixmap(":/MainPanel/Resources/mainpanel_foldernode_collapsetexturehighlight.png"));
+			painter.drawPixmap(rcArrow.left(),rcArrow.top(),rcArrow.width(),rcArrow.height(),QPixmap(":/MainPanel/Resources/mainpanel_foldernode_collapsetexture.png"));
 		}
 		else
 		{
@@ -524,7 +565,7 @@ void BuddyListWidget::DrawBuddyTeam(int nIndex)
 }
 
 
-void BuddyListWidget::CalcCenterRect(QRect& rcDest, int cx, int cy, QRect& rcCenter )
+void BuddyListWidget::CalcCenterRect(const QRect& rcDest, int cx, int cy, QRect& rcCenter )
 {
 	int x = ((rcDest.right()-rcDest.left()) - cx + 1) / 2;
 	int y = ((rcDest.bottom()-rcDest.top()) - cy + 1) / 2;
@@ -537,75 +578,132 @@ void BuddyListWidget::CalcCenterRect(QRect& rcDest, int cx, int cy, QRect& rcCen
 
 void BuddyListWidget::wheelEvent( QWheelEvent * event )
 {
-	int nLineSize = 100;
+	int nLineSize = 30;
+
+	int m = event->delta();
 
 	if (event->delta() >0)
 	{	
-		Scroll(0, -nLineSize);
+		int sliderPositon = m_pScrollBar->sliderPosition();
+		m_pScrollBar->setSliderPosition(sliderPositon - nLineSize);
 	}
 	else
 	{
-		Scroll(0, nLineSize);
+		int sliderPositon = m_pScrollBar->sliderPosition();
+		m_pScrollBar->setSliderPosition(sliderPositon + nLineSize);
 	}
 
 
 	update();
 }
 
-void BuddyListWidget::Scroll(int cx, int cy)
+
+
+// bool BuddyListWidget::eventFilter( QObject *obj, QEvent *event )
+// {
+// 	if (m_pScrollBar && obj == m_pScrollBar ) {
+// 		if (event->type() == QEvent::MouseButtonPress) 
+// 		{
+// 			QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
+// 			if (mouseEvent->buttons() & Qt::LeftButton)
+// 			{
+// 				m_LastPt = mouseEvent->pos();
+// 				m_bScrollButtonDown = true;
+// 			}
+// 		}
+// 		else if (event->type() == QEvent::MouseButtonRelease)
+// 		{
+// 			QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
+// 			if (mouseEvent->buttons() & Qt::LeftButton)
+// 			{
+// 				m_bScrollButtonDown = false;
+// 			}
+// 
+// 		}
+// 		else if (event->type() == QEvent::MouseMove)
+// 		{
+// 			QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
+// 			if (mouseEvent->buttons() & Qt::LeftButton)
+// 			{
+// 				if (m_bScrollButtonDown)
+// 				{
+// 					QPoint pt = mouseEvent->pos();
+// 					int deltay = pt.y() - m_LastPt.y();
+// 
+// 					m_nTop -= deltay;
+// 
+// 					m_LastPt = pt;
+// 
+// 					update();
+// 
+// 				}
+// 
+// 			}
+// 		}
+// 	}
+// 
+// 	return QWidget::eventFilter(obj,event);
+// }
+
+int BuddyListWidget::GetContentHeight()
 {
-	//if (m_VScrollBar.IsVisible() && m_VScrollBar.IsEnabled())
+	int nTop = 0;
+	for (int i = 0;i< m_BuddyList.size();++i)
 	{
-		int nPos = m_pScrollBar->sliderPosition();
-		m_pScrollBar->setSliderPosition(nPos + cy);
-		m_pScrollBar->setSliderPosition(nPos + cy);
-		nPos = m_pScrollBar->sliderPosition();
-		m_nTop = 0 - nPos;
+		nTop += 24;
+
+		BuddyTeam *pItem = m_BuddyList.at(i);
+		if (pItem && pItem->Expand())
+		{
+			for (int j = 0;j<pItem->m_BuddyItemList.size();++j)
+			{
+				nTop += 54;
+				nTop += 1;
+			}
+
+		}
+
+	}
+
+	return nTop;
+
+}
+
+void BuddyListWidget::showEvent( QShowEvent * e )
+{
+	int h = GetContentHeight();
+	int m = height();
+	if (height() > h)
+	{
+		m_pScrollBar->setHidden(true);
+	}
+	else
+	{
+		m_pScrollBar->setHidden(false);
 	}
 }
 
-bool BuddyListWidget::eventFilter( QObject *obj, QEvent *event )
+
+void BuddyListWidget::Scroll()
 {
-	if (m_pScrollBar && obj == m_pScrollBar ) {
-		if (event->type() == QEvent::MouseButtonPress) 
-		{
-			QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
-			if (mouseEvent->buttons() & Qt::LeftButton)
-			{
-				m_LastPt = mouseEvent->pos();
-				m_bScrollButtonDown = true;
-			}
-		}
-		else if (event->type() == QEvent::MouseButtonRelease)
-		{
-			QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
-			if (mouseEvent->buttons() & Qt::LeftButton)
-			{
-				m_bScrollButtonDown = false;
-			}
+	if (m_pScrollBar->isVisible()&& m_pScrollBar->isEnabled())
+	{
+		int nPos = m_pScrollBar->sliderPosition();
+		m_nTop = 0 - nPos;
 
-		}
-		else if (event->type() == QEvent::MouseMove)
-		{
-			QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
-			if (mouseEvent->buttons() & Qt::LeftButton)
-			{
-				if (m_bScrollButtonDown)
-				{
-					QPoint pt = mouseEvent->pos();
-					int deltay = pt.y() - m_LastPt.y();
+		update();
+	}
+}
 
-					m_nTop -= deltay;
-
-					m_LastPt = pt;
-
-					update();
-
-				}
-
-			}
-		}
+void BuddyListWidget::ScrollBarValueChanged( int value )
+{
+	if (value >0)
+	{
+		Scroll();
+	}
+	else
+	{
+		Scroll();
 	}
 
-	return QWidget::eventFilter(obj,event);
 }
