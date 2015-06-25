@@ -13,10 +13,10 @@ ColumnWidget::ColumnWidget(QWidget *parent)
 
 	setAutoFillBackground(true);
 
-	QPalette palette;
-	palette.setColor(QPalette::Background, QColor(231,239,248));
+	//QPalette palette;
+	//palette.setColor(QPalette::Background, QColor(231,239,248));
 	//palette.setBrush(QPalette::Background, QBrush(QPixmap(":/MainTab/Resources/main_tabctrl_background.png")));
-	this->setPalette(palette);
+	//this->setPalette(palette);
 
 
 	setObjectName("columnWidget");

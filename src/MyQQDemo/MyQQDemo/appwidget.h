@@ -20,7 +20,7 @@ private:
 
 	QHBoxLayout *mainLayout;
 
-	QPushButton *m_pAppMenu;
+	QPushButton *m_pAppMenuBtn;
 	QPushButton *m_pSystemSetting;
 	QPushButton *m_pMessageManager;
 	QPushButton *m_pFileAssiant;
