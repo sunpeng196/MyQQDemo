@@ -49,6 +49,8 @@ BuddyListWidget::BuddyListWidget(QWidget *parent)
 
 	m_pScrollBar->installEventFilter(this);
 
+	 //setStyleSheet("border:none");
+
 
 	m_pScrollBar->setStyleSheet("QScrollBar:vertical"
 		"{"
@@ -605,8 +607,8 @@ void BuddyListWidget::DrawBuddyTeam(int nIndex)
 
 	if (m_nSelTeamIndex == nIndex && m_nSelIndex == -1)//×éÑ¡ÖÐ
 	{
-// 		painter.drawPixmap(rcItem.left(),rcItem.top(),rcItem.width(),rcItem.height(),
-// 			QPixmap(":/BuddyList/BuddyList/main_yellowbar_bkg.png"));
+		painter.drawPixmap(rcItem.left(),rcItem.top(),rcItem.width(),rcItem.height(),
+			QPixmap(":/BuddyList/BuddyList/main_yellowbar_bkg.png"));
 		if (!lpItem->m_bExpand)
 		{
 			painter.drawPixmap(rcArrow.left(),rcArrow.top(),rcArrow.width(),rcArrow.height(),QPixmap(":/MainPanel/Resources/mainpanel_foldernode_collapsetexture.png"));

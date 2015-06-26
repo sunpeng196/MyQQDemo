@@ -201,3 +201,37 @@ QScrollBar#ScrollBar::add-page:vertical,QScrollBar::sub-page:vertical   // µ±¹ö¶
     background:rgba(0,0,0,10%);
     border-radius:4px;
 }
+
+
+
+QWidget#widgetColumn>QPushButton
+{
+	height:35px;
+}
+
+QWidget#widgetColumn>QPushButton:checked
+{	
+	border-image:url(:/MainTab/Resources/maintab/main_tab_check.png) 0 0 0 0 stretch stretch;
+}
+
+QWidget#widgetColumn>QPushButton:hover
+{
+	border-image:url(:/MainTab/Resources/maintab/main_tab_check.png) 0 0 0 0 stretch stretch;
+}
+
+QWidget#widgetColumn>QPushButton::menu-indicator
+{
+	border-image: none;
+}
+
+QWidget#widgetColumn>QPushButton::menu-indicator:checked:hover
+{
+	width:20px;
+	height:30;
+	border-image:url(:/MainTab/Resources/maintab/main_tabbtn_highlight.png) 0 0 0 0 stretch stretch;
+}
+
+QWidget#widgetColumn>QPushButton::menu-indicator:pressed, QWidget#widgetColumn>QPushButton::menu-indicator:open
+{
+	border-image:url(:/MainTab/Resources/maintab/main_tabbtn_highlight.png) 0 0 0 0 stretch stretch;
+}

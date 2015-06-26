@@ -132,7 +132,9 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="myqqdemo.cpp" />
-    <ClCompile Include="qqstylepushbutton.cpp" />
+    <ClCompile Include="qqstylepushbutton.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="searchlineedit.cpp" />
     <ClCompile Include="titlebar.cpp" />
     <ClCompile Include="toolwidget.cpp" />

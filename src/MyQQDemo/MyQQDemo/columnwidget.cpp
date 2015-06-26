@@ -4,81 +4,169 @@
 #include <QStackedWidget>
 #include <QMenu>
 #include <QLabel>
+#include <QPainter>
+#include <QMouseEvent>
 
 ColumnWidget::ColumnWidget(QWidget *parent)
 	: QWidget(parent)
 {
-// 	setFixedHeight(32);
-// 	setFixedWidth(260);
+	 m_iCurrentHoverItem = -1;
+	 m_iCurrentChooseItem = -1;
+	 Init();
+	 setMouseTracking(true);
 
-	setAutoFillBackground(true);
+	 m_nLeft = m_nTop = 0;
 
-	//QPalette palette;
-	//palette.setColor(QPalette::Background, QColor(231,239,248));
-	//palette.setBrush(QPalette::Background, QBrush(QPixmap(":/MainTab/Resources/main_tabctrl_background.png")));
-	//this->setPalette(palette);
-
-
-	setObjectName("columnWidget");
-
-	//setStyleSheet("QPushButton{border:0px;background-image: url(:/MainTab/Resources/main_tab_check.png)}");
-
-	m_pHBoxLayout = new QHBoxLayout(this);
-	m_pHBoxLayout->setSpacing(0);
-	m_pHBoxLayout->setContentsMargins(0,0,0,0);
-
-
-	m_pContractBtn = new QQStylePushButton(":/ColumnIcon/Resources/icon_contacts_normal.png",
-		":/ColumnIcon/Resources/icon_contacts_hover.png",
-		":/ColumnIcon/Resources/icon_contacts_selected.png","联系人",this);
-
-	m_pContractBtn->setObjectName("pushBtnContract");
-
-	m_pGroupBtn = new QQStylePushButton(":/ColumnIcon/Resources/icon_group_normal.png",
-		":/ColumnIcon/Resources/icon_group_hover.png",
-		":/ColumnIcon/Resources/icon_group_selected.png",
-		"群/讨论组",
-		this);
-	m_pGroupBtn->setObjectName("groupBtn");
-
-
-	m_pLastBtn = new QQStylePushButton(":/ColumnIcon/Resources/icon_last_normal.png",
-		":/ColumnIcon/Resources/icon_last_hover.png",
-		":/ColumnIcon/Resources/icon_last_normal_msg.png",
-		"回话",
-		this);
-	m_pLastBtn->setObjectName("lastBtn");
-
-	m_tabBarGroup = new QButtonGroup();
-	m_tabBarGroup->addButton(m_pContractBtn);
-	m_tabBarGroup->addButton(m_pGroupBtn);
-	m_tabBarGroup->addButton(m_pLastBtn);
-
-	m_pContractBtn->setCheckable(true);
-	m_pContractBtn->setChecked(true);
-
-	m_pGroupBtn->setCheckable(true);
-	m_pLastBtn->setCheckable(true);
-
-
-	m_pContractBtn->setFlat(true);
-	m_pGroupBtn->setFlat(true);
-	m_pLastBtn->setFlat(true);
-
-	QMenu *pMenu = new QMenu(m_pLastBtn);
-	m_pLastBtn->setMenu(pMenu);
-	pMenu->addAction("漫游回话列表");
-	pMenu->addAction("清空回话列表");
-
-	m_pHBoxLayout->addWidget(m_pContractBtn);
-	m_pHBoxLayout->addWidget(m_pGroupBtn);
-	m_pHBoxLayout->addWidget(m_pLastBtn);
-
-	setLayout(m_pHBoxLayout);
-
+	 SetCurrentItem(0);
+	 setStyleSheet("border:none");
 }
 
 ColumnWidget::~ColumnWidget()
 {
+
+}
+
+
+
+void ColumnWidget::paintEvent( QPaintEvent * e )
+{
+	QPainter painter(this);
+	painter.drawPixmap(0,0,width(),height(),QPixmap(":/MainTab/Resources/main_tabctrl_background.png"));
+	for (int i = 0;i < m_TabCtrlList.size();++i)
+	{
+		DrawItem(i);
+	}
+
+}
+
+void ColumnWidget::mousePressEvent( QMouseEvent * e )
+{
+	int iIndex = GetPointIndex(e->pos());
+	SetCurrentItem(iIndex);
+	update();
+}
+
+void ColumnWidget::mouseMoveEvent( QMouseEvent *e )
+{
+	int iIndex = GetPointIndex(e->pos());
+	SetHoverItem(iIndex);
+	update();
+}
+
+int ColumnWidget::GetPointIndex(const QPoint &pt )
+{
+	int iRet = -1;
+	for (int i = 0;i < m_TabCtrlList.size();++i)
+	{
+		QRect rect;
+		GetItemRectByIndex(i,rect);
+		if (rect.contains(pt))
+		{
+			iRet = i;
+			break;
+		}
+	}
+
+	return iRet;
+}
+
+
+bool ColumnWidget::GetItemRectByIndex(int nIndex, QRect& rect)
+{
+	TabCtrlItem * lpItem;
+	int nLeft = m_nLeft, nTop = m_nTop;
+
+	int iWidth = (width()-2)/3-1;
+
+	for (int i = 0; i < (int)m_TabCtrlList.size(); i++)
+	{
+		lpItem = m_TabCtrlList.at(i);
+		if (lpItem != NULL)
+		{
+			if (i == nIndex)
+			{
+				rect = QRect(nLeft, nTop,iWidth,35);
+				return TRUE;
+			}
+			nLeft += iWidth;
+			nLeft += 1;
+		}
+	}
+
+	return false;
+}
+
+
+void ColumnWidget::DrawItem(int i)
+{
+	QPainter painter(this);
+
+	TabCtrlItem * lpItem = m_TabCtrlList.at(i);
+	if (NULL == lpItem) return;
+
+	QRect rcItem;
+	GetItemRectByIndex(i, rcItem);
+
+
+	if (m_iCurrentChooseItem == i)
+	{
+		int cxIcon = lpItem->m_SelectedImage.width();
+		int cyIcon = lpItem->m_SelectedImage.height();
+
+		QRect rcIcon;
+		CalcCenterRect(rcItem, cxIcon, cyIcon, rcIcon);
+		painter.drawPixmap(rcItem,QPixmap(":/MainTab/Resources/maintab/main_tab_check.png"));
+
+		painter.drawPixmap(rcIcon,lpItem->m_SelectedImage);
+
+	}
+	else if (m_iCurrentHoverItem == i)
+	{
+		int cxIcon = lpItem->m_SelectedImage.width();
+		int cyIcon = lpItem->m_SelectedImage.height();
+
+		QRect rcIcon;
+		CalcCenterRect(rcItem, cxIcon, cyIcon, rcIcon);
+
+		painter.drawPixmap(rcIcon,lpItem->m_SelectedImage);
+	}
+	else
+	{
+		int cxIcon = lpItem->m_SelectedImage.width();
+		int cyIcon = lpItem->m_SelectedImage.height();
+
+		QRect rcIcon;
+		CalcCenterRect(rcItem, cxIcon, cyIcon, rcIcon);
+
+		painter.drawPixmap(rcIcon,lpItem->m_SelectedImage);
+	}
+
+	if (m_iCurrentChooseItem == i)
+	{
+
+			QRect rcArrow;
+			rcArrow.setLeft(rcItem.left()+lpItem->m_nLeftWidth);
+			rcArrow.setTop(rcItem.top()+20);
+
+
+
+			//painter.drawPixmap(20,20,20,20,QPixmap(":/MainTab/Resources/maintab/main_tabbtn_down.png"));
+
+			painter.drawPixmap(0,10,30,30,QPixmap(":/MainTab/Resources/main_tabctrl_arrow.png"));
+
+	}
+
+}
+
+
+void ColumnWidget::CalcCenterRect(QRect& rcDest, int cx, int cy, QRect& rcCenter )
+{
+	int x = ((rcDest.width()) - cx + 1) / 2;
+	int y = ((rcDest.height()) - cy + 1) / 2;
+
+	rcCenter.setLeft(rcDest.left() + x);
+	rcCenter.setTop(rcDest.top() + y);
+	rcCenter.setWidth(cx);
+	rcCenter.setHeight(cy);
 
 }

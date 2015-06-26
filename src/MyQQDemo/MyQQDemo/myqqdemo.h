@@ -4,11 +4,12 @@
 #include <QtGui/QFrame>
 #include "appwidget.h"
 class TitleBar;
-class ColumnWidget;
+class QWidget;
 class ToolWidget;
 class QSystemTrayIcon;
 class SearchLineEdit;
 class BuddyListWidget;
+class ColumnWidget;
 
 class MyQQDemo : public QFrame
 {
@@ -30,7 +31,7 @@ private:
 
 	ColumnWidget *m_pColumnWidget;
 
-/*	ToolWidget *m_pToolWidget;*/
+
 
 	QSystemTrayIcon *m_pSytemTrayIcon;
 

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'columnwidget.h'
 **
-** Created: Wed Jun 24 15:09:17 2015
+** Created: Fri Jun 26 16:06:33 2015
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
 **
 ** WARNING! All changes made in this file will be lost!

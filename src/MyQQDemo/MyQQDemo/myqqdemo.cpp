@@ -29,6 +29,8 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
  	m_pColumnWidget = new ColumnWidget(this);
 
  	m_pColumnWidget->setGeometry(0,170,281,35);
+	m_pColumnWidget->setObjectName("widgetColumn");
+
 
 	//setCursor();
 

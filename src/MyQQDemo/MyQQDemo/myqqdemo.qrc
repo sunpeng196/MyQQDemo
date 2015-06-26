@@ -45,6 +45,11 @@
         <file>Resources/main_tab_check.png</file>
         <file>Resources/main_tab_highlight.png</file>
         <file>Resources/main_tabctrl_background.png</file>
+        <file>Resources/maintab/main_tab_check.png</file>
+        <file>Resources/maintab/main_tab_highlight.png</file>
+        <file>Resources/maintab/main_tabbtn_down.png</file>
+        <file>Resources/maintab/main_tabbtn_highlight.png</file>
+        <file>Resources/main_tabctrl_arrow.png</file>
     </qresource>
     <qresource prefix="/ToolWidget">
         <file>Resources/menu_btn_highlight.png</file>
