@@ -1,3 +1,17 @@
+QMenu{
+  background-color: white;
+  padding: 1px;
+}
+
+QMenu::item{
+  background-color: transparent;
+}
+
+QMenu::item:selected{
+  background-color: rgb(234, 243, 253);
+  color: black;
+}
+
 QToolButton#toolButtonClose
 {
 	width: 39px;
@@ -33,45 +47,60 @@ QToolButton#toolButtonMin:pressed
 }
 
 
+/*background-image: url(:/AppMenu/Resources/mainmenubutton/menu_btn_normal.png) 0 0 0 0 stretch stretch;*/
 
+QPushButton#AppMenu
+{ 
+    image:url(:/AppMenu/Resources/mainmenubutton/menu_btn_normal.png);
+}
 
+QPushButton#AppMenu:hover
+{
+    background-image: url(:/ToolWidget/Resources/menu_btn_normal.png) 0 0 0 0 stretch stretch;
+}
 
 QPushButton#pushBtnContract
 {
-    border-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
-    background-repeat:no-repeat;
-    border:none;
-    background-position: center left;
+    border-image:url(:/MainTab/Resources/main_tab_check.png) 0 0 0 0 stretch stretch;
+    width:100px;
+    height:38px;
+    background: red;
+    
+    font-weight: bold; 
 }
 
 QPushButton#pushBtnContract:hover 
 {
-	border-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	 border-image: url(:/MainTab/Resources/main_tab_check.png) 0 0 0 0 stretch stretch;
 	 background-repeat:no-repeat;
+}
+
+
+
+QWidget#widgetColumn
+{
+    background-color:blue;
+    
 }
 
 QPushButton#pushBtnContract:pressed 
 {
-	border-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	border-image: url(:/MainTab/Resources/main_tab_check.png) 0 0 0 0 stretch stretch;
 	background-repeat:no-repeat;
+	height:38px;
+	width:20px;
 }
 
 QPushButton#pushBtnContract:checked 
 {
-	border-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	border-image: url(:/MainTab/Resources/main_tab_check.png) 0 0 0 0 stretch stretch;
 	background-repeat:no-repeat;
 }
 
 
-
-
-
-
-
-
 QPushButton#groupBtn
 {
-    background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+    background-image: url(:/MainTab/Resources/main_tab_check.png) 0 0 0 0 stretch stretch;
     background-repeat:no-repeat;
     border:none;
     background-position: center left;
@@ -79,26 +108,26 @@ QPushButton#groupBtn
 
 QPushButton#groupBtn:hover 
 {
-	background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	background-image: url(:/MainTab/Resources/main_tab_check.png) 0 0 0 0 stretch stretch;
 	background-repeat:no-repeat;
 }
 
 QPushButton#groupBtn:pressed 
 {
-	background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	background-image: url(:/MainTab/Resources/main_tab_check.png) 0 0 0 0 stretch stretch;
 	background-repeat:no-repeat;
 }
 
 QPushButton#groupBtn:checked 
 {
-	background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	background-image: url(:/MainTab/Resources/main_tab_check.png) 0 0 0 0 stretch stretch;
 	background-repeat:no-repeat;
 }
 
 
 QPushButton#lastBtn
 {
-    background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+    background-image: url(:/MainTab/Resources/main_tab_check.png) 0 0 0 0 stretch stretch;
     background-repeat:no-repeat;
     border:none;
     background-position: center left;
@@ -106,25 +135,25 @@ QPushButton#lastBtn
 
 QPushButton#lastBtn:hover 
 {
-	background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	background-image: url(:/MainTab/Resources/main_tab_check.png) 0 0 0 0 stretch stretch;
 	 background-repeat:no-repeat;
 }
 
 QPushButton#lastBtn:pressed 
 {
-	background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	background-image: url(:/MainTab/Resources/main_tab_check.png) 0 0 0 0 stretch stretch;
 	background-repeat:no-repeat;
 }
 
 QPushButton#lastBtn:checked 
 {
-	background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch;
+	background-image: url(:/MainTab/Resources/main_tab_check.png) 0 0 0 0 stretch stretch;
 	background-repeat:no-repeat;
 }
 
 QWidget#columnWidget
 {
-    background-image: url(:/MainTab/Resources/main_tab_check.png 0 0 0 0 stretch stretch; 0 0 0 0 stretch stretch;
+    background-image: url(:/MainTab/Resources/main_tab_check.png) 0 0 0 0 stretch stretch; 0 0 0 0 stretch stretch;
 
 }
 
@@ -138,18 +167,6 @@ QToolButton#toolBtnMainMenu:hover
 border-image:url(:/ToolWidget/Resources/menu_btn_highlight.png) 0 0 0 0 stretch stretch;
 }
 
-
-QPushButton#AppMenu
-{
-    background-image: url(:/AppMenu/Resources/mainmenubutton/menu_btn_normal.png 0 0 0 0 stretch stretch;
-}
-
-QPushButton#AppMenu:hover
-{
- background-image: url(:/ToolWidget/Resources/menu_btn_highlight.png 0 0 0 0 stretch stretch;
-}
-
-// 设置垂直滚动条基本样式
 QScrollBar#ScrollBar:vertical
 {
     width:8px;
@@ -235,3 +252,5 @@ QWidget#widgetColumn>QPushButton::menu-indicator:pressed, QWidget#widgetColumn>Q
 {
 	border-image:url(:/MainTab/Resources/maintab/main_tabbtn_highlight.png) 0 0 0 0 stretch stretch;
 }
+
+

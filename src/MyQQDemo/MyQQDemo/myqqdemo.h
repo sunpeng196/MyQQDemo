@@ -11,6 +11,8 @@ class SearchLineEdit;
 class BuddyListWidget;
 class ColumnWidget;
 
+class ColumnWidget2;
+
 class MyQQDemo : public QFrame
 {
 	Q_OBJECT

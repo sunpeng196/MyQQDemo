@@ -7,6 +7,7 @@
 #include <QMenu>
 #include "searchlineedit.h"
 #include "buddylistwidget.h"
+#include "columnwidget2.h"
 
 MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	: QFrame(parent, flags)
@@ -20,15 +21,16 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 
 	//this->setFixedSize(270,650);
 	//QString styleSheet = "QMainWindow:{border:0px;}";
-	setStyleSheet("QFrame {background-image:url(:/MyQQDemo/Resources/main.jpg);border:0px solid black;}");
+	//setStyleSheet("QFrame {background-image:url(:/MyQQDemo/Resources/main.jpg);border:0px solid black;}");
 
 	m_pTitleBar = new TitleBar(this);
 	m_pTitleBar->setGeometry(0,0,281,30);
 
 
- 	m_pColumnWidget = new ColumnWidget(this);
+ 	m_pColumnWidget = new ColumnWidget(this);//new ColumnWidget(this);
 
- 	m_pColumnWidget->setGeometry(0,170,281,35);
+ 	m_pColumnWidget->setGeometry(0,150,281,38);
+
 	m_pColumnWidget->setObjectName("widgetColumn");
 
 
@@ -55,7 +57,7 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 
 	m_pBuddyList->SetBuddyItemHeadFlashAnim(0,1,true);
 
-	m_pBuddyList->setGeometry(1,207,278,443);
+	m_pBuddyList->setGeometry(0,204,278,443);
 	m_pAppWidget = new AppWidget(this);
 
 	m_pAppWidget->setGeometry(0,657,278,30);

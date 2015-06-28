@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QPainter>
 #include <QMouseEvent>
+#include <QAction>
 
 ColumnWidget::ColumnWidget(QWidget *parent)
 	: QWidget(parent)
@@ -31,7 +32,10 @@ ColumnWidget::~ColumnWidget()
 void ColumnWidget::paintEvent( QPaintEvent * e )
 {
 	QPainter painter(this);
+	painter.setRenderHint(QPainter::Antialiasing);
+
 	painter.drawPixmap(0,0,width(),height(),QPixmap(":/MainTab/Resources/main_tabctrl_background.png"));
+
 	for (int i = 0;i < m_TabCtrlList.size();++i)
 	{
 		DrawItem(i);
@@ -44,6 +48,15 @@ void ColumnWidget::mousePressEvent( QMouseEvent * e )
 	int iIndex = GetPointIndex(e->pos());
 	SetCurrentItem(iIndex);
 	update();
+
+	if (iIndex == m_iCurrentChooseItem)
+	{
+		QMenu *pMenu = new QMenu(this);
+		pMenu->addAction(new QAction("大头像",this));
+		pMenu->addAction(new QAction("小头像",this));
+
+		pMenu->exec(e->globalPos());
+	}
 }
 
 void ColumnWidget::mouseMoveEvent( QMouseEvent *e )
@@ -150,9 +163,10 @@ void ColumnWidget::DrawItem(int i)
 
 
 
-			//painter.drawPixmap(20,20,20,20,QPixmap(":/MainTab/Resources/maintab/main_tabbtn_down.png"));
+			painter.drawPixmap(rcItem.width()-14 - 6,2,14,30,QPixmap(":/MainTab/Resources/maintab/main_tabbtn_down.png"));
 
-			painter.drawPixmap(0,10,30,30,QPixmap(":/MainTab/Resources/main_tabctrl_arrow.png"));
+			int iXPosition = rcItem.left() + rcItem.width()/3 + 3;
+			painter.drawPixmap(iXPosition,0,22,38,QPixmap(":/MainTab/Resources/main_tabctrl_arrow.png"));
 
 	}
 

@@ -16,26 +16,35 @@ AppWidget::AppWidget(QWidget *parent)
 	m_pAppMenuBtn = new QPushButton(this);
 	  
 	//m_pAppMenu->setGeometry(2,2,24,24);
-	m_pAppMenuBtn->setIcon(QIcon(":/AppMenu/Resources/mainmenubutton/menu_btn_normal.png"));
+	//m_pAppMenuBtn->setIcon(QIcon(":/AppMenu/Resources/mainmenubutton/menu_btn_normal.png"));
 
 	m_pAppMenuBtn->setToolTip("主菜单");
 
-	m_pAppMenuBtn->setFixedSize(20,20);
+	m_pAppMenuBtn->setFixedSize(24,24);
 
-	m_pAppMenuBtn->setFlat(true);
+	//m_pAppMenuBtn->setFlat(true);
 
 	m_pAppMenuBtn->setObjectName("AppMenu");
 
 	m_pAppMenuBtn->setCheckable(false);
-	m_pAppMenuBtn->setStyleSheet("QPushButton{border:none}");
+	//m_pAppMenuBtn->setStyleSheet("QPushButton{border:none}");
 
 
-	QMenu *pMenu = new QMenu(m_pAppMenuBtn);
-	pMenu->addAction(new QAction("传文件到手机",this));
-	pMenu->addAction(new QAction("导出手机相册",this));
-	pMenu->addAction(new QAction("我的收藏",this));
+// 	QMenu *pMenu = new QMenu(m_pAppMenuBtn);
+// 	QAction *pTransferFile = new QAction("传文件到手机",this);
+// 	pTransferFile->setCheckable(true);
+// 	pTransferFile->setChecked(true);
+// 
+// 	pMenu->addAction(pTransferFile);
+// 	pMenu->addSeparator();
+// 
+// 	pMenu->addAction(new QAction("导出手机相册",this));
+// 	pMenu->addAction(new QAction("我的收藏",this));
 
-	m_pAppMenuBtn->setMenu(pMenu);
+	//pMenu->setIcon(QIcon(":/MyQQDemo/Resources/close_normal.png"));
+
+
+/*	m_pAppMenuBtn->setMenu(pMenu);*/
 
 	
 

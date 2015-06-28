@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QTextCodec>
 #include "buddylistwidget.h"
+#include "stylewidget.h"
 
 int main(int argc, char *argv[])
 {
@@ -23,6 +24,9 @@ int main(int argc, char *argv[])
 		qApp->setStyleSheet(file.readAll());
 	}
 	file.close();
+
+// 	StyleWidget w;
+// 	w.show();
 
 
 	MyQQDemo w;

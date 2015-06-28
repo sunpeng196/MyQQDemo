@@ -1,5 +1,5 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'searchlineedit.h'
+** Meta object code from reading C++ file 'columnwidget2.h'
 **
 ** Created: Sun Jun 28 16:02:27 2015
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
@@ -7,9 +7,9 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../searchlineedit.h"
+#include "../../columnwidget2.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'searchlineedit.h' doesn't include <QObject>."
+#error "The header file 'columnwidget2.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 63
 #error "This file was generated using the moc from 4.8.4. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -17,7 +17,7 @@
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
-static const uint qt_meta_data_SearchLineEdit[] = {
+static const uint qt_meta_data_ColumnWidget2[] = {
 
  // content:
        6,       // revision
@@ -33,11 +33,11 @@ static const uint qt_meta_data_SearchLineEdit[] = {
        0        // eod
 };
 
-static const char qt_meta_stringdata_SearchLineEdit[] = {
-    "SearchLineEdit\0"
+static const char qt_meta_stringdata_ColumnWidget2[] = {
+    "ColumnWidget2\0"
 };
 
-void SearchLineEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void ColumnWidget2::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
     Q_UNUSED(_id);
@@ -45,35 +45,35 @@ void SearchLineEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
     Q_UNUSED(_a);
 }
 
-const QMetaObjectExtraData SearchLineEdit::staticMetaObjectExtraData = {
+const QMetaObjectExtraData ColumnWidget2::staticMetaObjectExtraData = {
     0,  qt_static_metacall 
 };
 
-const QMetaObject SearchLineEdit::staticMetaObject = {
-    { &QLineEdit::staticMetaObject, qt_meta_stringdata_SearchLineEdit,
-      qt_meta_data_SearchLineEdit, &staticMetaObjectExtraData }
+const QMetaObject ColumnWidget2::staticMetaObject = {
+    { &QWidget::staticMetaObject, qt_meta_stringdata_ColumnWidget2,
+      qt_meta_data_ColumnWidget2, &staticMetaObjectExtraData }
 };
 
 #ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &SearchLineEdit::getStaticMetaObject() { return staticMetaObject; }
+const QMetaObject &ColumnWidget2::getStaticMetaObject() { return staticMetaObject; }
 #endif //Q_NO_DATA_RELOCATION
 
-const QMetaObject *SearchLineEdit::metaObject() const
+const QMetaObject *ColumnWidget2::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
 }
 
-void *SearchLineEdit::qt_metacast(const char *_clname)
+void *ColumnWidget2::qt_metacast(const char *_clname)
 {
     if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_SearchLineEdit))
-        return static_cast<void*>(const_cast< SearchLineEdit*>(this));
-    return QLineEdit::qt_metacast(_clname);
+    if (!strcmp(_clname, qt_meta_stringdata_ColumnWidget2))
+        return static_cast<void*>(const_cast< ColumnWidget2*>(this));
+    return QWidget::qt_metacast(_clname);
 }
 
-int SearchLineEdit::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int ColumnWidget2::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QLineEdit::qt_metacall(_c, _id, _a);
+    _id = QWidget::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     return _id;
