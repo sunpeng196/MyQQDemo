@@ -13,6 +13,16 @@ class ColumnWidget;
 
 class ColumnWidget2;
 
+enum AFX_HIDE_TYPE
+{
+	en_None = 0,		//不收缩
+	en_Top,				//向上收缩
+	en_Bottom,			//向下收缩
+	en_Left,			//向左收缩
+	en_Right			//向右收缩
+};
+
+
 class MyQQDemo : public QFrame
 {
 	Q_OBJECT
@@ -25,9 +35,14 @@ public:
 	void mouseMoveEvent(QMouseEvent * e);
 	void mouseReleaseEvent(QMouseEvent * e);
 
-	
+	bool winEvent ( MSG * message, long * result);
+	void BeginHide(QPoint point);
+	void FixMoving(const QPoint& point);
+	void HideWindow();
 
+/*	QSize sizeHint();*/
 
+	int m_HideTimer;
 private:
 	TitleBar *m_pTitleBar;
 
@@ -43,6 +58,12 @@ private:
 
 
 	AppWidget *m_pAppWidget;
+
+
+	AFX_HIDE_TYPE 			m_enHideType;				//隐藏模式
+	bool					m_bFinished;				//隐藏或显示过程是否完成
+	bool					m_bHiding;					//该参数只有在!m_hsFinished才有效,真:正在隐藏,假:正在显示
+	bool					m_bTimed;					//是否设置了检测鼠标的Timer
 
 
 

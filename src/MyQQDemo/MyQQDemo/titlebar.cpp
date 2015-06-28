@@ -82,6 +82,8 @@ void TitleBar::mouseMoveEvent( QMouseEvent * event )
 		pQQDemo->move(pQQDemo->pos() + m_ptMove - m_ptPrev);
 
 		m_ptPrev = m_ptMove;
+
+		event->ignore();
 	}
 
 	//event->ignore();
