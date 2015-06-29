@@ -47,6 +47,7 @@ TitleBar::TitleBar(QWidget *parent)
 	m_hBoxLayout->setContentsMargins(0,0,5,0);
 
 	setLayout(m_hBoxLayout);
+	setMouseTracking(true);
 
 }
 
@@ -86,7 +87,7 @@ void TitleBar::mouseMoveEvent( QMouseEvent * event )
 		event->ignore();
 	}
 
-	//event->ignore();
+	event->accept();
 
 }
 
@@ -95,5 +96,6 @@ void TitleBar::mouseReleaseEvent( QMouseEvent * event )
 	if (event->button() == Qt::LeftButton)
 	{
 		m_bLeftPressDown = false;
+		event->ignore();
 	}
 }

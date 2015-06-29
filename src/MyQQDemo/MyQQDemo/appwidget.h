@@ -4,6 +4,7 @@
 #include <QWidget>
 class QHBoxLayout;
 class QPushButton;
+class QToolButton;
 
 
 class AppWidget : public QWidget
@@ -20,7 +21,7 @@ private:
 
 	QHBoxLayout *mainLayout;
 
-	QPushButton *m_pAppMenuBtn;
+	QToolButton *m_pAppMenuBtn;
 	QPushButton *m_pSystemSetting;
 	QPushButton *m_pMessageManager;
 	QPushButton *m_pFileAssiant;

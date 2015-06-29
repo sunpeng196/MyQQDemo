@@ -35,14 +35,24 @@ public:
 	void mouseMoveEvent(QMouseEvent * e);
 	void mouseReleaseEvent(QMouseEvent * e);
 
+	void resizeEvent(QMouseEvent *e);
+
 	bool winEvent ( MSG * message, long * result);
 	void BeginHide(QPoint point);
 	void FixMoving(const QPoint& point);
 	void HideWindow();
 
+	void timerEvent(QTimerEvent * e);
+	void ShowWindow();
 /*	QSize sizeHint();*/
 
-	int m_HideTimer;
+	int m_iAniTimer;//表示隐藏和显示的定时器
+
+	int m_iMouseChecker;//表示检测
+
+	void moveEvent ( QMoveEvent * event );
+
+	
 private:
 	TitleBar *m_pTitleBar;
 
@@ -65,7 +75,7 @@ private:
 	bool					m_bHiding;					//该参数只有在!m_hsFinished才有效,真:正在隐藏,假:正在显示
 	bool					m_bTimed;					//是否设置了检测鼠标的Timer
 
-
+	bool m_bLeftBtnDown;
 
 	
 

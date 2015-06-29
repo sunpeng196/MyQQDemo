@@ -14,7 +14,6 @@ ToolWidget::ToolWidget(QWidget *parent)
 	m_pMainMenuButton->setAutoRaise(true);
 	m_pMainMenuButton->setFixedSize(32,32);
 
-	m_pMainMenuButton->setIcon(QIcon(":/ToolWidget/Resources/menu_btn_normal.png"));
 	m_pMainMenuButton->setIconSize(QSize(24,24));
 
 	m_pHBoxLayout->addWidget(m_pMainMenuButton);

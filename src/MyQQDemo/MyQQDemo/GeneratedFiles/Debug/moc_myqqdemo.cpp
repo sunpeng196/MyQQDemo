@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'myqqdemo.h'
 **
-** Created: Sun Jun 28 17:41:55 2015
+** Created: Mon Jun 29 18:15:06 2015
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
 **
 ** WARNING! All changes made in this file will be lost!

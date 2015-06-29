@@ -52,8 +52,8 @@ void ColumnWidget::mousePressEvent( QMouseEvent * e )
 	if (iIndex == m_iCurrentChooseItem)
 	{
 		QMenu *pMenu = new QMenu(this);
-		pMenu->addAction(new QAction("大头像",this));
-		pMenu->addAction(new QAction("小头像",this));
+		pMenu->addAction(new QAction("头像显示",this));
+		pMenu->addAction(new QAction("名称显示",this));
 
 		pMenu->exec(e->globalPos());
 	}

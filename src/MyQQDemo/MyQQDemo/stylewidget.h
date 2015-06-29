@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "ui_stylewidget.h"
+class QMouseEvent;
 
 class StyleWidget : public QWidget
 {
@@ -11,6 +12,12 @@ class StyleWidget : public QWidget
 public:
 	StyleWidget(QWidget *parent = 0);
 	~StyleWidget();
+
+	void mousePressEvent(QMouseEvent *e);
+
+	int m_iStartTimer;
+
+	void timerEvent(QTimerEvent * e);
 
 private:
 	Ui::StyleWidget ui;

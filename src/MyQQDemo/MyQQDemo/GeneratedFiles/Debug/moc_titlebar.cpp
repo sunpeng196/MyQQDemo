@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'titlebar.h'
 **
-** Created: Sun Jun 28 16:02:26 2015
+** Created: Mon Jun 29 14:07:17 2015
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
 **
 ** WARNING! All changes made in this file will be lost!

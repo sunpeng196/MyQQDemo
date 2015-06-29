@@ -1,4 +1,4 @@
-QMenu{
+/*QMenu{
   background-color: white;
   padding: 1px;
 }
@@ -10,7 +10,7 @@ QMenu::item{
 QMenu::item:selected{
   background-color: rgb(234, 243, 253);
   color: black;
-}
+}*/
 
 QToolButton#toolButtonClose
 {
@@ -50,13 +50,15 @@ QToolButton#toolButtonMin:pressed
 /*background-image: url(:/AppMenu/Resources/mainmenubutton/menu_btn_normal.png) 0 0 0 0 stretch stretch;*/
 
 QPushButton#AppMenu
-{ 
-    image:url(:/AppMenu/Resources/mainmenubutton/menu_btn_normal.png);
+{  
+    image: url(:/ToolWidget/Resources/menu_btn_normal.png);
+    background:transparent;   
 }
 
 QPushButton#AppMenu:hover
 {
-    background-image: url(:/ToolWidget/Resources/menu_btn_normal.png) 0 0 0 0 stretch stretch;
+    image: url(:/ToolWidget/Resources/menu_btn_highlight.png);
+    background:transparent;   
 }
 
 QPushButton#pushBtnContract
@@ -251,6 +253,12 @@ QWidget#widgetColumn>QPushButton::menu-indicator:checked:hover
 QWidget#widgetColumn>QPushButton::menu-indicator:pressed, QWidget#widgetColumn>QPushButton::menu-indicator:open
 {
 	border-image:url(:/MainTab/Resources/maintab/main_tabbtn_highlight.png) 0 0 0 0 stretch stretch;
+}
+
+
+QWidget#AppWidget
+{
+     background-color: blue;    
 }
 
 

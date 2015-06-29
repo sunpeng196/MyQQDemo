@@ -25,7 +25,7 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 
 	//this->setFixedSize(270,650);
 	//QString styleSheet = "QMainWindow:{border:0px;}";
-	//setStyleSheet("QFrame {background-image:url(:/MyQQDemo/Resources/main.jpg);border:0px solid black;}");
+	setStyleSheet("QFrame {background-image:url(:/MyQQDemo/Resources/main.jpg);border:0px solid black;}");
 
 	m_pTitleBar = new TitleBar(this);
 	m_pTitleBar->setGeometry(0,0,281,30);
@@ -64,15 +64,17 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	m_pBuddyList->setGeometry(0,204,278,443);
 	m_pAppWidget = new AppWidget(this);
 
-	m_pAppWidget->setGeometry(0,657,278,30);
+	m_pAppWidget->setGeometry(0,height()-60,width(),60);
+
+	m_pAppWidget->setObjectName("AppWidget");
 
 	m_enHideType = en_None;
 
-	//setMouseTracking(true);
+	setMouseTracking(true);
 
-	
+	m_bTimed = false;//表明是否启动监控鼠标离开的监视器。该监视器在窗口移动到窗口边缘的时候开始启动
 
-	
+	m_bLeftBtnDown = false;//表明鼠标左键是否被按下
 
 	
 }
@@ -84,22 +86,55 @@ MyQQDemo::~MyQQDemo()
 
 void MyQQDemo::mousePressEvent( QMouseEvent * e )
 {
-
+	m_bLeftBtnDown = true;
 }
 
 void MyQQDemo::mouseMoveEvent( QMouseEvent * e )
 {
-	Qt::MouseButton b = e->button();
-	//if (e->button() == Qt::LeftButton)
+	QPoint pt = e->pos();
+	if (pt.x() <= 4 && pt.y()<= 4)
 	{
-		FixMoving(e->globalPos());
+		setCursor(Qt::SizeFDiagCursor);
 	}
+	else if(pt.x()<= 4 && pt.y() + 4 > height())
+	{
+		setCursor(Qt::SizeBDiagCursor);
+	}
+	else if (pt.x() + 4 >= width() && pt.y()<= 4)
+	{
+		setCursor(Qt::SizeBDiagCursor);
+	}
+	else if (pt.x() + 4 >= width() && pt.y() + 4 >height())
+	{
+		setCursor(Qt::SizeFDiagCursor);
+	}
+	else if (pt.x() <= 4)//左边
+	{
+		setCursor(Qt::SizeHorCursor);
+	}
+	else if (pt.y() + 4 >= height())//底部
+	{
+		setCursor(Qt::SizeVerCursor);
+	}
+	else if (pt.x() + 4 >= width())//最右边
+	{
+		setCursor(Qt::SizeHorCursor);
+	}
+	else if (pt.y() <= 4)//顶部
+	{
+		setCursor(Qt::SizeVerCursor);
+	}
+	else
+	{
+		setCursor(Qt::ArrowCursor);
+	}
+
 
 }
 
 void MyQQDemo::mouseReleaseEvent( QMouseEvent * e )
 {
-
+	m_bLeftBtnDown = false;
 }
 
 bool MyQQDemo::winEvent( MSG * message, long * result )
@@ -108,6 +143,9 @@ bool MyQQDemo::winEvent( MSG * message, long * result )
 	{  
 	case WM_NCHITTEST:
 		{
+
+			BeginHide(pos());
+
 			return false;
 		}
 		 
@@ -121,21 +159,26 @@ bool MyQQDemo::winEvent( MSG * message, long * result )
 
 void MyQQDemo::BeginHide(QPoint point)
 {
-//	if( (m_enHideType != en_None) && !m_bTimed && (point.x < GetSystemMetrics(SM_CXSCREEN) + INFALTE))
-//	{   
-//		m_HideTimer = startTimer(1000);
-//		
-//		m_bTimed = true;
-//
-//		m_bFinished = false;
-//		m_bHiding = false;
-///*		::SetTimer(m_hOwnHwnd,IDI_BEGINHIDE,BH_ELAPSE,NULL); //开启显示过程*/
-//	}
+	QRect rect = QApplication::desktop()->availableGeometry();
+
+	int iScreenHeight = height();
+	int iScreenWidth  = width();
+
+	if( (m_enHideType != en_None) && !m_bTimed && (point.x() < iScreenWidth + 20))
+	{   
+ 		m_iMouseChecker = startTimer(20);
+ 		m_bTimed = true;
+ 
+ 		m_bFinished = false;
+ 		m_bHiding = false;
+		m_iAniTimer = startTimer(20);
+	}
 }
 
 void MyQQDemo::FixMoving(const QPoint& point)
 {
-	QRect rect = QApplication::desktop()->availableGeometry();
+	INT nScreenHeight = QApplication::desktop()->height();
+	INT nScreenWidth  = QApplication::desktop()->width();
 
 	INT nHeight = height();
 	INT nWidth  = width();
@@ -145,16 +188,14 @@ void MyQQDemo::FixMoving(const QPoint& point)
 	{  
 		m_enHideType = en_Top;
 	}
-// 	//粘附在下边
-// 	else if(point.y >= (nScreenHeight - INTERVAL - m_nTaskBarHeight))
-// 	{   
-// 		pRect->top = nScreenHeight - m_nTaskBarHeight - nHeight;
-// 		pRect->bottom = nScreenHeight - m_nTaskBarHeight;
-// 		m_enHideType = en_Bottom;
-// 	}
-// 	//粘附在左边	
-// 	else if (point.x < INTERVAL)
-// 	{	
+	//粘附在下边
+	else if(point.y() >= (nScreenHeight - 20 - 30))
+	{   
+		m_enHideType = en_Bottom;
+	}
+	//粘附在左边	
+	else if (point.x() < 20)
+	{	
 // 		if(!m_bSized)
 // 		{
 // 			CRect tRect;
@@ -165,12 +206,12 @@ void MyQQDemo::FixMoving(const QPoint& point)
 // 		pRect->left = 0;
 // 		pRect->top = -m_nEdgeHeight;
 // 		pRect->bottom = nScreenHeight - m_nTaskBarHeight;
-// 		m_bSized = TRUE;
-// 		m_enHideType = en_Left;
-// 	}
-// 	//粘附在右边
-// 	else if(point.x >= (nScreenWidth - INTERVAL))
-// 	{   
+/*		m_bSized = TRUE;*/
+		m_enHideType = en_Left;
+	}
+	//粘附在右边
+	else if(point.x() >= (nScreenWidth - 20))
+	{   
 // 		if(!m_bSized)
 // 		{
 // 			CRect tRect;
@@ -182,11 +223,11 @@ void MyQQDemo::FixMoving(const QPoint& point)
 // 		pRect->top = -m_nEdgeHeight;
 // 		pRect->bottom = nScreenHeight - m_nTaskBarHeight;
 // 		m_bSized = true;
-// 		m_enHideType = en_Right;
-// 	}
-// 	//不粘附
-// 	else
-// 	{   
+		m_enHideType = en_Right;
+	}
+	//不粘附
+	else
+	{   
 // 		if(m_bSized)
 // 		{  
 // 			pRect->bottom = pRect->top + m_nWindowHeight;
@@ -201,43 +242,186 @@ void MyQQDemo::FixMoving(const QPoint& point)
 // 			if(::KillTimer(m_hOwnHwnd,IDI_CHECKMOUSE) == 1)
 // 				m_bTimed = false;
 // 		}
-// 		m_enHideType = en_None;
-// 	}
+		m_enHideType = en_None;
+	}
 }
 
 
 void MyQQDemo::HideWindow()
 {
-	
-}
+	if(m_enHideType == en_None) return;
 
-// QSize MyQQDemo::sizeHint()
-// {
-// 	if(m_enHideType == en_None) return;
-// 
-// 	INT nHeight = height();
-// 	INT nWidth  = width();
-// 
-// 	//步幅
-// 	INT nStride = 0;
-// 
-// 	switch(m_enHideType)
-// 	{
-// 	case en_Top:
-// 		{
-// 			nStride = nHeight/7;
-// 			rcWindow.bottom -= nStride;
-// 
-// 
-// 
-// 			if(rcWindow.bottom <= m_nEdgeWidth)
+
+	INT nHeight = rect().height();
+	INT nWidth  = rect().width();
+
+	//步幅
+	int nStride = 0;
+
+	switch(m_enHideType)
+	{
+	case en_Top:
+		{
+			nStride = nHeight/7;
+			QPoint pt = pos();
+
+			if (pt.y() + height() <= 3)
+			{
+				this->move(pt.x(),3 - height());//将窗口移动到边缘只有3像素的位置
+				m_bFinished = true;
+			}
+			this->move(pt.x(),pt.y() - nStride);
+		}
+		break;
+	case en_Bottom:
+		{
+// 			nStride = nHeight/STEPS_COUNT;
+// 			rcWindow.top += nStride;
+// 			if(rcWindow.top >= (GetSystemMetrics(SM_CYSCREEN) - m_nEdgeWidth))
 // 			{
-// 				rcWindow.bottom = m_nEdgeWidth;
+// 				rcWindow.top = GetSystemMetrics(SM_CYSCREEN) - m_nEdgeWidth;
 // 				m_bFinished = true;
 // 			}
-// 			rcWindow.top = rcWindow.bottom - nHeight; 
+// 			rcWindow.bottom = rcWindow.top + nHeight;
+		}
+		break;
+	case en_Left:
+		{
+// 			nStride = nWidth/STEPS_COUNT;
+// 			rcWindow.right -= nStride;
+// 			if(rcWindow.right <= m_nEdgeWidth)
+// 			{
+// 				rcWindow.right = m_nEdgeWidth;
+// 				m_bFinished = true;
+// 			}
+// 			rcWindow.left = rcWindow.right - nWidth;
+// 			rcWindow.top = -m_nEdgeHeight;
+// 			rcWindow.bottom = GetSystemMetrics(SM_CYSCREEN) - m_nTaskBarHeight;
+		}
+		break;
+	case en_Right:
+		{
+// 			nStride = nWidth/STEPS_COUNT;
+// 			rcWindow.left += nStride;
+// 			if(rcWindow.left >= (GetSystemMetrics(SM_CXSCREEN) - m_nEdgeWidth))
+// 			{
+// 				rcWindow.left = GetSystemMetrics(SM_CXSCREEN) - m_nEdgeWidth;
+// 				m_bFinished = true;
+// 			}		
+// 			rcWindow.right = rcWindow.left + nWidth;
+// 			rcWindow.top = -m_nEdgeHeight;
+// 			rcWindow.bottom = GetSystemMetrics(SM_CYSCREEN) - m_nTaskBarHeight;
+		}
+		break;
+	}
+}
+
+void MyQQDemo::resizeEvent( QMouseEvent *e )
+{
+
+}
+
+void MyQQDemo::timerEvent( QTimerEvent * e )
+{
+	if(e->timerId() == m_iMouseChecker)
+	{
+		QPoint point = cursor().pos();
+
+		QRect rcWindow = rect();
+
+		rcWindow.adjust(-20,-20,20,20);
+
+		if(!rcWindow.contains(point))
+		{
+			killTimer(m_iMouseChecker);
+			m_bTimed = false;
+
+			m_bFinished = false;			
+			m_bHiding = true;
+			m_iAniTimer = startTimer(20);		
+		}
+		update();
+	}
+	else if(e->timerId() == m_iAniTimer)
+	{
+		if(m_bFinished)
+			killTimer(m_iAniTimer);
+		else
+			m_bHiding ? HideWindow():ShowWindow();	
+
+		update();
+	}
+}
+
+
+void MyQQDemo::ShowWindow()
+{
+	if(m_enHideType == en_None) return;
+
+	QRect rcWindow = rect();
+
+	int nStride = 0;
+
+	switch(m_enHideType)
+	{
+	case en_Top:
+		{
+			nStride = rcWindow.height()/7;
+			if(rcWindow.top() >= 3)
+			{
+				this->move(rcWindow.left(),3);
+				m_bFinished = true;
+			}
+			this->move(rcWindow.left(),rcWindow.y() + nStride);
+		}
+		break;
+// 	case en_Bottom:
+// 		{
+// 			nStride = nHeight/STEPS_COUNT;
+// 			rcWindow.top -= nStride;
+// 			if(rcWindow.top <= (GetSystemMetrics(SM_CYSCREEN) - nHeight))
+// 			{
+// 				rcWindow.top = GetSystemMetrics(SM_CYSCREEN) - nHeight;
+// 				m_bFinished = true;
+// 			}
+// 			rcWindow.bottom = rcWindow.top + nHeight;
 // 		}
 // 		break;
-// 	}
-// 
-// }
+// 	case en_Left:
+// 		{
+// 			nStride = nWidth/STEPS_COUNT;
+// 			rcWindow.right += nStride;
+// 			if(rcWindow.right >= nWidth)
+// 			{
+// 				rcWindow.right = nWidth;
+// 				m_bFinished = true;
+// 			}
+// 			rcWindow.left = rcWindow.right - nWidth;
+// 			rcWindow.top = -m_nEdgeHeight;
+// 			rcWindow.bottom = GetSystemMetrics(SM_CYSCREEN) - m_nTaskBarHeight;
+// 		}
+// 		break;
+// 	case en_Right:
+// 		{
+// 			nStride = nWidth/STEPS_COUNT;
+// 			rcWindow.left -= nStride;
+// 			if(rcWindow.left <= (GetSystemMetrics(SM_CXSCREEN) - nWidth))
+// 			{
+// 				rcWindow.left = GetSystemMetrics(SM_CXSCREEN) - nWidth;
+// 				m_bFinished = true;
+// 			}
+// 			rcWindow.right = rcWindow.left + nWidth;
+// 			rcWindow.top = -m_nEdgeHeight;
+// 			rcWindow.bottom = GetSystemMetrics(SM_CYSCREEN) - m_nTaskBarHeight;
+// 		}
+// 		break;
+	}
+
+}
+
+void MyQQDemo::moveEvent( QMoveEvent * event )
+{
+	QPoint pt = event->pos();
+	QPoint globalPt = mapToGlobal(pt);
+	FixMoving(globalPt);
+}
