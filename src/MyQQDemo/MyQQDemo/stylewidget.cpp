@@ -5,11 +5,11 @@
 StyleWidget::StyleWidget(QWidget *parent)
 	: QWidget(parent)
 {
-	ui.setupUi(this);
+	//ui.setupUi(this);
 	m_iStartTimer = 0;
 
 	this->setFixedHeight(380);
-	this->setWindowFlags(Qt::FramelessWindowHint);
+	//this->setWindowFlags(Qt::FramelessWindowHint);
 }
 
 StyleWidget::~StyleWidget()
@@ -19,15 +19,30 @@ StyleWidget::~StyleWidget()
 
 void StyleWidget::mousePressEvent( QMouseEvent *e )
 {
-	QPoint pt = this->pos();
+// 	QPoint pt = e->globalPos();
+// 
+// 	QPoint ptGloabl = cursor().pos();
 
-	int iWidth = QApplication::desktop()->width();
-	int iHeight = QApplication::desktop()->height();
+// 	QRect abc = geometry();
+// 
+// 
+// 	QString str;
+// 	str.sprintf("X:%d,Y:%d.GlobalX:%d,GlobalY:%d",abc.left(),abc.top(),abc.right(),abc.bottom());QS
 
-	//if (pt.y() <= 20)
-	{
-		m_iStartTimer = startTimer(10);		
-	}
+	QPoint pt = pos();
+
+	QString str;
+	str.sprintf("X:%d,Y:%d",pt.x(),pt.y());
+
+	setWindowTitle(str);
+
+// 	int iWidth = QApplication::desktop()->width();
+// 	int iHeight = QApplication::desktop()->height();
+// 
+// 	//if (pt.y() <= 20)
+// 	{
+// 		m_iStartTimer = startTimer(10);		
+// 	}
 
 
 }

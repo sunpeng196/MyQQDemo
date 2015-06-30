@@ -161,8 +161,8 @@ void MyQQDemo::BeginHide(QPoint point)
 {
 	QRect rect = QApplication::desktop()->availableGeometry();
 
-	int iScreenHeight = height();
-	int iScreenWidth  = width();
+	int iScreenHeight = rect.height();
+	int iScreenWidth  = rect.width();
 
 	if( (m_enHideType != en_None) && !m_bTimed && (point.x() < iScreenWidth + 20))
 	{   
@@ -263,14 +263,16 @@ void MyQQDemo::HideWindow()
 	case en_Top:
 		{
 			nStride = nHeight/7;
-			QPoint pt = pos();
+			QRect posi = geometry();
+			int iNextTopPosition = posi.top() - nStride;
 
-			if (pt.y() + height() <= 3)
+			if (posi.bottom() <= 3)//底部距离<=3表明到达终点
 			{
-				this->move(pt.x(),3 - height());//将窗口移动到边缘只有3像素的位置
+				iNextTopPosition = 3 - height();
 				m_bFinished = true;
+
 			}
-			this->move(pt.x(),pt.y() - nStride);
+			this->move(posi.left(),iNextTopPosition);
 		}
 		break;
 	case en_Bottom:
@@ -327,7 +329,7 @@ void MyQQDemo::timerEvent( QTimerEvent * e )
 	{
 		QPoint point = cursor().pos();
 
-		QRect rcWindow = rect();
+		QRect rcWindow = geometry();
 
 		rcWindow.adjust(-20,-20,20,20);
 
@@ -340,7 +342,7 @@ void MyQQDemo::timerEvent( QTimerEvent * e )
 			m_bHiding = true;
 			m_iAniTimer = startTimer(20);		
 		}
-		update();
+		//update();
 	}
 	else if(e->timerId() == m_iAniTimer)
 	{
@@ -349,7 +351,7 @@ void MyQQDemo::timerEvent( QTimerEvent * e )
 		else
 			m_bHiding ? HideWindow():ShowWindow();	
 
-		update();
+		//update();
 	}
 }
 
@@ -358,7 +360,7 @@ void MyQQDemo::ShowWindow()
 {
 	if(m_enHideType == en_None) return;
 
-	QRect rcWindow = rect();
+	QRect rcWindow = geometry();
 
 	int nStride = 0;
 
@@ -367,13 +369,16 @@ void MyQQDemo::ShowWindow()
 	case en_Top:
 		{
 			nStride = rcWindow.height()/7;
-			if(rcWindow.top() >= 3)
+			int iNextHeight = rcWindow.top() + nStride;
+			if(rcWindow.top() > -3)
 			{
-				this->move(rcWindow.left(),3);
+				iNextHeight = -3;
 				m_bFinished = true;
 			}
-			this->move(rcWindow.left(),rcWindow.y() + nStride);
+
+			this->move(rcWindow.left(),iNextHeight);
 		}
+		
 		break;
 // 	case en_Bottom:
 // 		{

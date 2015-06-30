@@ -28,8 +28,8 @@ int main(int argc, char *argv[])
 // 	StyleWidget w;
 // 	w.show();
 
-
 	MyQQDemo w;
 	w.show();
+
 	return a.exec();
 }
