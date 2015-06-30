@@ -1,16 +1,108 @@
-/*QMenu{
-  background-color: white;
-  padding: 1px;
-}
+QMenu {
+     background-color: white;
+     margin: 2px; /* some spacing around the menu */
+	 
+ }
 
-QMenu::item{
-  background-color: transparent;
-}
+ QMenu::item {
+    padding: 2px 25px 2px 20px;
+    border: 1px solid transparent; /* reserve space for selection border */
+	background-image:url(:/Menu/Resources/Menu/menu_bkg.png);
+	top:0px;
+	left:0px;
+	padding-left:20px;
+	width:157px;
+	height:38px;
+	 
+ }
 
-QMenu::item:selected{
-  background-color: rgb(234, 243, 253);
-  color: black;
-}*/
+ QMenu::item:selected {
+     border-color: darkblue;
+     background: rgba(100, 100, 100, 150);
+ }
+
+ QMenu::icon:checked { /* appearance of a 'checked' icon */
+     background: gray;
+     border: 1px inset gray;
+     position: absolute;
+     top: 1px;
+     right: 1px;
+     bottom: 1px;
+     left: 1px;
+ }
+
+ QMenu::separator {
+     height: 2px;
+     background: lightblue;
+     margin-left: 10px;
+     margin-right: 5px;
+ }
+
+ QMenu::indicator {
+     width: 13px;
+     height: 13px;
+ }
+
+ /* non-exclusive indicator = check box style indicator (see QActionGroup::setExclusive) */
+ QMenu::indicator:non-exclusive:unchecked {
+     image: url(:/Menu/Resources/Menu/menu_check.png);
+ }
+
+ QMenu::indicator:non-exclusive:unchecked:selected {
+     image: url(:/Menu/Resources/Menu/menu_check.png);
+ }
+
+ QMenu::indicator:non-exclusive:checked {
+     image: url(:/Menu/Resources/Menu/menu_check.png);
+ }
+
+ QMenu::indicator:non-exclusive:checked:selected {
+    image: url(:/Menu/Resources/Menu/menu_check.png);
+ }
+
+ /* exclusive indicator = radio button style indicator (see QActionGroup::setExclusive) */
+ QMenu::indicator:exclusive:unchecked {
+     image: url(:/Menu/Resources/Menu/menu_check.png);
+ }
+
+ QMenu::indicator:exclusive:unchecked:selected {
+    image: url(:/Menu/Resources/Menu/menu_check.png);
+ }
+
+ QMenu::indicator:exclusive:checked {
+     image: url(:/Menu/Resources/Menu/menu_check.png);
+ }
+
+ QMenu::indicator:exclusive:checked:selected {
+    image: url(:/Menu/Resources/Menu/menu_check.png);
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
 QToolButton#toolButtonClose
 {

@@ -52,8 +52,46 @@ void ColumnWidget::mousePressEvent( QMouseEvent * e )
 	if (iIndex == m_iCurrentChooseItem)
 	{
 		QMenu *pMenu = new QMenu(this);
-		pMenu->addAction(new QAction("头像显示",this));
+
+		QMenu *pHeadImage = new QMenu(pMenu);
+
+		QAction *pShowLargeHead = new QAction(pHeadImage);
+		pShowLargeHead->setCheckable(true);
+		pShowLargeHead->setChecked(true);
+		pShowLargeHead->setText("大头像");
+
+		pHeadImage->addAction(pShowLargeHead);
+		pHeadImage->addAction("小头像");
+		pHeadImage->addSeparator();
+
+		pHeadImage->addAction("选中时显示大头像");
+		pHeadImage->addSeparator();
+		pHeadImage->addAction("显示我的大头像");
+
+
+
+		QAction *pHeaderShow = new QAction(this);
+		pHeaderShow->setText("头像显示");
+		pHeaderShow->setMenu(pHeadImage);
+
+
+		pMenu->addAction(pHeaderShow);
+
+
+
+
 		pMenu->addAction(new QAction("名称显示",this));
+		pMenu->addAction(new QAction("列表显示",this));
+		pMenu->addSeparator();
+		pMenu->addAction(new QAction("排序显示",this));
+		pMenu->addAction(new QAction("刷新好友列表",this));
+		pMenu->addAction(new QAction("显示在线联系人",this));
+		pMenu->addSeparator();
+		pMenu->addAction(new QAction("显示生活服务分组",this));
+		pMenu->addAction(new QAction("显示陌生人分组",this));
+		pMenu->addAction(new QAction("显示黑名单",this));
+
+
 
 		pMenu->exec(e->globalPos());
 	}

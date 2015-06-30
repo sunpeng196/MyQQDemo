@@ -18,12 +18,12 @@ int main(int argc, char *argv[])
 	QTextCodec::setCodecForLocale(codec);
 	QTextCodec::setCodecForCStrings(codec);
 
-	QFile file(":/qss/QQStyle.css");
-	if (file.open(QIODevice::ReadOnly))
-	{
-		qApp->setStyleSheet(file.readAll());
-	}
-	file.close();
+// 	QFile file(":/qss/QQStyle.css");
+// 	if (file.open(QIODevice::ReadOnly))
+// 	{
+// 		qApp->setStyleSheet(file.readAll());
+// 	}
+// 	file.close();
 
 // 	StyleWidget w;
 // 	w.show();

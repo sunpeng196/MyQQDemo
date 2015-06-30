@@ -14,15 +14,17 @@ public:
 	SearchLineEdit(QWidget *parent);
 	~SearchLineEdit();
 
-	void paintEvent(QPaintEvent * e);
+	//void paintEvent(QPaintEvent * e);
 
 	void mousePressEvent(QMouseEvent *e);
 
 	void focusInEvent(QFocusEvent * e);
+	void leaveEvent(QEvent * e);
 
 private:
+	bool m_bFocusIn;
 
-	QLabel *m_pSerachPixMap;
+	//QLabel *m_pSerachPixMap;
 	
 };
 

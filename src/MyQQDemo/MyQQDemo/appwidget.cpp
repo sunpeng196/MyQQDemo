@@ -30,6 +30,9 @@ AppWidget::AppWidget(QWidget *parent)
 
 	m_pAppMenuBtn->setFixedSize(24,24);
 
+
+	m_pAppMenuBtn->setStyleSheet("QToolButton{border:0px;} QToolButton::menu-indicator { image: None; }");
+
 	//m_pAppMenuBtn->setFlat(true);
 
 	m_pAppMenuBtn->setObjectName("AppMenu");
@@ -40,7 +43,7 @@ AppWidget::AppWidget(QWidget *parent)
 	m_pAppMenuBtn->setPopupMode(QToolButton::InstantPopup);
 
 	m_pAppMenuBtn->setGeometry(2,20,20,18);
-	m_pAppMenuBtn->setIcon(QIcon(""));
+	//m_pAppMenuBtn->setIcon(QIcon(""));
 
 
 

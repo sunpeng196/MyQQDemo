@@ -136,4 +136,27 @@
         <file>Resources/ScrollBar/scrollbar_top_highlight.png</file>
         <file>Resources/ScrollBar/scrollbar_top_normal.png</file>
     </qresource>
+    <qresource prefix="/Menu">
+        <file>Resources/Menu/menu_arrow_down.bmp</file>
+        <file>Resources/Menu/close_highlight.png</file>
+        <file>Resources/Menu/close_normal.png</file>
+        <file>Resources/Menu/menu_arrow.png</file>
+        <file>Resources/Menu/menu_arrow_up.bmp</file>
+        <file>Resources/Menu/menu_bkg.png</file>
+        <file>Resources/Menu/menu_bkg_board.png</file>
+        <file>Resources/Menu/menu_check.png</file>
+        <file>Resources/Menu/menu_cutling.png</file>
+        <file>Resources/Menu/menu_highlight.png</file>
+    </qresource>
+    <qresource prefix="/Search">
+        <file>Resources/mainSearch/main_search_bkg.png</file>
+        <file>Resources/mainSearch/main_search_deldown.png</file>
+        <file>Resources/mainSearch/main_search_delhighdown.png</file>
+        <file>Resources/mainSearch/main_search_delhighlight.png</file>
+        <file>Resources/mainSearch/main_search_down.png</file>
+        <file>Resources/mainSearch/main_search_enter.png</file>
+        <file>Resources/mainSearch/main_search_frame.png</file>
+        <file>Resources/mainSearch/main_search_normal.png</file>
+        <file>Resources/main_search_bkg.png</file>
+    </qresource>
 </RCC>

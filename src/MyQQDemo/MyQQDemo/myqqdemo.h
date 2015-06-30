@@ -52,6 +52,8 @@ public:
 
 	void moveEvent ( QMoveEvent * event );
 
+	void paintEvent(QPaintEvent *e);
+
 	
 private:
 	TitleBar *m_pTitleBar;
@@ -62,7 +64,7 @@ private:
 
 	QSystemTrayIcon *m_pSytemTrayIcon;
 
-	SearchLineEdit *m_pSearchLineEdit;
+/*	SearchLineEdit *m_pSearchLineEdit;*/
 
 	BuddyListWidget *m_pBuddyList;
 
@@ -76,6 +78,8 @@ private:
 	bool					m_bTimed;					//是否设置了检测鼠标的Timer
 
 	bool m_bLeftBtnDown;
+
+	bool m_bSearchEnable;
 
 	
 
