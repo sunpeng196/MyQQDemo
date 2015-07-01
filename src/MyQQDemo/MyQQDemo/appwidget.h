@@ -28,6 +28,8 @@ private:
 	QPushButton *m_pMyShouCang;
 	QPushButton *m_pFind;
 	QPushButton *m_pAppBaby;
+
+	bool eventFilter(QObject *obj, QEvent *event);
 	
 };
 

@@ -2,19 +2,23 @@
 #include <QLabel>
 #include <QtGui/QMouseEvent>
 #include <QPainter>
+#include <QToolButton>
 
 SearchLineEdit::SearchLineEdit(QWidget *parent)
 	: QLineEdit(parent)
 {
-	setAttribute(Qt::WA_TranslucentBackground);
-	setStyleSheet("background: transparent;border:none;");
-	
-// 	m_pSerachPixMap = new QLabel(this);
-// 	m_pSerachPixMap->setStyleSheet("border-width:0px");
-// 	m_pSerachPixMap->setPixmap(QPixmap(":/SearchLineEdit/Resources/finger_normal.png"));
-// 	m_pSerachPixMap->setAttribute(Qt::WA_TranslucentBackground);
+	m_pLabel = new QLabel(this);
+	m_pLabel->setScaledContents(true);
+	m_pLabel->setAttribute(Qt::WA_TranslucentBackground);
 
-	m_bFocusIn = false;
+	setAttribute(Qt::WA_TranslucentBackground);
+
+	m_pLabel->installEventFilter(this);
+
+	setMouseTracking(true);
+	this->setFocusPolicy(Qt::StrongFocus);
+
+	this->setPlaceholderText("搜索：联系人、讨论组、群、企业");
 }
 
 SearchLineEdit::~SearchLineEdit()
@@ -22,56 +26,34 @@ SearchLineEdit::~SearchLineEdit()
 
 }
 
-// void SearchLineEdit::paintEvent( QPaintEvent * e )
-// {
-// // 	m_pSerachPixMap->setGeometry(width()- QPixmap(":/SearchLineEdit/Resources/finger_normal.png").width(),
-// // 		6,
-// // 		QPixmap(":/SearchLineEdit/Resources/finger_normal.png").width(),
-// // 		QPixmap(":/SearchLineEdit/Resources/finger_normal.png").height());
-// // 
-// // 	return QLineEdit::paintEvent(e);
-// 	QPainter painter(this);
-// 	if (!m_bFocusIn)
-// 	{	
-// 		painter.drawPixmap(rect(),QPixmap(":/Search/Resources/main_search_bkg.png"));
-// 	}
-// 	else
-// 	{
-// 		painter.drawPixmap(rect(),QPixmap(":/Search/Resources/mainSearch/main_search_frame.png"));
-// 		QRect rc(rect().width()-30,8,16,16);
-// 		painter.drawPixmap(rc,QPixmap(":/Search/Resources/mainSearch/main_search_deldown.png"));
-// 		for (int i = 1;i<6;++i)
-// 		{
-// 			QRect tempRect(rect().left(),rect().top() + i * 30,270,30);
-// 			painter.drawPixmap(tempRect,QPixmap(":/Search/Resources/mainSearch/main_search_frame.png"));
-// 			painter.drawText(tempRect,"江南大学公社(347744583)");
-// 		}
-// 
-// 	}
-// 
-// 	return QLineEdit::paintEvent(e);
-// 
-// 
-// }
-
-void SearchLineEdit::mousePressEvent( QMouseEvent *e )
+void SearchLineEdit::resizeEvent( QResizeEvent * e )
 {
-	m_bFocusIn = true;
-	update();
+	int nLabelHeight = height() - 4;
+	int nLabelWidth = height() - 4;
+
+	m_pLabel->setMaximumSize(nLabelWidth,nLabelHeight);
+
+	m_pLabel->setCursor(Qt::ArrowCursor);
+
+	m_pLabel->setGeometry(width() - nLabelWidth - 2,(height() - nLabelHeight)/2,
+		nLabelWidth,nLabelHeight);
+
+	setTextMargins(QMargins(6,0,nLabelHeight+6,0));
+	m_pLabel->setPixmap(QPixmap(":/SearchLineEdit/Resources/finger_normal.png"));
 }
 
-void SearchLineEdit::focusInEvent( QFocusEvent * e )
+bool SearchLineEdit::eventFilter( QObject *object , QEvent *event)
 {
-	if (!e->gotFocus())
-	{
-		m_bFocusIn = false;
-		update();
-	}
+	if (m_pLabel && object == m_pLabel ) {
+		if (event->type() == QEvent::MouseButtonPress) {
+			QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
+			if (mouseEvent->buttons() & Qt::LeftButton)
+			{
+				return true;
+			}			
+		}
+	} 
+	return QLineEdit::eventFilter(object, event);
 
 }
 
-void SearchLineEdit::leaveEvent( QEvent * e )
-{
-	m_bFocusIn = false;
-	update();
-}

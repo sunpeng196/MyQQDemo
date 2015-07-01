@@ -158,5 +158,6 @@
         <file>Resources/mainSearch/main_search_frame.png</file>
         <file>Resources/mainSearch/main_search_normal.png</file>
         <file>Resources/main_search_bkg.png</file>
+        <file>Resources/allbtn_highlight.png</file>
     </qresource>
 </RCC>

@@ -4,6 +4,7 @@
 #include <QPushButton>
 #include <QMenu>
 #include <QToolButton>
+#include <QEvent>
 
 AppWidget::AppWidget(QWidget *parent)
 	: QWidget(parent)
@@ -40,10 +41,15 @@ AppWidget::AppWidget(QWidget *parent)
 /*	m_pAppMenuBtn->setCheckable(true);*/
 	m_pAppMenuBtn->setAutoRaise(true);
 
+	m_pAppMenuBtn->setIcon(QIcon(":/AppMenu/Resources/mainmenubutton/menu_btn_normal.png"));
+	m_pAppMenuBtn->setIconSize(QSize(24,24));
+
 	m_pAppMenuBtn->setPopupMode(QToolButton::InstantPopup);
 
-	m_pAppMenuBtn->setGeometry(2,20,20,18);
-	//m_pAppMenuBtn->setIcon(QIcon(""));
+	m_pAppMenuBtn->setGeometry(2,20,24,24);
+
+	m_pAppMenuBtn->installEventFilter(this);
+
 
 
 
@@ -114,6 +120,23 @@ AppWidget::AppWidget(QWidget *parent)
 AppWidget::~AppWidget()
 {
 
+}
+
+bool AppWidget::eventFilter( QObject *obj, QEvent *event )
+{
+	if (obj == m_pAppMenuBtn)
+	{
+		if (event->type() == QEvent::Enter)
+		{			
+			m_pAppMenuBtn->setIcon(QIcon(":/ToolWidget/Resources/menu_btn_highlight.png"));
+
+		}
+		else if (event->type() == QEvent::Leave)
+		{
+			m_pAppMenuBtn->setIcon(QIcon(":/ToolWidget/Resources/menu_btn_normal.png"));
+		}
+	}
+	return QWidget::eventFilter(obj,event);
 }
 
 // void AppWidget::paintEvent( QPaintEvent *event )

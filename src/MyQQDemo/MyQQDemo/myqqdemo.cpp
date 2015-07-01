@@ -13,6 +13,8 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QPainter>
+#include "userinfowidget.h"
+#include "userinfowidget2.h"
 
 MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	: QFrame(parent, flags)
@@ -79,6 +81,23 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 
 	m_bSearchEnable = false;
 
+	m_pSearchLineEdit = new SearchLineEdit(this);
+
+	int m = width();
+	m_pSearchLineEdit->setGeometry(0,120,width(),30);
+
+	m_UserInfoWidget = new UserInfoWidget2(this);
+
+	m_UserInfoWidget->setGeometry(0,10,width(),100);
+
+
+
+
+
+	
+
+
+
 	
 }
 
@@ -91,18 +110,18 @@ void MyQQDemo::mousePressEvent( QMouseEvent * e )
 {
 	m_bLeftBtnDown = true;
 
-	QPoint pt = e->pos();
-	QRect rect(1,120,280,30);
-	if (rect.contains(pt))
-	{
-		m_bSearchEnable = true;
-		update();
-	}
-	else
-	{
-		m_bSearchEnable = false;
-		update();
-	}
+// 	QPoint pt = e->pos();
+// 	QRect rect(1,120,280,30);
+// 	if (rect.contains(pt))
+// 	{
+// 		m_bSearchEnable = true;
+// 		update();
+// 	}
+// 	else
+// 	{
+// 		m_bSearchEnable = false;
+// 		update();
+// 	}
 }
 
 void MyQQDemo::mouseMoveEvent( QMouseEvent * e )
@@ -268,8 +287,8 @@ void MyQQDemo::HideWindow()
 	if(m_enHideType == en_None) return;
 
 
-	INT nHeight = rect().height();
-	INT nWidth  = rect().width();
+	int nHeight = rect().height();
+	int nWidth  = rect().width();
 
 	//²½·ù
 	int nStride = 0;
@@ -447,25 +466,25 @@ void MyQQDemo::moveEvent( QMoveEvent * event )
 	FixMoving(globalPt);
 }
 
-void MyQQDemo::paintEvent( QPaintEvent *e )
-{
-	QPainter painter(this);
-
-	if (m_bSearchEnable)
-	{
-		painter.drawPixmap(0,120,281,500,QPixmap(":/Search/Resources/mainSearch/main_search_frame.png"));
-
-		return;
-
-	}
-	else
-	{
-		painter.drawPixmap(1,120,280,30,QPixmap(":/Search/Resources/main_search_bkg.png"));
-	}
-
-
-
-
-
-	return QFrame::paintEvent(e);
-}
+// void MyQQDemo::paintEvent( QPaintEvent *e )
+// {
+// 	QPainter painter(this);
+// 
+// 	if (m_bSearchEnable)
+// 	{
+// 		painter.drawPixmap(0,120,281,500,QPixmap(":/Search/Resources/mainSearch/main_search_frame.png"));
+// 
+// 		return;
+// 
+// 	}
+// 	else
+// 	{
+// 		painter.drawPixmap(1,120,280,30,QPixmap(":/Search/Resources/main_search_bkg.png"));
+// 	}
+// 
+// 
+// 
+// 
+// 
+// 	return QFrame::paintEvent(e);
+// }

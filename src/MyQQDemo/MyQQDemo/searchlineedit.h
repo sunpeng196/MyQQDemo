@@ -2,8 +2,10 @@
 #define SEARCHLINEEDIT_H
 
 #include <QLineEdit>
-class QLabel;
+class QToolButton;
 class QMouseEvent;
+
+class QLabel;
 
 
 class SearchLineEdit : public QLineEdit
@@ -14,17 +16,14 @@ public:
 	SearchLineEdit(QWidget *parent);
 	~SearchLineEdit();
 
-	//void paintEvent(QPaintEvent * e);
+	void resizeEvent(QResizeEvent * e);
 
-	void mousePressEvent(QMouseEvent *e);
+	virtual bool eventFilter(QObject *obj, QEvent *e);
 
-	void focusInEvent(QFocusEvent * e);
-	void leaveEvent(QEvent * e);
 
 private:
-	bool m_bFocusIn;
 
-	//QLabel *m_pSerachPixMap;
+	QLabel *m_pLabel;
 	
 };
 

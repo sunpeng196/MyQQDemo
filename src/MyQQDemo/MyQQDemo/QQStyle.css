@@ -1,3 +1,42 @@
+QToolButton:hover 
+{
+	margin:0px;
+	border-image:url(:/Search/Resources/allbtn_highlight.png) 0 0 0 0 stretch stretch;
+}
+QToolButton:pressed
+{
+	border-image:url(:/Search/Resources/allbtn_highlight.png) 0 0 0 0 stretch stretch;		
+}
+
+QLineEdit#SearchInput{
+	background:transparent;
+	border:1px;
+	
+	
+}
+
+QLineEdit#SearchInput:hover{
+	background-image:url(":/Search/Resources/mainSearch/main_search_frame.png");
+}
+
+ QPushButton#SearchInput:pressed {
+     background-color:white;
+     border-style: inset;
+	 text:"";
+ }
+
+
+QToolButton#toolBtnSearch
+{
+
+}
+
+
+
+
+
+
+
 QMenu {
      background-color: white;
      margin: 2px; /* some spacing around the menu */

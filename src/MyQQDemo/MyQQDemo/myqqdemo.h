@@ -13,6 +13,10 @@ class ColumnWidget;
 
 class ColumnWidget2;
 
+class UserInfoWidget;
+
+class UserInfoWidget2;
+
 enum AFX_HIDE_TYPE
 {
 	en_None = 0,		//≤ª ’Àı
@@ -52,7 +56,7 @@ public:
 
 	void moveEvent ( QMoveEvent * event );
 
-	void paintEvent(QPaintEvent *e);
+	//void paintEvent(QPaintEvent *e);
 
 	
 private:
@@ -64,9 +68,11 @@ private:
 
 	QSystemTrayIcon *m_pSytemTrayIcon;
 
-/*	SearchLineEdit *m_pSearchLineEdit;*/
+	SearchLineEdit *m_pSearchLineEdit;
 
 	BuddyListWidget *m_pBuddyList;
+
+	UserInfoWidget2* m_UserInfoWidget;
 
 
 	AppWidget *m_pAppWidget;
