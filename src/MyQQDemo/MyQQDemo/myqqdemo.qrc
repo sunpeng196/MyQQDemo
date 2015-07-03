@@ -5,6 +5,10 @@
         <file>Resources/close_hover.png</file>
         <file>Resources/close_normal.png</file>
         <file>Resources/Bg.png</file>
+        <file>Resources/app_icon_16 (3).png</file>
+        <file>Resources/app_icon_16 (4).png</file>
+        <file>Resources/app_icon_16 (5).png</file>
+        <file>Resources/app_icon_16.png</file>
     </qresource>
     <qresource prefix="/qss">
         <file>QQStyle.css</file>
@@ -159,5 +163,25 @@
         <file>Resources/mainSearch/main_search_normal.png</file>
         <file>Resources/main_search_bkg.png</file>
         <file>Resources/allbtn_highlight.png</file>
+    </qresource>
+    <qresource prefix="/AppWidget">
+        <file>Resources/button/2014_btn_hover.png</file>
+        <file>Resources/button/btn_medalwall_dark.png</file>
+        <file>Resources/button/btn_medalwall_normal.png</file>
+        <file>Resources/button/btn_skin_normal.png</file>
+        <file>Resources/button/filemanager.png</file>
+        <file>Resources/button/find.png</file>
+        <file>Resources/button/medalwall_ani.png</file>
+        <file>Resources/button/message.png</file>
+        <file>Resources/button/mycollection_mainpanel.png</file>
+        <file>Resources/button/tools.png</file>
+        <file>Resources/qplusentrancebtn.png</file>
+    </qresource>
+    <qresource prefix="/UserINfo">
+        <file>Resources/UserInfo/icon_weibo_normal.png</file>
+        <file>Resources/UserInfo/imonline.png</file>
+        <file>Resources/UserInfo/logo_shadow.png</file>
+        <file>Resources/UserInfo/PaiPai_MainService.png</file>
+        <file>Resources/UserInfo/qzone16_main.png</file>
     </qresource>
 </RCC>

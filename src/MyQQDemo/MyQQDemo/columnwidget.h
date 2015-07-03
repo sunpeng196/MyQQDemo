@@ -26,6 +26,10 @@ public:
 	ColumnWidget(QWidget *parent);
 	~ColumnWidget();
 
+
+signals:  
+	void currentRowChanged ( int currentRow );
+public:
 	void Init()
 	{
 		TabCtrlItem *pNewItem = new TabCtrlItem();

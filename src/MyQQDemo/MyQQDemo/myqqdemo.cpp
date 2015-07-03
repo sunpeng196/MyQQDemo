@@ -15,6 +15,10 @@
 #include <QPainter>
 #include "userinfowidget.h"
 #include "userinfowidget2.h"
+#include "appwidget2.h"
+#include <QStackedWidget>
+#include <QListWidget>
+#include <QStringListModel>
 
 MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	: QFrame(parent, flags)
@@ -35,10 +39,9 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 
 
  	m_pColumnWidget = new ColumnWidget(this);//new ColumnWidget(this);
-
- 	m_pColumnWidget->setGeometry(0,150,281,38);
-
+ 	m_pColumnWidget->setGeometry(0,175,281,38);
 	m_pColumnWidget->setObjectName("widgetColumn");
+
 
 
 	//setCursor();
@@ -48,7 +51,7 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 // 	m_pToolWidget->setGeometry(0,100,270,30);
 
 	m_pSytemTrayIcon = new QSystemTrayIcon(this);
-	m_pSytemTrayIcon->setIcon(QIcon(""));
+	m_pSytemTrayIcon->setIcon(QIcon(":/MyQQDemo/Resources/app_icon_16 (3).png"));
 	m_pSytemTrayIcon->show();
 
 	QMenu *pMenu = m_pSytemTrayIcon->contextMenu();
@@ -60,16 +63,70 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 // 
 // 	m_pSearchLineEdit->setGeometry(0,100,280,30);
 
-	m_pBuddyList = new BuddyListWidget(this);
+
+
+
+/*	m_pBuddyList->setGeometry(0,214,278,443);*/
+
+
+// 	m_pGroupList->setGeometry(0,214,278,443);
+// 	m_pLastGroup->setGeometry(0,214,278,443);
+
+// 	m_pBuddyList->setVisible(true);
+// 	m_pGroupList->setVisible(false);
+// 	m_pLastGroup->setVisible(false);
+
+	m_pStackedWidget = new QStackedWidget(this);
+
+	m_pBuddyList = new BuddyListWidget(m_pStackedWidget);
+	//m_pGroupList = new BuddyListWidget(m_pStackedWidget);
+	//m_pLastGroup = new BuddyListWidget(m_pStackedWidget);
+
+
+	m_pStackedWidget->addWidget(m_pBuddyList);
+
+	QListWidget *pListWidget = new QListWidget(m_pStackedWidget);
+	m_pStackedWidget->addWidget(pListWidget);
+
+	pListWidget->addItem(new QListWidgetItem("asdfjklsaj"));
+
+	QListWidget *pListWidget2 = new QListWidget(m_pStackedWidget);
+	m_pStackedWidget->addWidget(pListWidget2);
+
+	pListWidget2->addItem(new QListWidgetItem("daskfjklask;jfasd;fjas"));
+
+
+
+	//m_pStackedWidget->addWidget(m_pGroupList);
+	//m_pStackedWidget->addWidget(m_pLastGroup);
+
+	//QListWidget *pList = new QListWidget(m_pStackedWidget);
+
+
+
+	m_pStackedWidget->setCurrentIndex(0);
+	m_pStackedWidget->setGeometry(0,214,278,443);
+
+	QObject::connect(m_pColumnWidget,SIGNAL(currentRowChanged(int)),m_pStackedWidget,SLOT(setCurrentIndex(int)));
+
 
 	m_pBuddyList->SetBuddyItemHeadFlashAnim(0,1,true);
 
-	m_pBuddyList->setGeometry(0,204,278,443);
-	m_pAppWidget = new AppWidget(this);
+
+	m_pAppWidget = new AppWidget2(this);
 
 	m_pAppWidget->setGeometry(0,height()-60,width(),60);
 
-	m_pAppWidget->setObjectName("AppWidget");
+	QRect rect = m_pAppWidget->rect();
+
+
+	rect = m_pAppWidget->geometry();
+
+	QPoint pt = m_pAppWidget->pos();
+
+	int h = m_pAppWidget->height();
+	int w = m_pAppWidget->width();
+
 
 	m_enHideType = en_None;
 
@@ -84,11 +141,11 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	m_pSearchLineEdit = new SearchLineEdit(this);
 
 	int m = width();
-	m_pSearchLineEdit->setGeometry(0,120,width(),30);
+	m_pSearchLineEdit->setGeometry(0,145,width(),30);
 
 	m_UserInfoWidget = new UserInfoWidget2(this);
 
-	m_UserInfoWidget->setGeometry(0,10,width(),100);
+	m_UserInfoWidget->setGeometry(0,30,width(),100);
 
 
 
@@ -126,43 +183,43 @@ void MyQQDemo::mousePressEvent( QMouseEvent * e )
 
 void MyQQDemo::mouseMoveEvent( QMouseEvent * e )
 {
-	QPoint pt = e->pos();
-	if (pt.x() <= 4 && pt.y()<= 4)
-	{
-		setCursor(Qt::SizeFDiagCursor);
-	}
-	else if(pt.x()<= 4 && pt.y() + 4 > height())
-	{
-		setCursor(Qt::SizeBDiagCursor);
-	}
-	else if (pt.x() + 4 >= width() && pt.y()<= 4)
-	{
-		setCursor(Qt::SizeBDiagCursor);
-	}
-	else if (pt.x() + 4 >= width() && pt.y() + 4 >height())
-	{
-		setCursor(Qt::SizeFDiagCursor);
-	}
-	else if (pt.x() <= 4)//×ó±ß
-	{
-		setCursor(Qt::SizeHorCursor);
-	}
-	else if (pt.y() + 4 >= height())//µ×²¿
-	{
-		setCursor(Qt::SizeVerCursor);
-	}
-	else if (pt.x() + 4 >= width())//×îÓÒ±ß
-	{
-		setCursor(Qt::SizeHorCursor);
-	}
-	else if (pt.y() <= 4)//¶¥²¿
-	{
-		setCursor(Qt::SizeVerCursor);
-	}
-	else
-	{
-		setCursor(Qt::ArrowCursor);
-	}
+// 	QPoint pt = e->pos();
+// 	if (pt.x() <= 4 && pt.y()<= 4)
+// 	{
+// 		setCursor(Qt::SizeFDiagCursor);
+// 	}
+// 	else if(pt.x()<= 4 && pt.y() + 4 > height())
+// 	{
+// 		setCursor(Qt::SizeBDiagCursor);
+// 	}
+// 	else if (pt.x() + 4 >= width() && pt.y()<= 4)
+// 	{
+// 		setCursor(Qt::SizeBDiagCursor);
+// 	}
+// 	else if (pt.x() + 4 >= width() && pt.y() + 4 >height())
+// 	{
+// 		setCursor(Qt::SizeFDiagCursor);
+// 	}
+// 	else if (pt.x() <= 4)//×ó±ß
+// 	{
+// 		setCursor(Qt::SizeHorCursor);
+// 	}
+// 	else if (pt.y() + 4 >= height())//µ×²¿
+// 	{
+// 		setCursor(Qt::SizeVerCursor);
+// 	}
+// 	else if (pt.x() + 4 >= width())//×îÓÒ±ß
+// 	{
+// 		setCursor(Qt::SizeHorCursor);
+// 	}
+// 	else if (pt.y() <= 4)//¶¥²¿
+// 	{
+// 		setCursor(Qt::SizeVerCursor);
+// 	}
+// 	else
+// 	{
+// 		setCursor(Qt::ArrowCursor);
+// 	}
 
 
 }

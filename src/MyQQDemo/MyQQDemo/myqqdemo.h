@@ -17,6 +17,10 @@ class UserInfoWidget;
 
 class UserInfoWidget2;
 
+class AppWidget2;
+
+class QStackedWidget;
+
 enum AFX_HIDE_TYPE
 {
 	en_None = 0,		//不收缩
@@ -71,11 +75,16 @@ private:
 	SearchLineEdit *m_pSearchLineEdit;
 
 	BuddyListWidget *m_pBuddyList;
+	BuddyListWidget *m_pGroupList;
+	BuddyListWidget *m_pLastGroup;
+
+
+	QStackedWidget *m_pStackedWidget;
 
 	UserInfoWidget2* m_UserInfoWidget;
 
 
-	AppWidget *m_pAppWidget;
+	AppWidget2 *m_pAppWidget;
 
 
 	AFX_HIDE_TYPE 			m_enHideType;				//隐藏模式

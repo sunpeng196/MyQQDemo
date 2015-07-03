@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'stylewidget.ui'
 **
-** Created: Wed Jul 1 16:37:07 2015
+** Created: Fri Jul 3 17:13:58 2015
 **      by: Qt User Interface Compiler version 4.8.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

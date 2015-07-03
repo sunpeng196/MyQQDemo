@@ -4,6 +4,7 @@
 #include <QTextCodec>
 #include "buddylistwidget.h"
 #include "stylewidget.h"
+#include "appwidget2.h"
 
 int main(int argc, char *argv[])
 {
@@ -30,6 +31,8 @@ int main(int argc, char *argv[])
 
 	MyQQDemo w;
 	w.show();
+
+
 
 	return a.exec();
 }

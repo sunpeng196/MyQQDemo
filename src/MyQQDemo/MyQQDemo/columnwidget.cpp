@@ -93,7 +93,9 @@ void ColumnWidget::mousePressEvent( QMouseEvent * e )
 
 
 
-		pMenu->exec(e->globalPos());
+		//pMenu->exec(e->globalPos());
+
+		emit currentRowChanged(m_iCurrentChooseItem);
 	}
 }
 
