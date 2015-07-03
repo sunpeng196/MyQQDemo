@@ -88,12 +88,12 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	QListWidget *pListWidget = new QListWidget(m_pStackedWidget);
 	m_pStackedWidget->addWidget(pListWidget);
 
-	pListWidget->addItem(new QListWidgetItem("asdfjklsaj"));
+	pListWidget->addItem(new QListWidgetItem("Hello,World"));
 
 	QListWidget *pListWidget2 = new QListWidget(m_pStackedWidget);
 	m_pStackedWidget->addWidget(pListWidget2);
 
-	pListWidget2->addItem(new QListWidgetItem("daskfjklask;jfasd;fjas"));
+	pListWidget2->addItem(new QListWidgetItem("ÖÐ¹ú"));
 
 
 

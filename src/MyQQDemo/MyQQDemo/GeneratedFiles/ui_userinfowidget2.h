@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'userinfowidget2.ui'
 **
-** Created: Fri Jul 3 17:13:58 2015
+** Created: Fri Jul 3 17:50:05 2015
 **      by: Qt User Interface Compiler version 4.8.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -101,6 +101,8 @@ public:
 
         lineEdit = new QLineEdit(UserInfoWidget2);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        lineEdit->setStyleSheet(QString::fromUtf8("background-color:transparent;\n"
+"border:0px;"));
 
         verticalLayout->addWidget(lineEdit);
 
@@ -166,6 +168,8 @@ public:
         toolButton->setText(QApplication::translate("UserInfoWidget2", "...", 0, QApplication::UnicodeUTF8));
         toolButton_2->setText(QApplication::translate("UserInfoWidget2", "...", 0, QApplication::UnicodeUTF8));
         toolButton_3->setText(QApplication::translate("UserInfoWidget2", "...", 0, QApplication::UnicodeUTF8));
+        lineEdit->setText(QString());
+        lineEdit->setPlaceholderText(QApplication::translate("UserInfoWidget2", "\347\274\226\350\276\221\344\270\252\346\200\247\347\255\276\345\220\215", 0, QApplication::UnicodeUTF8));
         toolButton_4->setText(QApplication::translate("UserInfoWidget2", "...", 0, QApplication::UnicodeUTF8));
         toolButton_5->setText(QApplication::translate("UserInfoWidget2", "...", 0, QApplication::UnicodeUTF8));
         toolButton_6->setText(QApplication::translate("UserInfoWidget2", "...", 0, QApplication::UnicodeUTF8));

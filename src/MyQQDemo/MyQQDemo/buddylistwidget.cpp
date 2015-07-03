@@ -805,7 +805,6 @@ void BuddyListWidget::ScrollBarValueChanged( int value )
 
 void BuddyListWidget::timerEvent( QTimerEvent * e )
 {
-	return;
 	int m = e->timerId();
 	if (e->timerId() == m_dwHeadFlashAnimTimerId)
 	{
