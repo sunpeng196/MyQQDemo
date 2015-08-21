@@ -6,8 +6,6 @@
 #include <QAction>
 #include <QMenu>
 #include "searchlineedit.h"
-#include "buddylistwidget.h"
-#include "columnwidget2.h"
 #include <Windows.h>
 #include <QMouseEvent>
 #include <QApplication>
@@ -23,7 +21,7 @@
 MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	: QFrame(parent, flags)
 {
-	setWindowFlags(Qt::FramelessWindowHint);
+	setWindowFlags(Qt::FramelessWindowHint|Qt::Tool | Qt::X11BypassWindowManagerHint);
 
 	setMinimumSize(270,650);
 	setMaximumSize(600,715);
@@ -41,6 +39,8 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
  	m_pColumnWidget = new ColumnWidget(this);//new ColumnWidget(this);
  	m_pColumnWidget->setGeometry(0,175,281,38);
 	m_pColumnWidget->setObjectName("widgetColumn");
+
+	//m_pColumnWidget->setStyleSheet("border:none");
 
 
 
@@ -77,30 +77,9 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 // 	m_pLastGroup->setVisible(false);
 
 	m_pStackedWidget = new QStackedWidget(this);
-
-	m_pBuddyList = new BuddyListWidget(m_pStackedWidget);
-	//m_pGroupList = new BuddyListWidget(m_pStackedWidget);
-	//m_pLastGroup = new BuddyListWidget(m_pStackedWidget);
+	m_pStackedWidget->setStyleSheet("border:none");
 
 
-	m_pStackedWidget->addWidget(m_pBuddyList);
-
-	QListWidget *pListWidget = new QListWidget(m_pStackedWidget);
-	m_pStackedWidget->addWidget(pListWidget);
-
-	pListWidget->addItem(new QListWidgetItem("Hello,World"));
-
-	QListWidget *pListWidget2 = new QListWidget(m_pStackedWidget);
-	m_pStackedWidget->addWidget(pListWidget2);
-
-	pListWidget2->addItem(new QListWidgetItem("ÖÐ¹ú"));
-
-
-
-	//m_pStackedWidget->addWidget(m_pGroupList);
-	//m_pStackedWidget->addWidget(m_pLastGroup);
-
-	//QListWidget *pList = new QListWidget(m_pStackedWidget);
 
 
 
@@ -110,7 +89,6 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	QObject::connect(m_pColumnWidget,SIGNAL(currentRowChanged(int)),m_pStackedWidget,SLOT(setCurrentIndex(int)));
 
 
-	m_pBuddyList->SetBuddyItemHeadFlashAnim(0,1,true);
 
 
 	m_pAppWidget = new AppWidget2(this);
@@ -124,8 +102,6 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 
 	QPoint pt = m_pAppWidget->pos();
 
-	int h = m_pAppWidget->height();
-	int w = m_pAppWidget->width();
 
 
 	m_enHideType = en_None;
@@ -148,6 +124,9 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	m_UserInfoWidget->setGeometry(0,30,width(),100);
 
 
+	//RegisterHotKey(this->get)
+
+	
 
 
 
@@ -167,6 +146,8 @@ void MyQQDemo::mousePressEvent( QMouseEvent * e )
 {
 	m_bLeftBtnDown = true;
 
+	return QFrame::mousePressEvent(e);
+
 // 	QPoint pt = e->pos();
 // 	QRect rect(1,120,280,30);
 // 	if (rect.contains(pt))
@@ -183,6 +164,7 @@ void MyQQDemo::mousePressEvent( QMouseEvent * e )
 
 void MyQQDemo::mouseMoveEvent( QMouseEvent * e )
 {
+	return QFrame::mouseMoveEvent(e);
 // 	QPoint pt = e->pos();
 // 	if (pt.x() <= 4 && pt.y()<= 4)
 // 	{
@@ -226,7 +208,9 @@ void MyQQDemo::mouseMoveEvent( QMouseEvent * e )
 
 void MyQQDemo::mouseReleaseEvent( QMouseEvent * e )
 {
+
 	m_bLeftBtnDown = false;
+	return QFrame::mouseReleaseEvent(e);
 }
 
 bool MyQQDemo::winEvent( MSG * message, long * result )
@@ -523,25 +507,3 @@ void MyQQDemo::moveEvent( QMoveEvent * event )
 	FixMoving(globalPt);
 }
 
-// void MyQQDemo::paintEvent( QPaintEvent *e )
-// {
-// 	QPainter painter(this);
-// 
-// 	if (m_bSearchEnable)
-// 	{
-// 		painter.drawPixmap(0,120,281,500,QPixmap(":/Search/Resources/mainSearch/main_search_frame.png"));
-// 
-// 		return;
-// 
-// 	}
-// 	else
-// 	{
-// 		painter.drawPixmap(1,120,280,30,QPixmap(":/Search/Resources/main_search_bkg.png"));
-// 	}
-// 
-// 
-// 
-// 
-// 
-// 	return QFrame::paintEvent(e);
-// }

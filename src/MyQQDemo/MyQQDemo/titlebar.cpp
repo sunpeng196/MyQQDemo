@@ -43,6 +43,8 @@ TitleBar::TitleBar(QWidget *parent)
 
 	QObject::connect(m_pCloseButton,SIGNAL(clicked()),qApp,SLOT(quit()));
 
+	QObject::connect(m_pMinButton,SIGNAL(clicked()),this->parent(),SLOT(showMinimized()));
+
 	m_hBoxLayout->setSpacing(0);
 	m_hBoxLayout->setContentsMargins(0,0,5,0);
 

@@ -86,29 +86,11 @@
     <ClCompile Include="GeneratedFiles\Release\moc_searchlineedit.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="qqstylepushbutton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_qqstylepushbutton.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_qqstylepushbutton.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="buddylistwidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_buddylistwidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_buddylistwidget.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="BuddyTeam.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BuddyItem.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="appwidget.cpp">
       <Filter>Source Files</Filter>
@@ -117,15 +99,6 @@
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_appwidget.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="columnwidget2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_columnwidget2.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_columnwidget2.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="stylewidget.cpp">
@@ -187,13 +160,7 @@
     <CustomBuild Include="qqstylepushbutton.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="buddylistwidget.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="appwidget.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="columnwidget2.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="stylewidget.h">
@@ -222,12 +189,6 @@
     <None Include="QQStyle.css" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BuddyTeam.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BuddyItem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_stylewidget.h">
       <Filter>Generated Files</Filter>
     </ClInclude>

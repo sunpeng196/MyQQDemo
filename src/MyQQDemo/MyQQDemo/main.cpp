@@ -2,9 +2,9 @@
 #include <QtGui/QApplication>
 #include <QFile>
 #include <QTextCodec>
-#include "buddylistwidget.h"
 #include "stylewidget.h"
 #include "appwidget2.h"
+#include <QMessageBox>
 
 int main(int argc, char *argv[])
 {
@@ -27,10 +27,13 @@ int main(int argc, char *argv[])
 // 	file.close();
 
 // 	StyleWidget w;
+// 	//QMessageBox::information(NULL, "Title", "Content", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 // 	w.show();
 
 	MyQQDemo w;
 	w.show();
+
+	
 
 
 

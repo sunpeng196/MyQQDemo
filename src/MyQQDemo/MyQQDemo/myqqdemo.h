@@ -74,9 +74,8 @@ private:
 
 	SearchLineEdit *m_pSearchLineEdit;
 
-	BuddyListWidget *m_pBuddyList;
-	BuddyListWidget *m_pGroupList;
-	BuddyListWidget *m_pLastGroup;
+
+
 
 
 	QStackedWidget *m_pStackedWidget;

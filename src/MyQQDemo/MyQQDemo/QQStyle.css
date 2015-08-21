@@ -1,3 +1,90 @@
+ QTreeView {
+     alternate-background-color: yellow;
+ }
+ 
+ QTreeView::item:has-children {
+	  background-color:red;
+	  height:28px;
+ }
+ 
+  QTreeView::item:!has-children {
+
+	  background-color:blue;
+	  height:100px;
+
+ }
+ 
+ 
+ 
+ 
+ 
+ /*QTreeView::item::selected{
+	background-image:url(:/BuddyList/BuddyList/main_yellowbar_bkg.png);
+ }
+ 
+   QTreeView::branch:open :has-children:{
+   image: url(:/MainPanel/Resources/mainpanel_foldernode_collapsetexture.png);
+
+ }
+    QTreeView::branch:closed:has-children{
+	/*image: url(:/MainPanel/Resources/mainpanel_foldernode_expandtexture.png);*/
+ }*/
+
+ 
+ 
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 QToolButton:hover 
 {
 	margin:0px;
