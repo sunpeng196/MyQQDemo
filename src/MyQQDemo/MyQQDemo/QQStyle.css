@@ -15,75 +15,6 @@
  }
  
  
- 
- 
- 
- /*QTreeView::item::selected{
-	background-image:url(:/BuddyList/BuddyList/main_yellowbar_bkg.png);
- }
- 
-   QTreeView::branch:open :has-children:{
-   image: url(:/MainPanel/Resources/mainpanel_foldernode_collapsetexture.png);
-
- }
-    QTreeView::branch:closed:has-children{
-	/*image: url(:/MainPanel/Resources/mainpanel_foldernode_expandtexture.png);*/
- }*/
-
- 
- 
-
-
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-/*--------------------------------------------------------------------------------------------------------------------*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 QToolButton:hover 
 {
@@ -113,122 +44,12 @@ QLineEdit#SearchInput:hover{
  }
 
 
-QToolButton#toolBtnSearch
-{
 
+QLineEdit#lineEdit:hover
+{
+    border:2px;
 }
 
-
-
-
-
-
-
-QMenu {
-     background-color: white;
-     margin: 2px; /* some spacing around the menu */
-	 
- }
-
- QMenu::item {
-    padding: 2px 25px 2px 20px;
-    border: 1px solid transparent; /* reserve space for selection border */
-	background-image:url(:/Menu/Resources/Menu/menu_bkg.png);
-	top:0px;
-	left:0px;
-	padding-left:20px;
-	width:157px;
-	height:38px;
-	 
- }
-
- QMenu::item:selected {
-     border-color: darkblue;
-     background: rgba(100, 100, 100, 150);
- }
-
- QMenu::icon:checked { /* appearance of a 'checked' icon */
-     background: gray;
-     border: 1px inset gray;
-     position: absolute;
-     top: 1px;
-     right: 1px;
-     bottom: 1px;
-     left: 1px;
- }
-
- QMenu::separator {
-     height: 2px;
-     background: lightblue;
-     margin-left: 10px;
-     margin-right: 5px;
- }
-
- QMenu::indicator {
-     width: 13px;
-     height: 13px;
- }
-
- /* non-exclusive indicator = check box style indicator (see QActionGroup::setExclusive) */
- QMenu::indicator:non-exclusive:unchecked {
-     image: url(:/Menu/Resources/Menu/menu_check.png);
- }
-
- QMenu::indicator:non-exclusive:unchecked:selected {
-     image: url(:/Menu/Resources/Menu/menu_check.png);
- }
-
- QMenu::indicator:non-exclusive:checked {
-     image: url(:/Menu/Resources/Menu/menu_check.png);
- }
-
- QMenu::indicator:non-exclusive:checked:selected {
-    image: url(:/Menu/Resources/Menu/menu_check.png);
- }
-
- /* exclusive indicator = radio button style indicator (see QActionGroup::setExclusive) */
- QMenu::indicator:exclusive:unchecked {
-     image: url(:/Menu/Resources/Menu/menu_check.png);
- }
-
- QMenu::indicator:exclusive:unchecked:selected {
-    image: url(:/Menu/Resources/Menu/menu_check.png);
- }
-
- QMenu::indicator:exclusive:checked {
-     image: url(:/Menu/Resources/Menu/menu_check.png);
- }
-
- QMenu::indicator:exclusive:checked:selected {
-    image: url(:/Menu/Resources/Menu/menu_check.png);
- }
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 
 QToolButton#toolButtonClose
 {
@@ -262,6 +83,11 @@ QToolButton#toolButtonMin:hover
 QToolButton#toolButtonMin:pressed 
 {
 	border-image:url(:/SysMenu/Resources/sysbtn_min_down.png) 0 0 0 0 stretch stretch;
+}
+
+QLineEdit#searchLineEdit
+{
+    border-image:(url(:/Search/Resources/mainSearch/main_search_bkg.png));
 }
 
 

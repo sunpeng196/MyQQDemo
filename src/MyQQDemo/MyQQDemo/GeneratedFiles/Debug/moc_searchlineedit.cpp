@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'searchlineedit.h'
 **
-** Created: Mon Jul 6 11:40:10 2015
+** Created: Sat Aug 22 15:27:44 2015
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,26 +23,33 @@ static const uint qt_meta_data_SearchLineEdit[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
+       1,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        0,       // signalCount
 
+ // slots: signature, parameters, type, tag, flags
+      16,   15,   15,   15, 0x0a,
+
        0        // eod
 };
 
 static const char qt_meta_stringdata_SearchLineEdit[] = {
-    "SearchLineEdit\0"
+    "SearchLineEdit\0\0SlotTextChanged(QString)\0"
 };
 
 void SearchLineEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    Q_UNUSED(_o);
-    Q_UNUSED(_id);
-    Q_UNUSED(_c);
-    Q_UNUSED(_a);
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        Q_ASSERT(staticMetaObject.cast(_o));
+        SearchLineEdit *_t = static_cast<SearchLineEdit *>(_o);
+        switch (_id) {
+        case 0: _t->SlotTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        default: ;
+        }
+    }
 }
 
 const QMetaObjectExtraData SearchLineEdit::staticMetaObjectExtraData = {
@@ -76,6 +83,11 @@ int SearchLineEdit::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     _id = QLineEdit::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    }
     return _id;
 }
 QT_END_MOC_NAMESPACE

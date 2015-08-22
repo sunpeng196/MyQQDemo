@@ -1,0 +1,438 @@
+{
+	"retcode": 0,
+	"result": [{
+		"uin": 2442765777,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 3530605359,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 2104158509,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 1935812858,
+		"status": "away",
+		"client_type": 1
+	},
+	{
+		"uin": 3960448849,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 3093063979,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 2250410415,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 4206004769,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 2890962003,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 3951177275,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 3382061450,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 4111123491,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 3697948922,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 224581070,
+		"status": "online",
+		"client_type": 24
+	},
+	{
+		"uin": 2769554265,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 4246418272,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 1179401604,
+		"status": "online",
+		"client_type": 24
+	},
+	{
+		"uin": 1805899228,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 3530605359,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 3913989778,
+		"status": "online",
+		"client_type": 24
+	},
+	{
+		"uin": 980640120,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 1185404784,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 3209557335,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 3952399118,
+		"status": "away",
+		"client_type": 1
+	},
+	{
+		"uin": 2389317506,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 348092803,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 2598986604,
+		"status": "online",
+		"client_type": 24
+	},
+	{
+		"uin": 2444199020,
+		"status": "online",
+		"client_type": 24
+	},
+	{
+		"uin": 3072356246,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 3604185739,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 1088519078,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 201197259,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 26403503,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 599303299,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 3415184748,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 3333889084,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 2241812890,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 4073249796,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 2035061291,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 1185404784,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 3864065365,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 2734125922,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 523110025,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 2657723328,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 2462106138,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 1723760119,
+		"status": "online",
+		"client_type": 24
+	},
+	{
+		"uin": 3724700250,
+		"status": "online",
+		"client_type": 24
+	},
+	{
+		"uin": 3815461544,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 3632860462,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 3415184748,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 413610173,
+		"status": "online",
+		"client_type": 24
+	},
+	{
+		"uin": 546114987,
+		"status": "online",
+		"client_type": 24
+	},
+	{
+		"uin": 3464363486,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 2988103170,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 3174243779,
+		"status": "online",
+		"client_type": 24
+	},
+	{
+		"uin": 4175850329,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 2959012824,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 769778495,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 308202129,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 3342424620,
+		"status": "away",
+		"client_type": 1
+	},
+	{
+		"uin": 2333534920,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 1806055529,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 1169285679,
+		"status": "busy",
+		"client_type": 1
+	},
+	{
+		"uin": 4236900300,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 1755392747,
+		"status": "away",
+		"client_type": 1
+	},
+	{
+		"uin": 497555512,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 3914975842,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 4109369523,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 1392800800,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 2013180097,
+		"status": "busy",
+		"client_type": 1
+	},
+	{
+		"uin": 3325789986,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 174761554,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 2505958845,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 1925703157,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 2864127401,
+		"status": "away",
+		"client_type": 1
+	},
+	{
+		"uin": 2988103170,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 3342424620,
+		"status": "away",
+		"client_type": 1
+	},
+	{
+		"uin": 896596061,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 333183291,
+		"status": "online",
+		"client_type": 24
+	},
+	{
+		"uin": 2239891211,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 2014058941,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 1839053633,
+		"status": "away",
+		"client_type": 1
+	},
+	{
+		"uin": 4240124811,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 4226554904,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 649329643,
+		"status": "online",
+		"client_type": 1
+	},
+	{
+		"uin": 350817675,
+		"status": "online",
+		"client_type": 21
+	},
+	{
+		"uin": 4259772615,
+		"status": "online",
+		"client_type": 24
+	}]
+}

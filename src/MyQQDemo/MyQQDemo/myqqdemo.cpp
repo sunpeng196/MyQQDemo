@@ -17,6 +17,13 @@
 #include <QStackedWidget>
 #include <QListWidget>
 #include <QStringListModel>
+#include "friendlistview.h"
+#include <QTextCodec>
+#include "qfriendlistmodel.h"
+#include "qfriendlistdelegate.h"
+#include "qrecentsessionmodel.h"
+#include "qrecentlistview.h"
+#include "chatsessionlistdelegate.h"
 
 MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	: QFrame(parent, flags)
@@ -30,7 +37,7 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 
 	//this->setFixedSize(270,650);
 	//QString styleSheet = "QMainWindow:{border:0px;}";
-	setStyleSheet("QFrame {background-image:url(:/MyQQDemo/Resources/main.jpg);border:0px solid black;}");
+	//setStyleSheet("QFrame {background-image:url(:/MyQQDemo/Resources/main.jpg);border:0px solid black;}");
 
 	m_pTitleBar = new TitleBar(this);
 	m_pTitleBar->setGeometry(0,0,281,30);
@@ -55,26 +62,9 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	m_pSytemTrayIcon->show();
 
 	QMenu *pMenu = m_pSytemTrayIcon->contextMenu();
-	//pMenu->addAction(new QAction(tr("显示主界面")));
 
 	m_pSytemTrayIcon->setContextMenu(pMenu);
 
-// 	m_pSearchLineEdit = new SearchLineEdit(this);
-// 
-// 	m_pSearchLineEdit->setGeometry(0,100,280,30);
-
-
-
-
-/*	m_pBuddyList->setGeometry(0,214,278,443);*/
-
-
-// 	m_pGroupList->setGeometry(0,214,278,443);
-// 	m_pLastGroup->setGeometry(0,214,278,443);
-
-// 	m_pBuddyList->setVisible(true);
-// 	m_pGroupList->setVisible(false);
-// 	m_pLastGroup->setVisible(false);
 
 	m_pStackedWidget = new QStackedWidget(this);
 	m_pStackedWidget->setStyleSheet("border:none");
@@ -83,13 +73,61 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 
 
 
-	m_pStackedWidget->setCurrentIndex(0);
+	//m_pStackedWidget->setCurrentIndex(0);
 	m_pStackedWidget->setGeometry(0,214,278,443);
 
 	QObject::connect(m_pColumnWidget,SIGNAL(currentRowChanged(int)),m_pStackedWidget,SLOT(setCurrentIndex(int)));
 
+	FriendListView *pView = new FriendListView(m_pStackedWidget);
+	QTextCodec::setCodecForTr(QTextCodec::codecForName("GB2312"));
 
+	QFile file("C:\\Users\\15051145\\Desktop\\QQFriendList.txt");
+	if (!file.open(QIODevice::ReadOnly))
+		return ;
 
+	QByteArray output = file.readAll();
+
+	QFriendListModel *model = new QFriendListModel(this);
+
+	model->ParserContentFromString(output);
+
+	QFile file2("C:\\Users\\15051145\\Desktop\\FriendOnline.txt");
+	if (!file2.open(QIODevice::ReadOnly))
+	{
+		return;
+	}
+	QByteArray online = file2.readAll();
+	model->ParserOnlineClient(online);
+
+	model->SetMessageArrive(1755392747);
+	model->SetMessageArrive(2901928114);
+
+	pView->setModel(model);
+
+	pView->setItemDelegate(new QFriendListDelegate(pView));
+	pView->setIndentation(10);
+
+	pView->setHeaderHidden(true);
+
+	QRecentSessionModel *recentModel = new QRecentSessionModel(this);
+	QFile file3("C:\\Users\\15051145\\Desktop\\RecentList.txt");
+	if (!file3.open(QIODevice::ReadOnly))
+	{
+		return;
+	}
+	QByteArray recent = file3.readAll();
+	recentModel->ParserContent(recent);
+
+	QRecentListView *pRecentListView = new QRecentListView(this);
+	pRecentListView->setModel(recentModel);
+	pRecentListView->setItemDelegate(new ChatSessionListDelegate(this));
+
+	
+	m_pStackedWidget->addWidget(pView);
+
+	m_pStackedWidget->addWidget(pRecentListView);
+
+	m_pStackedWidget->setCurrentIndex(0);
 
 	m_pAppWidget = new AppWidget2(this);
 
@@ -115,6 +153,7 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	m_bSearchEnable = false;
 
 	m_pSearchLineEdit = new SearchLineEdit(this);
+	m_pSearchLineEdit->setObjectName("searchLineEdit");
 
 	int m = width();
 	m_pSearchLineEdit->setGeometry(0,145,width(),30);

@@ -67,19 +67,9 @@ private:
 	TitleBar *m_pTitleBar;
 
 	ColumnWidget *m_pColumnWidget;
-
-
-
 	QSystemTrayIcon *m_pSytemTrayIcon;
-
 	SearchLineEdit *m_pSearchLineEdit;
-
-
-
-
-
 	QStackedWidget *m_pStackedWidget;
-
 	UserInfoWidget2* m_UserInfoWidget;
 
 
