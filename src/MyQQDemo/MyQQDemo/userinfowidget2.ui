@@ -38,6 +38,9 @@
         <iconset resource="myqqdemo.qrc">
          <normaloff>:/UserINfo/Resources/UserInfo/imonline.png</normaloff>:/UserINfo/Resources/UserInfo/imonline.png</iconset>
        </property>
+       <property name="popupMode">
+        <enum>QToolButton::InstantPopup</enum>
+       </property>
        <property name="autoRaise">
         <bool>true</bool>
        </property>

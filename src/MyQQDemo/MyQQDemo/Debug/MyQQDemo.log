@@ -1,58 +1,15 @@
-﻿生成启动时间为 2015/8/22 16:05:16。
+﻿生成启动时间为 2015/8/25 15:43:44。
      1>项目“D:\githubProject\MyQQDemo\src\MyQQDemo\MyQQDemo\MyQQDemo.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\MyQQDemo.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        CustomBuild:
          所有输出均为最新。
        ClCompile:
-         D:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"D:\qjson-master\include" /I.\GeneratedFiles /I. /ID:\Qt\4.8.4\include /I.\GeneratedFiles\Debug /ID:\Qt\4.8.4\include\QtCore /ID:\Qt\4.8.4\include\QtGui /Zi /nologo /W1 /WX- /Od /Oy- /D UNICODE /D WIN32 /D QT_LARGEFILE_SUPPORT /D QT_DLL /D QT_CORE_LIB /D QT_GUI_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t- /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt myqqdemo.cpp
-         myqqdemo.cpp
+         所有输出均为最新。
          所有输出均为最新。
        Link:
-         D:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\githubProject\MyQQDemo\src\MyQQDemo\Win32\Debug\\MyQQDemo.exe" /NOLOGO /LIBPATH:"D:\qjson-master\src\DEBUG" /LIBPATH:D:\Qt\4.8.4\lib qtmaind.lib QtCored4.lib QtGuid4.lib qjsond.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\MyQQDemo.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\githubProject\MyQQDemo\src\MyQQDemo\Win32\Debug\MyQQDemo.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\githubProject\MyQQDemo\src\MyQQDemo\Win32\Debug\MyQQDemo.lib" /MACHINE:X86 Debug\appwidget.obj
-         Debug\appwidget2.obj
-         Debug\chatsessionlistdelegate.obj
-         Debug\columnwidget.obj
-         Debug\FriendGroupInfo.obj
-         Debug\FriendInfo.obj
-         Debug\friendlistview.obj
-         Debug\moc_appwidget.obj
-         Debug\moc_appwidget2.obj
-         Debug\moc_chatsessionlistdelegate.obj
-         Debug\moc_columnwidget.obj
-         Debug\moc_FriendGroupInfo.obj
-         Debug\moc_FriendInfo.obj
-         Debug\moc_friendlistview.obj
-         Debug\moc_myqqdemo.obj
-         Debug\moc_qfriendlistdelegate.obj
-         Debug\moc_qfriendlistmodel.obj
-         Debug\moc_qqstylepushbutton.obj
-         Debug\moc_qrecentlistview.obj
-         Debug\moc_qrecentsessionmodel.obj
-         Debug\moc_searchlineedit.obj
-         Debug\moc_stylewidget.obj
-         Debug\moc_titlebar.obj
-         Debug\moc_toolwidget.obj
-         Debug\moc_userinfowidget.obj
-         Debug\moc_userinfowidget2.obj
-         Debug\qrc_myqqdemo.obj
-         Debug\main.obj
-         Debug\myqqdemo.obj
-         Debug\qfriendlistdelegate.obj
-         Debug\qfriendlistmodel.obj
-         Debug\qrecentlistview.obj
-         Debug\qrecentsessionmodel.obj
-         Debug\RecentChat.obj
-         Debug\searchlineedit.obj
-         Debug\stylewidget.obj
-         Debug\titlebar.obj
-         Debug\toolwidget.obj
-         Debug\userinfowidget.obj
-         Debug\userinfowidget2.obj
-         LINK : 没有找到 D:\githubProject\MyQQDemo\src\MyQQDemo\Win32\Debug\\MyQQDemo.exe 或上一个增量链接没有生成它；正在执行完全链接
+         所有输出均为最新。
          MyQQDemo.vcxproj -> D:\githubProject\MyQQDemo\src\MyQQDemo\Win32\Debug\MyQQDemo.exe
-       Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"D:\githubProject\MyQQDemo\src\MyQQDemo\Win32\Debug\\MyQQDemo.exe;#1" /manifest Debug\MyQQDemo.exe.intermediate.manifest
        FinalizeBuildStatus:
          正在删除文件“Debug\MyQQDemo.unsuccessfulbuild”。
          正在对“Debug\MyQQDemo.lastbuildstate”执行 Touch 任务。
@@ -60,4 +17,4 @@
 
 生成成功。
 
-已用时间 00:00:02.31
+已用时间 00:00:00.09

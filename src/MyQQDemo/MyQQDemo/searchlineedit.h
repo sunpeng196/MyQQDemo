@@ -19,6 +19,9 @@ public:
 	SearchLineEdit(QWidget *parent);
 	~SearchLineEdit();
 
+	void contextMenuEvent(QContextMenuEvent *event);
+
+
 	void resizeEvent(QResizeEvent * e);
 
 	virtual bool eventFilter(QObject *obj, QEvent *e);

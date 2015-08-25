@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'searchlineedit.h'
 **
-** Created: Sat Aug 22 15:27:44 2015
+** Created: Tue Aug 25 10:14:12 2015
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
 **
 ** WARNING! All changes made in this file will be lost!

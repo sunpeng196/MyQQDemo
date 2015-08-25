@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'qqstylepushbutton.h'
 **
-** Created: Mon Jul 6 11:40:10 2015
+** Created: Mon Aug 24 17:02:38 2015
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
 **
 ** WARNING! All changes made in this file will be lost!

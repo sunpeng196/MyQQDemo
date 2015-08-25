@@ -3,6 +3,7 @@
 #include <QtGui/QMouseEvent>
 #include <QPainter>
 #include <QToolButton>
+#include <QMenu>
 
 SearchLineEdit::SearchLineEdit(QWidget *parent)
 	: QLineEdit(parent)
@@ -28,6 +29,8 @@ SearchLineEdit::SearchLineEdit(QWidget *parent)
 		SIGNAL(textChanged(const QString&)),
 		this,
 		SLOT(SlotTextChanged(const QString&)));
+
+
 
 }
 
@@ -100,5 +103,17 @@ void SearchLineEdit::SlotTextChanged(const QString& str)
 		m_pLabel->setPixmap(QPixmap(":/SearchLineEdit/Resources/finger_normal.png"));
 		m_pListView->hide();
 	}
+}
+
+void SearchLineEdit::contextMenuEvent( QContextMenuEvent *event )
+{
+	QMenu *menu = createStandardContextMenu();
+	menu->clear();
+	menu->addAction(tr("剪切(T)"));
+	menu->addAction(tr("复制(C)"));
+	menu->addAction(tr("粘贴(P)"));
+	menu->addAction(tr("全部选择(A)"));
+	menu->exec(event->globalPos());
+	delete menu;
 }
 

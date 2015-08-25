@@ -1,15 +1,15 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'userinfowidget.h'
+** Meta object code from reading C++ file 'navigationwidget.h'
 **
-** Created: Sat Aug 22 09:45:19 2015
+** Created: Tue Aug 25 15:08:24 2015
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../userinfowidget.h"
+#include "../../navigationwidget.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'userinfowidget.h' doesn't include <QObject>."
+#error "The header file 'navigationwidget.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 63
 #error "This file was generated using the moc from 4.8.4. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -17,7 +17,7 @@
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
-static const uint qt_meta_data_UserInfoWidget[] = {
+static const uint qt_meta_data_NavigationWidget[] = {
 
  // content:
        6,       // revision
@@ -33,11 +33,11 @@ static const uint qt_meta_data_UserInfoWidget[] = {
        0        // eod
 };
 
-static const char qt_meta_stringdata_UserInfoWidget[] = {
-    "UserInfoWidget\0"
+static const char qt_meta_stringdata_NavigationWidget[] = {
+    "NavigationWidget\0"
 };
 
-void UserInfoWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void NavigationWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
     Q_UNUSED(_id);
@@ -45,33 +45,33 @@ void UserInfoWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
     Q_UNUSED(_a);
 }
 
-const QMetaObjectExtraData UserInfoWidget::staticMetaObjectExtraData = {
+const QMetaObjectExtraData NavigationWidget::staticMetaObjectExtraData = {
     0,  qt_static_metacall 
 };
 
-const QMetaObject UserInfoWidget::staticMetaObject = {
-    { &QWidget::staticMetaObject, qt_meta_stringdata_UserInfoWidget,
-      qt_meta_data_UserInfoWidget, &staticMetaObjectExtraData }
+const QMetaObject NavigationWidget::staticMetaObject = {
+    { &QWidget::staticMetaObject, qt_meta_stringdata_NavigationWidget,
+      qt_meta_data_NavigationWidget, &staticMetaObjectExtraData }
 };
 
 #ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &UserInfoWidget::getStaticMetaObject() { return staticMetaObject; }
+const QMetaObject &NavigationWidget::getStaticMetaObject() { return staticMetaObject; }
 #endif //Q_NO_DATA_RELOCATION
 
-const QMetaObject *UserInfoWidget::metaObject() const
+const QMetaObject *NavigationWidget::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
 }
 
-void *UserInfoWidget::qt_metacast(const char *_clname)
+void *NavigationWidget::qt_metacast(const char *_clname)
 {
     if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_UserInfoWidget))
-        return static_cast<void*>(const_cast< UserInfoWidget*>(this));
+    if (!strcmp(_clname, qt_meta_stringdata_NavigationWidget))
+        return static_cast<void*>(const_cast< NavigationWidget*>(this));
     return QWidget::qt_metacast(_clname);
 }
 
-int UserInfoWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int NavigationWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
     if (_id < 0)

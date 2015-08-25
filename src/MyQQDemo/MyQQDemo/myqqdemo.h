@@ -21,6 +21,8 @@ class AppWidget2;
 
 class QStackedWidget;
 
+class NavigationWidget;
+
 enum AFX_HIDE_TYPE
 {
 	en_None = 0,		//不收缩
@@ -52,7 +54,6 @@ public:
 
 	void timerEvent(QTimerEvent * e);
 	void ShowWindow();
-/*	QSize sizeHint();*/
 
 	int m_iAniTimer;//表示隐藏和显示的定时器
 
@@ -62,11 +63,19 @@ public:
 
 	//void paintEvent(QPaintEvent *e);
 
+	public slots:
+	void ShowMainBoard();
+
 	
 private:
 	TitleBar *m_pTitleBar;
 
-	ColumnWidget *m_pColumnWidget;
+	NavigationWidget *m_pColumnWidget;
+
+	//ColumnWidget *m_pColumnWidget;
+
+
+
 	QSystemTrayIcon *m_pSytemTrayIcon;
 	SearchLineEdit *m_pSearchLineEdit;
 	QStackedWidget *m_pStackedWidget;

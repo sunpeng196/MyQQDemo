@@ -11,7 +11,6 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QPainter>
-#include "userinfowidget.h"
 #include "userinfowidget2.h"
 #include "appwidget2.h"
 #include <QStackedWidget>
@@ -24,11 +23,12 @@
 #include "qrecentsessionmodel.h"
 #include "qrecentlistview.h"
 #include "chatsessionlistdelegate.h"
+#include "navigationwidget.h"
 
 MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	: QFrame(parent, flags)
 {
-	setWindowFlags(Qt::FramelessWindowHint|Qt::Tool | Qt::X11BypassWindowManagerHint);
+	setWindowFlags(Qt::FramelessWindowHint);
 
 	setMinimumSize(270,650);
 	setMaximumSize(600,715);
@@ -42,10 +42,19 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	m_pTitleBar = new TitleBar(this);
 	m_pTitleBar->setGeometry(0,0,281,30);
 
+	//使用绘制的栏的实现
 
- 	m_pColumnWidget = new ColumnWidget(this);//new ColumnWidget(this);
+ //	m_pColumnWidget = new ColumnWidget(this);//new ColumnWidget(this);
+ //	m_pColumnWidget->setGeometry(0,175,281,38);
+	//m_pColumnWidget->setObjectName("widgetColumn");
+
+	
+
+ 	m_pColumnWidget = new NavigationWidget(this);//new ColumnWidget(this);
  	m_pColumnWidget->setGeometry(0,175,281,38);
-	m_pColumnWidget->setObjectName("widgetColumn");
+ 	m_pColumnWidget->setObjectName("widgetColumn");
+
+
 
 	//m_pColumnWidget->setStyleSheet("border:none");
 
@@ -61,9 +70,33 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	m_pSytemTrayIcon->setIcon(QIcon(":/MyQQDemo/Resources/app_icon_16 (3).png"));
 	m_pSytemTrayIcon->show();
 
-	QMenu *pMenu = m_pSytemTrayIcon->contextMenu();
+	QObject::connect(m_pSytemTrayIcon,
+		SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
+		this,
+		SLOT(ShowMainBoard()));
+
+	//QMenu *pMenu = m_pSytemTrayIcon->contextMenu();
+	QMenu *pMenu = new QMenu(this);
+	pMenu->addAction(tr("我在线上"));
+	pMenu->addAction(tr("Q我吧"));
+	pMenu->addAction(tr("离开"));
+	pMenu->addAction(tr("忙碌"));
+	pMenu->addAction(tr("请勿打扰"));
+	pMenu->addAction(tr("隐身"));
+	pMenu->addAction(tr("离线"));
+	pMenu->addAction(tr("添加状态信息"));
+	pMenu->addSeparator();
+	pMenu->addAction(tr("关闭所有声音"));
+	pMenu->addAction(tr("关闭头像闪动"));
+	pMenu->addAction(tr("锁定QQ Ctrl+Alt+L"));
+	pMenu->addSeparator();
+	pMenu->addAction(tr("打开主面板"));
+	pMenu->addSeparator();
+	pMenu->addAction("退出");
 
 	m_pSytemTrayIcon->setContextMenu(pMenu);
+
+	m_pSytemTrayIcon->setToolTip("QQ:1234(347744583)\r\n声音:开启\r\n消息提醒框:关闭\r\n回话消息:任务栏头像闪烁");
 
 
 	m_pStackedWidget = new QStackedWidget(this);
@@ -76,12 +109,12 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	//m_pStackedWidget->setCurrentIndex(0);
 	m_pStackedWidget->setGeometry(0,214,278,443);
 
-	QObject::connect(m_pColumnWidget,SIGNAL(currentRowChanged(int)),m_pStackedWidget,SLOT(setCurrentIndex(int)));
+	//QObject::connect(m_pColumnWidget,SIGNAL(currentRowChanged(int)),m_pStackedWidget,SLOT(setCurrentIndex(int)));
 
 	FriendListView *pView = new FriendListView(m_pStackedWidget);
 	QTextCodec::setCodecForTr(QTextCodec::codecForName("GB2312"));
 
-	QFile file("C:\\Users\\15051145\\Desktop\\QQFriendList.txt");
+	QFile file(":/Data/Resources/Data/QQFriendList.txt");
 	if (!file.open(QIODevice::ReadOnly))
 		return ;
 
@@ -91,7 +124,7 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 
 	model->ParserContentFromString(output);
 
-	QFile file2("C:\\Users\\15051145\\Desktop\\FriendOnline.txt");
+	QFile file2(":/Data/Resources/Data/FriendOnline.txt");
 	if (!file2.open(QIODevice::ReadOnly))
 	{
 		return;
@@ -110,7 +143,7 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	pView->setHeaderHidden(true);
 
 	QRecentSessionModel *recentModel = new QRecentSessionModel(this);
-	QFile file3("C:\\Users\\15051145\\Desktop\\RecentList.txt");
+	QFile file3(":/Data/Resources/Data/RecentList.txt");
 	if (!file3.open(QIODevice::ReadOnly))
 	{
 		return;
@@ -163,7 +196,10 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	m_UserInfoWidget->setGeometry(0,30,width(),100);
 
 
-	//RegisterHotKey(this->get)
+	this->setWindowFlags(Qt::Popup);
+
+
+
 
 	
 
@@ -178,7 +214,7 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 
 MyQQDemo::~MyQQDemo()
 {
-
+	m_pSytemTrayIcon->hide();
 }
 
 void MyQQDemo::mousePressEvent( QMouseEvent * e )
@@ -544,5 +580,10 @@ void MyQQDemo::moveEvent( QMoveEvent * event )
 	QPoint pt = event->pos();
 	QPoint globalPt = mapToGlobal(pt);
 	FixMoving(globalPt);
+}
+
+void MyQQDemo::ShowMainBoard()
+{
+	this->show();
 }
 

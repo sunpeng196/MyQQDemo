@@ -791,4 +791,9 @@
         <file>Resources/UserInfo/PaiPai_MainService.png</file>
         <file>Resources/UserInfo/qzone16_main.png</file>
     </qresource>
+    <qresource prefix="/Data">
+        <file>Resources/Data/FriendOnline.txt</file>
+        <file>Resources/Data/QQFriendList.txt</file>
+        <file>Resources/Data/RecentList.txt</file>
+    </qresource>
 </RCC>

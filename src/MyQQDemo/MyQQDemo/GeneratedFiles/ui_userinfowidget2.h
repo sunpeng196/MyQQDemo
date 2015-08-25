@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'userinfowidget2.ui'
 **
-** Created: Mon Jul 6 11:40:09 2015
+** Created: Tue Aug 25 11:05:05 2015
 **      by: Qt User Interface Compiler version 4.8.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -70,6 +70,7 @@ public:
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/UserINfo/Resources/UserInfo/imonline.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton->setIcon(icon);
+        toolButton->setPopupMode(QToolButton::InstantPopup);
         toolButton->setAutoRaise(true);
 
         horizontalLayout->addWidget(toolButton);
