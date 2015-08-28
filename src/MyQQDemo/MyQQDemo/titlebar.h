@@ -19,7 +19,7 @@ public:
 	void mouseMoveEvent(QMouseEvent * event);
 	void mouseReleaseEvent(QMouseEvent * event);
 
-private:
+
 
 	QLabel *m_pQQLabelIcon;
 

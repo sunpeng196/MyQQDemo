@@ -31,6 +31,10 @@ FriendListView::FriendListView(QWidget *parent)
 		this,
 		SLOT(CheckMousePosForShowMessage(QModelIndex)));
 
+	this->setFocusPolicy(Qt::StrongFocus);
+
+	this->setRootIsDecorated(false);
+
 }
 
 FriendListView::~FriendListView()

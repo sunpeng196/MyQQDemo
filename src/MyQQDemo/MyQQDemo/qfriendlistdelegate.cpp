@@ -40,13 +40,53 @@ void QFriendListDelegate::paint( QPainter *painter, const QStyleOptionViewItem &
 		}
 		else
 		{
+			if (IsParentExpaned(index))
+			{
+				if (option.state & QStyle::State_MouseOver)
+				{
+					painter->drawPixmap(option.rect,QPixmap(":/BuddyList/BuddyList/main_yellowbar_bkg.png"));
+					painter->drawPixmap(option.rect.left()+2,
+						option.rect.top()+2,
+						14,
+						14,
+						QPixmap(":/BuddyList/BuddyList/MainPanel_FolderNode_expandTextureHighlight.png"));
+				}
+				else
+				{
+					painter->drawPixmap(option.rect.left()+2,
+						option.rect.top()+2,
+						14,
+						14,QPixmap(":/BuddyList/BuddyList/MainPanel_FolderNode_expandTexture.png"));
+				}		
+			}
+			else
+			{
+				if (option.state & QStyle::State_MouseOver)
+				{
+					painter->drawPixmap(option.rect,QPixmap(":/BuddyList/BuddyList/main_yellowbar_bkg.png"));
+					painter->drawPixmap(option.rect.left()+2,
+						option.rect.top()+2,
+						14,
+						14,QPixmap(":/BuddyList/BuddyList/MainPanel_FolderNode_collapseTextureHighlight.png"));
+				}
+				else
+				{
+					painter->drawPixmap(option.rect.left()+2,
+						option.rect.top()+2,
+						14,
+						14,QPixmap(":/BuddyList/BuddyList/MainPanel_FolderNode_collapseTexture.png"));
+				}
+			}
 			QString strGroupName = pGroupInfo->m_GroupInfoName;
 			int iOnLineNumber = pGroupInfo->GetOnLineNumber();
 			int iAllNumber = pGroupInfo->m_FriendInfoList.count();
 			str = QString("%1 %2/%3").arg(strGroupName).arg(iOnLineNumber).arg(iAllNumber);
 		}
 
-		painter->drawText(rect.left()+2 + 16,rect.top()+2,100,30,0,str);
+
+
+		
+		painter->drawText(rect.left()+18 + 16,rect.top()+2,100,30,0,str);
 
 
 	}
@@ -124,4 +164,9 @@ QSize QFriendListDelegate::sizeHint( const QStyleOptionViewItem &option, const Q
 	}
 
 	return QSize(0,0);
+}
+
+bool QFriendListDelegate::IsParentExpaned( const QModelIndex &index ) const
+{
+	return ((QTreeView*)(this->parent()))->isExpanded(index);
 }

@@ -20,6 +20,9 @@ ColumnWidget::ColumnWidget(QWidget *parent)
 
 	 SetCurrentItem(0);
 	 setStyleSheet("border:none");
+	 this->setFocusPolicy(Qt::StrongFocus);
+
+	 m_bShowRect = false;
 }
 
 ColumnWidget::~ColumnWidget()
@@ -49,52 +52,43 @@ void ColumnWidget::mousePressEvent( QMouseEvent * e )
 	SetCurrentItem(iIndex);
 	update();
 
+	QPoint pt = e->pos();
 	if (iIndex == m_iCurrentChooseItem)
 	{
-		QMenu *pMenu = new QMenu(this);
+		if (m_CurCurrentArrowRect.contains(e->pos()))
+		{
+			QMenu *pMenu = new QMenu(this);
 
-		QMenu *pHeadImage = new QMenu(pMenu);
+			QMenu *pHeadImage = new QMenu(pMenu);
 
-		QAction *pShowLargeHead = new QAction(pHeadImage);
-		pShowLargeHead->setCheckable(true);
-		pShowLargeHead->setChecked(true);
-		pShowLargeHead->setText("大头像");
+			QAction *pShowLargeHead = new QAction(pHeadImage);
+			pShowLargeHead->setCheckable(true);
+			pShowLargeHead->setChecked(true);
+			pShowLargeHead->setText("大头像");
 
-		pHeadImage->addAction(pShowLargeHead);
-		pHeadImage->addAction("小头像");
-		pHeadImage->addSeparator();
+			pHeadImage->addAction(pShowLargeHead);
+			pHeadImage->addAction("小头像");
+			pHeadImage->addSeparator();
 
-		pHeadImage->addAction("选中时显示大头像");
-		pHeadImage->addSeparator();
-		pHeadImage->addAction("显示我的大头像");
-
-
-
-		QAction *pHeaderShow = new QAction(this);
-		pHeaderShow->setText("头像显示");
-		pHeaderShow->setMenu(pHeadImage);
-
-
-		pMenu->addAction(pHeaderShow);
-
-
-
-
-		pMenu->addAction(new QAction("名称显示",this));
-		pMenu->addAction(new QAction("列表显示",this));
-		pMenu->addSeparator();
-		pMenu->addAction(new QAction("排序显示",this));
-		pMenu->addAction(new QAction("刷新好友列表",this));
-		pMenu->addAction(new QAction("显示在线联系人",this));
-		pMenu->addSeparator();
-		pMenu->addAction(new QAction("显示生活服务分组",this));
-		pMenu->addAction(new QAction("显示陌生人分组",this));
-		pMenu->addAction(new QAction("显示黑名单",this));
-
-
-
-		//pMenu->exec(e->globalPos());
-
+			pHeadImage->addAction("选中时显示大头像");
+			pHeadImage->addSeparator();
+			pHeadImage->addAction("显示我的大头像");
+			QAction *pHeaderShow = new QAction(this);
+			pHeaderShow->setText("头像显示");
+			pHeaderShow->setMenu(pHeadImage);
+			pMenu->addAction(pHeaderShow);
+			pMenu->addAction(new QAction("名称显示",this));
+			pMenu->addAction(new QAction("列表显示",this));
+			pMenu->addSeparator();
+			pMenu->addAction(new QAction("排序显示",this));
+			pMenu->addAction(new QAction("刷新好友列表",this));
+			pMenu->addAction(new QAction("显示在线联系人",this));
+			pMenu->addSeparator();
+			pMenu->addAction(new QAction("显示生活服务分组",this));
+			pMenu->addAction(new QAction("显示陌生人分组",this));
+			pMenu->addAction(new QAction("显示黑名单",this));
+			pMenu->exec(e->globalPos()+QPoint(0,20));
+		}
 		emit currentRowChanged(m_iCurrentChooseItem);
 	}
 }
@@ -172,6 +166,11 @@ void ColumnWidget::DrawItem(int i)
 
 		painter.drawPixmap(rcIcon,lpItem->m_SelectedImage);
 
+		if (m_bShowRect)
+		{
+			painter.setPen(QPen(Qt::black,0.5,Qt::DotLine));
+			painter.drawRect(rcItem);
+		}
 	}
 	else if (m_iCurrentHoverItem == i)
 	{
@@ -197,15 +196,20 @@ void ColumnWidget::DrawItem(int i)
 	if (m_iCurrentChooseItem == i)
 	{
 
-			QRect rcArrow;
-			rcArrow.setLeft(rcItem.left()+lpItem->m_nLeftWidth);
-			rcArrow.setTop(rcItem.top()+20);
+			QRect rcArrow = rcItem;
+// 			rcArrow.setLeft(rcItem.left()+lpItem->m_nLeftWidth);
+// 			rcArrow.setTop(rcItem.top()+20);
 
+			int m = rcArrow.right()-14-6;
+			int n = rcArrow.left()+2;
+			painter.drawPixmap(rcArrow.right()-14 - 6,rcArrow.left()+2,14,30,QPixmap(":/MainTab/Resources/maintab/main_tabbtn_down.png"));
 
-
-			painter.drawPixmap(rcItem.width()-14 - 6,2,14,30,QPixmap(":/MainTab/Resources/maintab/main_tabbtn_down.png"));
+			QRect temp(rcItem.width()-14 - 6,2,14,30);
+			m_CurCurrentArrowRect = temp;
 
 			int iXPosition = rcItem.left() + rcItem.width()/3 + 3;
+
+
 			painter.drawPixmap(iXPosition,0,22,38,QPixmap(":/MainTab/Resources/main_tabctrl_arrow.png"));
 
 	}
@@ -224,3 +228,48 @@ void ColumnWidget::CalcCenterRect(QRect& rcDest, int cx, int cy, QRect& rcCenter
 	rcCenter.setHeight(cy);
 
 }
+
+void ColumnWidget::keyPressEvent( QKeyEvent * e )
+{
+	if (e->key() == Qt::Key_Left)
+	{
+		m_iCurrentChooseItem -= 1;
+		if (m_iCurrentChooseItem < 0)
+		{
+			m_iCurrentChooseItem += 3;
+		}
+		update();
+		emit currentRowChanged(m_iCurrentChooseItem);
+		return;
+	}
+	if (e->key() == Qt::Key_Right)
+	{
+		m_iCurrentChooseItem += 1;
+		if (m_iCurrentChooseItem >= 3)
+		{
+			m_iCurrentChooseItem -= 3;
+		}
+		update();
+		emit currentRowChanged(m_iCurrentChooseItem);
+		return;
+	}
+
+}
+
+void ColumnWidget::focusInEvent( QFocusEvent *e )
+{
+	if (e->reason() == Qt::TabFocus)
+	{
+		m_bShowRect = true;
+	}
+// 	else
+// 	{
+// 		m_bShowRect = false;
+// 	}
+
+}
+
+// void ColumnWidget::focusOutEvent( QFocusEvent *e )
+// {
+// 	m_bShowRect = false;
+// }

@@ -24,6 +24,8 @@
 #include "qrecentlistview.h"
 #include "chatsessionlistdelegate.h"
 #include "navigationwidget.h"
+#include "messageboxdemo.h"
+#include "..\src\gui\dialogs\qmessagebox.h"
 
 MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	: QFrame(parent, flags)
@@ -44,15 +46,29 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 
 	//使用绘制的栏的实现
 
- //	m_pColumnWidget = new ColumnWidget(this);//new ColumnWidget(this);
- //	m_pColumnWidget->setGeometry(0,175,281,38);
-	//m_pColumnWidget->setObjectName("widgetColumn");
+ 	m_pColumnWidget = new ColumnWidget(this);//new ColumnWidget(this);
+ 	m_pColumnWidget->setGeometry(0,175,281,38);
+	m_pColumnWidget->setObjectName("widgetColumn");
 
 	
 
- 	m_pColumnWidget = new NavigationWidget(this);//new ColumnWidget(this);
- 	m_pColumnWidget->setGeometry(0,175,281,38);
- 	m_pColumnWidget->setObjectName("widgetColumn");
+//  	m_pColumnWidget = new NavigationWidget(this);//new ColumnWidget(this);
+//  	m_pColumnWidget->setGeometry(0,175,281,38);
+//  	m_pColumnWidget->setObjectName("widgetColumn");
+
+
+	QRect rect1 = QApplication::desktop()->availableGeometry();
+
+
+	m_pMessageBox = new MessageBoxDemo();
+	m_pMessageBox->setWindowFlags(Qt::FramelessWindowHint);
+	m_pMessageBox->hide();
+
+	
+
+	m_pMessageBox->setGeometry(rect1.width()-200,rect1.height()-200,200,190);
+
+
 
 
 
@@ -73,11 +89,13 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	QObject::connect(m_pSytemTrayIcon,
 		SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
 		this,
-		SLOT(ShowMainBoard()));
+		SLOT(ShowMainBoard(QSystemTrayIcon::ActivationReason)));
+
+	//m_pSytemTrayIcon->installEventFilter(this);
 
 	//QMenu *pMenu = m_pSytemTrayIcon->contextMenu();
 	QMenu *pMenu = new QMenu(this);
-	pMenu->addAction(tr("我在线上"));
+	pMenu->addAction(QString::fromUtf8("我在线上"));
 	pMenu->addAction(tr("Q我吧"));
 	pMenu->addAction(tr("离开"));
 	pMenu->addAction(tr("忙碌"));
@@ -138,7 +156,7 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	pView->setModel(model);
 
 	pView->setItemDelegate(new QFriendListDelegate(pView));
-	pView->setIndentation(10);
+	pView->setIndentation(4);
 
 	pView->setHeaderHidden(true);
 
@@ -155,12 +173,21 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	pRecentListView->setModel(recentModel);
 	pRecentListView->setItemDelegate(new ChatSessionListDelegate(this));
 
-	
+	QLabel *m_pGroup = new QLabel(this);
+	m_pGroup->setText(tr("群组列表"));
 	m_pStackedWidget->addWidget(pView);
-
 	m_pStackedWidget->addWidget(pRecentListView);
+	m_pStackedWidget->addWidget(m_pGroup);
 
 	m_pStackedWidget->setCurrentIndex(0);
+
+	m_pStackedWidget->installEventFilter(this);
+	m_pStackedWidget->setFocusPolicy(Qt::StrongFocus);
+
+	QObject::connect(m_pColumnWidget,
+		SIGNAL(currentRowChanged(int)),
+		m_pStackedWidget,
+		SLOT(setCurrentIndex(int)));
 
 	m_pAppWidget = new AppWidget2(this);
 
@@ -183,7 +210,7 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 
 	m_bLeftBtnDown = false;//表明鼠标左键是否被按下
 
-	m_bSearchEnable = false;
+
 
 	m_pSearchLineEdit = new SearchLineEdit(this);
 	m_pSearchLineEdit->setObjectName("searchLineEdit");
@@ -196,9 +223,12 @@ MyQQDemo::MyQQDemo(QWidget *parent, Qt::WFlags flags)
 	m_UserInfoWidget->setGeometry(0,30,width(),100);
 
 
-	this->setWindowFlags(Qt::Popup);
+	//this->setWindowFlags(Qt::Popup);
 
 
+	QWidget::setTabOrder(m_pTitleBar->m_pMinButton,m_pTitleBar->m_pCloseButton);
+
+	this->setWindowFlags(Qt::WindowStaysOnTopHint|Qt::FramelessWindowHint);
 
 
 	
@@ -582,8 +612,64 @@ void MyQQDemo::moveEvent( QMoveEvent * event )
 	FixMoving(globalPt);
 }
 
-void MyQQDemo::ShowMainBoard()
+void MyQQDemo::ShowMainBoard(QSystemTrayIcon::ActivationReason x)
 {
-	this->show();
+	if (x == QSystemTrayIcon::DoubleClick)
+	{
+		this->show();
+	}
+	if (x == QSystemTrayIcon::Trigger)
+	{
+		this->m_pMessageBox->show();
+	}
+	if (x == QSystemTrayIcon::Context)
+	{
+		m_pSytemTrayIcon->showMessage("abc","def",QSystemTrayIcon::MessageIcon::Information,3000);
+		//this->m_pMessageBox->show();
+	}
+	if (x == QSystemTrayIcon::Unknown)
+	{
+		this->m_pMessageBox->show();
+	}
+	if (x == QSystemTrayIcon::MiddleClick)
+	{
+		this->m_pMessageBox->show();
+	}
 }
+
+bool MyQQDemo::eventFilter( QObject *obj, QEvent *event )
+{
+	bool  b = QSystemTrayIcon::isSystemTrayAvailable();
+	if (obj == m_pSytemTrayIcon)
+	{
+		if (event->type() == QEvent::Enter)
+		{			
+			m_pMessageBox->show();
+		}
+		if (event->type() == QEvent::Leave)
+		{
+			m_pMessageBox->hide();
+		}
+	}
+
+
+	if (obj == m_pStackedWidget)
+	{
+		if (event->type() == QEvent::FocusIn)
+		{			
+			QRect rect = m_pStackedWidget->geometry();
+
+			QPainter painter(m_pStackedWidget);
+			painter.setPen(Qt::red);
+			painter.drawRect(rect);
+		}
+	}
+	return QWidget::eventFilter(obj,event);
+
+
+}
+
+
+
+
 

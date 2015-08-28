@@ -4,6 +4,7 @@
 #include <QPainter>
 #include <QToolButton>
 #include <QMenu>
+#include <QDebug>
 
 SearchLineEdit::SearchLineEdit(QWidget *parent)
 	: QLineEdit(parent)
@@ -24,6 +25,11 @@ SearchLineEdit::SearchLineEdit(QWidget *parent)
 	m_pListView = new QListView();
 	m_pListView->setParent((QWidget*)this->parent());
 	m_pListView->hide();
+
+	m_pListView->installEventFilter(this);
+
+
+
 
 	QObject::connect(this,
 		SIGNAL(textChanged(const QString&)),
@@ -65,7 +71,44 @@ bool SearchLineEdit::eventFilter( QObject *object , QEvent *event)
 				this->clear();
 			}			
 		}
-	} 
+	}
+
+	qDebug()<<(QEvent::Type)(event->type());
+	if (event->type() == QEvent::MouseButtonPress) {
+		m_pListView->hide();
+		this->setFocus();
+		return true;
+	}
+
+	if (object == m_pListView &&event->type() == QEvent::KeyPress)
+	{
+		bool consumed = false;
+		int key = static_cast<QKeyEvent*>(event)->key();
+		switch (key) {
+		case Qt::Key_Enter:
+		case Qt::Key_Return:
+			return true;
+
+		case Qt::Key_Escape:
+			this->setFocus();
+			m_pListView->hide();
+			return true;
+
+		case Qt::Key_Up:
+		case Qt::Key_Down:
+		case Qt::Key_Home:
+		case Qt::Key_End:
+		case Qt::Key_PageUp:
+		case Qt::Key_PageDown:
+			return false;
+
+		default:
+			this->event(event);
+			return false;
+		}
+	}
+
+
 	return QLineEdit::eventFilter(object, event);
 
 }
@@ -96,12 +139,16 @@ void SearchLineEdit::SlotTextChanged(const QString& str)
 	if (m_strList.count()>0)
 	{
 		m_pLabel->setPixmap(QPixmap(":/Search/Resources/mainSearch/main_search_down.png"));
+		m_pListView->setUpdatesEnabled(true);
 		m_pListView->show();
+		m_pListView->setFocus();
+
 	}
 	else
 	{
 		m_pLabel->setPixmap(QPixmap(":/SearchLineEdit/Resources/finger_normal.png"));
 		m_pListView->hide();
+		this->setFocus();
 	}
 }
 

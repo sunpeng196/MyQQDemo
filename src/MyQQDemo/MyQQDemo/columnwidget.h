@@ -26,6 +26,8 @@ public:
 	ColumnWidget(QWidget *parent);
 	~ColumnWidget();
 
+	void keyPressEvent(QKeyEvent * e);
+
 
 signals:  
 	void currentRowChanged ( int currentRow );
@@ -62,6 +64,8 @@ public:
 	}
 
 	void paintEvent(QPaintEvent * e);
+	void focusInEvent(QFocusEvent *e);
+	//void focusOutEvent(QFocusEvent *e);
 
 	void DrawItem( int i );
 
@@ -102,6 +106,10 @@ public:
 	QList<TabCtrlItem*> m_TabCtrlList;
 
 	int m_nLeft,m_nTop;
+
+	QRect m_CurCurrentArrowRect;
+
+	bool m_bShowRect;
 
 	
 };

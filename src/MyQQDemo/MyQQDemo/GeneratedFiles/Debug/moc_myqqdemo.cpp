@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'myqqdemo.h'
 **
-** Created: Tue Aug 25 15:39:31 2015
+** Created: Thu Aug 27 11:18:41 2015
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -37,7 +37,7 @@ static const uint qt_meta_data_MyQQDemo[] = {
 };
 
 static const char qt_meta_stringdata_MyQQDemo[] = {
-    "MyQQDemo\0\0ShowMainBoard()\0"
+    "MyQQDemo\0\0ShowMainBoard(QSystemTrayIcon::ActivationReason)\0"
 };
 
 void MyQQDemo::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -46,11 +46,10 @@ void MyQQDemo::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         Q_ASSERT(staticMetaObject.cast(_o));
         MyQQDemo *_t = static_cast<MyQQDemo *>(_o);
         switch (_id) {
-        case 0: _t->ShowMainBoard(); break;
+        case 0: _t->ShowMainBoard((*reinterpret_cast< QSystemTrayIcon::ActivationReason(*)>(_a[1]))); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 const QMetaObjectExtraData MyQQDemo::staticMetaObjectExtraData = {

@@ -3,6 +3,7 @@
 
 #include <QtGui/QFrame>
 #include "appwidget.h"
+#include <QSystemTrayIcon>
 class TitleBar;
 class QWidget;
 class ToolWidget;
@@ -22,6 +23,7 @@ class AppWidget2;
 class QStackedWidget;
 
 class NavigationWidget;
+class MessageBoxDemo;
 
 enum AFX_HIDE_TYPE
 {
@@ -47,6 +49,10 @@ public:
 
 	void resizeEvent(QMouseEvent *e);
 
+	bool	eventFilter ( QObject * watched, QEvent * event );
+
+	//void closeEvent(QCloseEvent *event);
+
 	bool winEvent ( MSG * message, long * result);
 	void BeginHide(QPoint point);
 	void FixMoving(const QPoint& point);
@@ -64,19 +70,20 @@ public:
 	//void paintEvent(QPaintEvent *e);
 
 	public slots:
-	void ShowMainBoard();
+	void ShowMainBoard(QSystemTrayIcon::ActivationReason);
 
 	
 private:
 	TitleBar *m_pTitleBar;
 
-	NavigationWidget *m_pColumnWidget;
+	//NavigationWidget *m_pColumnWidget;
 
-	//ColumnWidget *m_pColumnWidget;
+	ColumnWidget *m_pColumnWidget;
 
 
 
 	QSystemTrayIcon *m_pSytemTrayIcon;
+
 	SearchLineEdit *m_pSearchLineEdit;
 	QStackedWidget *m_pStackedWidget;
 	UserInfoWidget2* m_UserInfoWidget;
@@ -92,7 +99,9 @@ private:
 
 	bool m_bLeftBtnDown;
 
-	bool m_bSearchEnable;
+
+
+	MessageBoxDemo *m_pMessageBox;
 
 	
 

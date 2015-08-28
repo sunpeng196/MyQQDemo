@@ -17,6 +17,8 @@ public:
 	QSize sizeHint(const QStyleOptionViewItem &option,
 		const QModelIndex &index) const;
 
+	bool IsParentExpaned(const QModelIndex &index) const;
+
 private:
 	
 };
